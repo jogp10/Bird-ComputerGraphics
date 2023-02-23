@@ -43,7 +43,6 @@ export class MyUnitCube extends CGFobject {
             //bottom
             4, 5, 0,
             1, 0, 5
-
         ];
 
         this.primitiveType = this.scene.gl.TRIANGLES;
@@ -53,7 +52,7 @@ export class MyUnitCube extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
-        this.scene.translate(0, 0, -0.51);
+        this.scene.translate(0, 0, -0.51); // push back to avoid z-fighting
       
         super.display();
         this.scene.popMatrix();

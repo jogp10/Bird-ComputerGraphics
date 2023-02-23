@@ -6,6 +6,8 @@ import { MyTriangleSmall } from "./MyTriangleSmall.js";
 import { MyTriangleBig } from "./MyTriangleBig.js";
 import { MyTangram } from "./MyTangram.js";
 import { MyUnitCube } from "./MyUnitCube.js";
+import { MyQuad } from "./MyQuad.js";
+import { MyUnitCubeQuad } from "./MyUnitCubeQuad.js";
 
 /**
  * MyScene
@@ -38,6 +40,8 @@ export class MyScene extends CGFscene {
     this.triangleBig = new MyTriangleBig(this);
     this.trangram = new MyTangram(this);
     this.unitCube = new MyUnitCube(this);
+    this.quad = new MyQuad(this);
+    this.unitCubeQuad = new MyUnitCubeQuad(this);
   
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -47,8 +51,10 @@ export class MyScene extends CGFscene {
     this.displayParallelogram = false;
     this.displayTriangleSmall = false;
     this.displayTriangleBig = false;
-    this.displayTangram = true;
-    this.displayUnitCube = true;
+    this.displayTangram = false;
+    this.displayUnitCube = false;
+    this.displayQuad = false;
+    this.displayUnitCubeQuad = true;
 
   }
   initLights() {
@@ -117,13 +123,15 @@ export class MyScene extends CGFscene {
     if(this.displayTriangleSmall) this.triangleSmall.display();
     if(this.displayTriangleBig) this.triangleBig.display();
     
-    if(this.displayTangram && this.displayUnitCube) {
+    if(this.displayTangram && (this.displayUnitCube || this.displayUnitCubeQuad)) {
       this.translate(0.5, 1, 0.5);
       this.rotate(- Math.PI/2, 1, 0, 0);
     }
+
     if(this.displayTangram) this.trangram.display();
     if(this.displayUnitCube) this.unitCube.display();
-
+    if(this.displayQuad) this.quad.display();
+    if(this.displayUnitCubeQuad) this.unitCubeQuad.display();
 
     // ---- END Primitive drawing section
   }
