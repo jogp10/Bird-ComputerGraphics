@@ -4,9 +4,11 @@
 
 ## TP 2 Notes
 
-(add your main observations/remarks about your experiments here, in a bulleted list, and remove this line. Some examples below)
+- In exercise 1 we learned to work with geometric transformations in WebGL (matrix multiplications operations and vectors)
+![Screenshot 1](screenshots/cg-t02g04-tp2-1.png)
 
-- In exercise 1 we observed X
-- In exercise 2 we had difficulties in Y
+- In exercise 2 we explored some more transformations, including all objects at the same time
+![Screenshot 1](screenshots/cg-t02g04-tp2-2.png)
 
-![Screenshot 1](screenshots/cg-t02g04-tp2-n.png)
+- In exercise 3 we observed a different way to make the same cubic shape
+![Screenshot 1](screenshots/cg-t02g04-tp2-3.png)
