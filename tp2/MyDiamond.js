@@ -31,4 +31,3 @@ export class MyDiamond extends CGFobject {
 		this.initGLBuffers();
 	}
 }
-
