@@ -37,8 +37,20 @@ export class MyTangram extends CGFobject {
 
         // GREEN DIAMOND
         this.scene.pushMatrix();
-        this.scene.translate(-1.8, 4, 0);
-        this.scene.rotate(2*Math.PI/3, 0, 0, 1);
+        
+        let matrixTranslate = 
+                    [1, 0, 0, 0, 
+                     0, 1, 0, 0,
+                     0, 0, 1, 0,
+                     -1.8, 4, 0, 1];
+        let matrixRotate = [
+                Math.cos((2 * Math.PI) / 3), Math.sin((2 * Math.PI) / 3), 0, 0,
+                -Math.sin((2 * Math.PI) / 3),  Math.cos((2 * Math.PI) / 3), 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1];
+                
+        this.scene.multMatrix(matrixTranslate);
+        this.scene.multMatrix(matrixRotate);
         this.scene.setDiffuse(0, 1, 0, 0);
         this.greenDiamond.display();
         this.scene.popMatrix();
