@@ -26,7 +26,10 @@ export class MyTangram extends CGFobject {
         this.yellowParallelogram = new MyParallelogram(this.scene);
     }
 
-    display() {    
+    display() {
+        this.scene.pushMatrix();
+        this.scene.translate(-0.5, -1, 0); // Move all trangram
+
         // ORANGE TRIANGLE
         this.scene.pushMatrix();
         this.scene.translate(-Math.sqrt(2), 3, 0);
@@ -96,5 +99,6 @@ export class MyTangram extends CGFobject {
         this.purpleTriangle.display();
         this.scene.popMatrix();
 
+        this.scene.popMatrix();
     }
 }
