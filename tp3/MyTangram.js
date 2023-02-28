@@ -76,10 +76,13 @@ export class MyTangram extends CGFobject {
 
         // YELLOW PARALLELOGRAM
         this.scene.pushMatrix();
-        this.scene.translate(1, 0.6, 0);
+        this.scene.translate(0, 0.6, 0);
         this.scene.rotate(3*Math.PI/2, 0, 0, 1);
         this.scene.setDiffuse(1, 1, 0, 0);
-        this.scene.scale(1, -1, 1)
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+		this.scene.rotate(Math.PI, 0, 1, 0);
+		this.scene.rotate(Math.PI/2, 1, 0, 0);
+		this.scene.translate(-3, 0, 0);
         this.yellowParallelogram.display();
         this.scene.popMatrix();
 
