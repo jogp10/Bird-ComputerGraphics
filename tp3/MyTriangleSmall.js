@@ -14,8 +14,8 @@ export class MyTriangleSmall extends CGFobject {
 		this.vertices = [
 			-1, 0, 0,	//0
 			0, 1, 0,	//1
-			1, 0, 0	    //2
-			// Other side
+			1, 0, 0,    //2
+			// Other face
 			-1, 0, 0,	//3
 			0, 1, 0,	//4
 			1, 0, 0	    //5
@@ -30,8 +30,12 @@ export class MyTriangleSmall extends CGFobject {
 		this.normals = [
 			0, 0, 1,
 			0, 0, 1,
-			0, 0, 1
-		];
+			0, 0, 1,
+
+			0, 0, -1,
+			0, 0, -1,
+			0, 0, -1
+		]
 
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles

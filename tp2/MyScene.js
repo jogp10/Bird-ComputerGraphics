@@ -51,10 +51,10 @@ export class MyScene extends CGFscene {
     this.displayParallelogram = false;
     this.displayTriangleSmall = false;
     this.displayTriangleBig = false;
-    this.displayTangram = false;
+    this.displayTangram = true;
     this.displayUnitCube = false;
     this.displayQuad = false;
-    this.displayUnitCubeQuad = true;
+    this.displayUnitCubeQuad = false;
 
   }
   initLights() {
@@ -124,7 +124,7 @@ export class MyScene extends CGFscene {
     if(this.displayTriangleBig) this.triangleBig.display();
     
     if(this.displayTangram && (this.displayUnitCube || this.displayUnitCubeQuad)) {
-      this.translate(0.5, 1, 0.5);
+      this.translate(5, 0, 5);
       this.rotate(- Math.PI/2, 1, 0, 0);
     }
 

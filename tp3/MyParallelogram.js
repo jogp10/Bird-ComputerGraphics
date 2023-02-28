@@ -15,8 +15,8 @@ export class MyParallelogram extends CGFobject {
 			0, 0, 0,	//0
 			1, 1, 0,	//1
 			2, 0, 0,    //2
-            3, 1, 0,     //3
-			// Other side
+            3, 1, 0,    //3
+			// Other face
 			0, 0, 0,	//4
 			1, 1, 0,	//5
 			2, 0, 0,    //6
@@ -27,7 +27,8 @@ export class MyParallelogram extends CGFobject {
 		this.indices = [
 			0, 2, 1,
             2, 3, 1,
-			4, 5, 6,
+
+            4, 5, 6,
             6, 5, 7
 		];
 
@@ -35,7 +36,12 @@ export class MyParallelogram extends CGFobject {
 			0, 0, 1,
 			0, 0, 1,
 			0, 0, 1,
-			0, 0, 1
+			0, 0, 1,
+
+			0, 0, -1,
+			0, 0, -1,
+			0, 0, -1,
+			0, 0, -1
 		];
 
 		//The defined indices (and corresponding vertices)
@@ -45,3 +51,4 @@ export class MyParallelogram extends CGFobject {
 		this.initGLBuffers();
 	}
 }
+
