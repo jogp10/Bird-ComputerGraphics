@@ -10,5 +10,5 @@
 - In exercise 2 we explored some more transformations, including applying a rotation to all objects
 ![Screenshot 1](screenshots/cg-t02g04-tp2-2.png)
 
-- In exercise 3 we observed a different way to make the same cubic shape
+- In exercise 3 we observed a different way to make the same cubic shape, that lead to a different color reflection on the object. We noticed there was a difference in between the two techniques.
 ![Screenshot 1](screenshots/cg-t02g04-tp2-3.png)
