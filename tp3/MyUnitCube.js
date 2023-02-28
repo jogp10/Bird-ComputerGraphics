@@ -10,36 +10,29 @@ export class MyUnitCube extends CGFobject {
         this.initBuffers();
     }
 
+    duplicateVertices() {
+        let newVertices = [ 
+            -0.5, -0.5, 0.5, //0 Front left bottom
+            0.5, -0.5, 0.5, //1 Front right bottom
+            -0.5, 0.5, 0.5, //2 Front left top
+            0.5, 0.5, 0.5, //3 Front right top
+            -0.5, -0.5, -0.5, //4 Back left bottom
+            0.5, -0.5, -0.5, //5 Back right bottom
+            -0.5, 0.5, -0.5, //6 Back left top
+            0.5, 0.5, -0.5, //7 Back right top
+        ];
+        this.vertices = this.vertices.concat(newVertices);
+    }
+
     initBuffers() {
        //define 8 vertices of cube
-        this.vertices = [
-            -0.5, -0.5, 0.5,	//0 Front left bottom
-            0.5, -0.5, 0.5,		//1 Front right bottom
-            -0.5, 0.5, 0.5,		//2 Front left top
-            0.5, 0.5, 0.5,		//3 Front right top
-            -0.5, -0.5, -0.5,	//4
-            0.5, -0.5, -0.5,	//5
-            -0.5, 0.5, -0.5,	//6
-            0.5, 0.5, -0.5, 	//7
+        this.vertices = [];
 
-            -0.5, -0.5, 0.5,	//0 Front left bottom
-            0.5, -0.5, 0.5,		//1 Front right bottom
-            -0.5, 0.5, 0.5,		//2 Front left top
-            0.5, 0.5, 0.5,		//3 Front right top
-            -0.5, -0.5, -0.5,	//4
-            0.5, -0.5, -0.5,	//5
-            -0.5, 0.5, -0.5,	//6
-            0.5, 0.5, -0.5,     //7
+        this.duplicateVertices();
 
-            -0.5, -0.5, 0.5,	//0 Front left bottom
-            0.5, -0.5, 0.5,		//1 Front right bottom
-            -0.5, 0.5, 0.5,		//2 Front left top
-            0.5, 0.5, 0.5,		//3 Front right top
-            -0.5, -0.5, -0.5,	//4
-            0.5, -0.5, -0.5,	//5
-            -0.5, 0.5, -0.5,	//6
-            0.5, 0.5, -0.5      //7
-        ];
+        this.duplicateVertices();
+
+        this.duplicateVertices();
 
         //Counter-clockwise reference of vertices
         this.indices = [
@@ -65,6 +58,8 @@ export class MyUnitCube extends CGFobject {
         ];
         
         this.normals = [ 
+
+            //Normals for X axis
             -1,0,0,
             1,0,0,
             -1,0,0,
@@ -74,6 +69,7 @@ export class MyUnitCube extends CGFobject {
             -1,0,0,
             1,0,0,
 
+            //Normals for Z axis
             0,0,1,
             0,0,1,
             0,0,1,
@@ -83,14 +79,15 @@ export class MyUnitCube extends CGFobject {
             0,0,-1,
             0,0,-1,
 
-            0,1,0,
-            0,1,0,
+            //Normals for Y axis
+            0,-1,0,
+            0,-1,0,
             0,1,0,
             0,1,0,
             0,-1,0,
             0,-1,0,
-            0,-1,0,
-            0,-1,0
+            0,1,0,
+            0,1,0
 
         
         ]
