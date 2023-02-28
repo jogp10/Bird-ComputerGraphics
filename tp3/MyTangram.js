@@ -101,4 +101,16 @@ export class MyTangram extends CGFobject {
 
         this.scene.popMatrix();
     }
+
+    updateBuffers() {}
+
+    enableNormalViz() {
+        this.greenDiamond.enableNormalViz();
+        this.purpleTriangle.enableNormalViz();
+        this.redTriangle.enableNormalViz();
+        this.orangeTriangle.enableNormalViz();
+        this.blueTriangle.enableNormalViz();
+        this.pinkTriangle.enableNormalViz();
+        this.yellowParallelogram.enableNormalViz();
+    }
 }
