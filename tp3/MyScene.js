@@ -35,20 +35,18 @@ export class MyScene extends CGFscene {
         this.tangram = new MyTangram(this);
         this.unitCube = new MyUnitCube(this);
         
-        this.objects = [this.plane, this.pyramid, this.cone];
+        this.objects = [this.plane, this.pyramid, this.cone, this.tangram, this.unitCube];
 
         // Labels and ID's for object selection on MyInterface
-        this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2};
+        this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, 'Unit Cube': 4};
 
         //Other variables connected to MyInterface
-        this.selectedObject = 0;
+        this.selectedObject = 4;
         this.selectedMaterial = 0;
         this.displayAxis = true;
-        this.displayNormals = false;
+        this.displayNormals = true;
         this.objectComplexity = 0.5;
         this.scaleFactor = 2.0;
-        this.displayTangram = false;
-        this.displayUnitCube = false;
 
     }
     initLights() {
@@ -181,8 +179,10 @@ export class MyScene extends CGFscene {
         if (this.displayTangram)
             this.tangram.display();
         
-        if (this.displayUnitCube)
+        if (this.displayUnitCube) {
+            this.scale(3, 3, 0);
             this.unitCube.display();
+        }
         
         this.objects[this.selectedObject].display();
         this.popMatrix();
