@@ -11,7 +11,7 @@ import { MyParallelogram } from './MyParallelogram.js';
  * @param scene - Reference to MyScene object
  */
 export class MyTangram extends CGFobject {
-    constructor(scene) {	
+    constructor(scene) {
         super(scene);
         this.initBuffers();
         this.create_materials();
@@ -40,7 +40,7 @@ export class MyTangram extends CGFobject {
         //Orange Triangle
         this.scene.material_orange = new CGFappearance(this.scene);
         this.scene.material_orange.setAmbient(0.2, 0.0, 0.0, 1.0);
-        this.scene.setDiffuse(1, 128/255, 0, 0);
+        this.scene.material_orange.setDiffuse(1, 128/255, 0, 0);
         this.scene.material_orange.setSpecular(1,1,1,1);
         this.scene.material_orange.setShininess(10.0);
 
@@ -62,7 +62,7 @@ export class MyTangram extends CGFobject {
         this.scene.material_red = new CGFappearance(this.scene);
         this.scene.material_red.setAmbient(0.2, 0.0, 0.0, 1.0);
         this.scene.material_red.setDiffuse(1, 0, 0, 0);
-        this.scene.material_red.setDiffuse(1, 0, 0, 0);
+        this.scene.material_red.setSpecular(1, 1, 1, 1);
         this.scene.material_red.setShininess(10.0);
 
         //Yellow Parallelogram
@@ -82,6 +82,7 @@ export class MyTangram extends CGFobject {
 
         this.materials = [this.scene.material_green, this.scene.material_orange, this.scene.material_blue, this.scene.material_pink, this.scene.material_red, this.scene.material_yellow, this.scene.material_purple];
     }
+
     display() {
         this.scene.pushMatrix();
         this.scene.translate(-0.5, -1, 0); // Move all trangram
@@ -110,7 +111,8 @@ export class MyTangram extends CGFobject {
                 
         this.scene.multMatrix(matrixTranslate);
         this.scene.multMatrix(matrixRotate);
-        this.materials[0].apply();
+        //this.materials[0].apply();
+        this.scene.materials[3].apply();
         this.greenDiamond.display();
         this.scene.popMatrix();
 

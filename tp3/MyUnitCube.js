@@ -99,7 +99,7 @@ export class MyUnitCube extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
-        this.scene.translate(0, 0, -0.51); // push back to avoid z-fighting
+        this.scene.translate(0, 0, 0); // push back to avoid z-fighting
       
         super.display();
         this.scene.popMatrix();
