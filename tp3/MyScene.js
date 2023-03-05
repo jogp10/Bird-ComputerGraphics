@@ -42,7 +42,7 @@ export class MyScene extends CGFscene {
 
         //Other variables connected to MyInterface
         this.selectedObject = 3;
-        this.selectedMaterial = 0;
+        this.selectedMaterial = 3;
         this.displayAxis = true;
         this.displayNormals = true;
         this.objectComplexity = 0.5;
@@ -130,8 +130,8 @@ export class MyScene extends CGFscene {
 
         // Wood Material
         this.material4 = new CGFappearance(this);
-        this.material4.setAmbient(0, 0, 0, 1.0);
-        this.material4.setDiffuse(0.6, 0.4, 0.2, 1.0);
+        this.material4.setAmbient(0.52, 0.37, 0.26, 1.0);
+        this.material4.setDiffuse(0.52, 0.37, 0.26, 1.0);
         this.material4.setSpecular(0,0,0, 1.0);
         this.material4.setShininess(10.0);
 
