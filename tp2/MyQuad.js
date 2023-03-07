@@ -7,7 +7,6 @@ export class MyQuad extends CGFobject {
 	}
 
     initBuffers() {
-        //square in origin (0,0,0)
         this.vertices = [
             -0.5, -0.5, 0,	//0
             0.5, -0.5, 0,	//1
