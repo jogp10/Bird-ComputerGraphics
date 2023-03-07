@@ -59,13 +59,10 @@ export class MyCylinder extends CGFobject {
             this.normals.push(...normal);
 
             var k = 2 * i * this.slices;
-            if (j != this.slices - 1) {
-                this.indices.push(2 * j + k, 2 * j + 3 + k, 2 * j + 1 + k);
-                this.indices.push(2 * j + k, 2 * j + 2 + k, 2 * j + 3 + k);
-            } else {
-                this.indices.push(2 * j + k, k + 1, 2 * j + 1 + k);
-                this.indices.push(2 * j + k, k, k + 1);
-            }
+
+            this.indices.push(2 * j + k, (2 * j + 3)%(2*this.slices) + k, 2 * j + 1 + k);
+            this.indices.push(2 * j + k, (2 * j + 2)%(2*this.slices) + k, (2 * j + 3)%(2*this.slices) + k);
+
 
             ang += alphaAng;
         }
