@@ -6,7 +6,7 @@ import { CGFobject } from "../lib/CGF.js";
  * @param slices - number of slices
  * @param stacks - number of stacks
  */
-export class MyPrism extends CGFobject {
+export class MyCylinder extends CGFobject {
   constructor(scene, slices, stacks) {
     super(scene);
     this.slices = slices;
@@ -35,15 +35,13 @@ export class MyPrism extends CGFobject {
             var caa = Math.cos(ang + alphaAng);
 
             this.vertices.push(ca, i / this.stacks, -sa);
-            this.vertices.push(caa, i / this.stacks, -saa);
-            this.vertices.push(caa, (i + 1) / this.stacks, -saa);
             this.vertices.push(ca, (i + 1) / this.stacks, -sa);
 
             // triangle normal computed by cross product of two edges
             var normal = [
-                saa - sa,
+                ca,
                 0,
-                caa - ca,
+                -sa,
             ];
 
             // normalization
@@ -59,17 +57,15 @@ export class MyPrism extends CGFobject {
             // push normal once for each vertex of this triangle
             this.normals.push(...normal);
             this.normals.push(...normal);
-            this.normals.push(...normal);
-            this.normals.push(...normal);
 
-            var k = 4 * i * this.slices;
-
-            this.indices.push(4 * j + k, 4 * j + 1 + k, 4 * j + 2 + k);
-            this.indices.push(4 * j + k, 4 * j + 2 + k, 4 * j + 3 + k);
-
-            //this.indices.push(4 * j + k, 4 * j + 2 + k, 4 * j + 1 + k);
-            //this.indices.push(4 * j + k, 4 * j + 3 + k, 4 * j + 2 + k);
-
+            var k = 2 * i * this.slices;
+            if (j != this.slices - 1) {
+                this.indices.push(2 * j + k, 2 * j + 3 + k, 2 * j + 1 + k);
+                this.indices.push(2 * j + k, 2 * j + 2 + k, 2 * j + 3 + k);
+            } else {
+                this.indices.push(2 * j + k, k + 1, 2 * j + 1 + k);
+                this.indices.push(2 * j + k, k, k + 1);
+            }
 
             ang += alphaAng;
         }
