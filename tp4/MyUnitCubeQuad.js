@@ -12,6 +12,11 @@ export class MyUnitCubeQuad extends CGFobject {
         this.initBuffers();
     }
 
+    constructor(scene) {	
+        super(scene);
+        this.initBuffers();
+    }
+
     initBuffers() {
         this.front = new MyQuad(this.scene);
         this.back = new MyQuad(this.scene);
