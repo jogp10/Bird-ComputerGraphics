@@ -64,5 +64,7 @@ export class MyQuad extends CGFobject {
 		this.texCoords = [...coords];
 		this.updateTexCoordsGLBuffers();
 	}
+
+	updateBuffers() {}
 }
 

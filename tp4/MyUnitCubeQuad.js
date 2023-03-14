@@ -23,8 +23,8 @@ export class MyUnitCubeQuad extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
-        this.scene.scale(10, 10, 10);
-        this.scene.translate(0, 0, -0.505); // push back to avoid z-fighting
+        //this.scene.scale(10, 10, 10);
+        //this.scene.translate(0, 0, -0.505); // push back to avoid z-fighting
         this.scene.setDiffuse(0.5,0.5,0.5,1);
 
         // Front square
@@ -70,4 +70,16 @@ export class MyUnitCubeQuad extends CGFobject {
         
         this.scene.popMatrix();
     }
+
+    updateBuffers() {}
+
+	/**
+	 * @method updateTexCoords
+	 * Updates the list of texture coordinates of the quad
+	 * @param {Array} coords - Array of texture coordinates
+	 */
+	updateTexCoords(coords) {
+		this.texCoords = [...coords];
+		this.updateTexCoordsGLBuffers();
+	}
 }
