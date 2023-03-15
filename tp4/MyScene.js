@@ -26,16 +26,17 @@ export class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
 
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
-        this.unitCubeQuad = new MyUnitCubeQuad(this);
+        this.unitCubeQuad = new MyUnitCubeQuad(this,'images/mineTop.png','images/mineSide.png','images/mineSide.png','images/mineSide.png','images/mineSide.png','images/mineBottom.png');
         this.tangram = new MyTangram(this);
 
         this.objects = [this.quad, this.unitCubeQuad, this.tangram]
 
         // Labels and ID's for object selection on MyInterface
-        this.objectIDs = {'Quad': 0 , 'UnitCube': 1, 'Tangram': 2};
+        this.objectIDs = {'Quad': 0 , 'UnitCubeQuad': 1, 'Tangram': 2};
 
 
         //------ Applied Material
@@ -56,7 +57,7 @@ export class MyScene extends CGFscene {
 
         //-------Objects connected to MyInterface
         this.displayObject = true;
-        this.selectedObject = 2;
+        this.selectedObject = 1;
         this.displayAxis = true;
         this.scaleFactor = 5;
         this.selectedTexture = -1;        
@@ -132,7 +133,7 @@ export class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        //this.quadMaterial.apply();
+        this.quadMaterial.apply();
 
         // Default texture filtering in WebCGF is LINEAR. 
         // Uncomment next line for NEAREST when magnifying, or 
