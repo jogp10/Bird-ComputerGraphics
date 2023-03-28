@@ -72,13 +72,14 @@ export class ShaderScene extends CGFscene {
 		this.appearance.setShininess(120);
 
 		this.texture = new CGFtexture(this, "textures/texture.jpg");
-		this.appearance.setTexture(this.texture);
-		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
-
 		this.texture2 = new CGFtexture(this, "textures/FEUP.jpg");
-
 		this.texture3 = new CGFtexture(this, "textures/waterTex.jpg");
 		this.texture4 = new CGFtexture(this, "textures/waterMap.jpg");
+
+		this.appearance.setTexture(this.texture3);
+		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+
 
 		// shaders initialization
 
@@ -95,7 +96,6 @@ export class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/yel_blue.vert", "shaders/yel_blue.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/sepia_b.frag"),
 			new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag"),
-
 		];
 
 		// additional texture will have to be bound to texture unit 1 later, when using the shader, with "this.texture2.bind(1);"
@@ -103,7 +103,8 @@ export class ShaderScene extends CGFscene {
 		this.testShaders[5].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ timeFactor: 0 });
-		 this.testShaders[11].setUniformsValues({ uSampler2: 1 });
+		this.testShaders[11].setUniformsValues({ uSampler2: 1 });
+		this.testShaders[11].setUniformsValues({ timeFactor: 0 });
 
 
 
@@ -207,6 +208,8 @@ export class ShaderScene extends CGFscene {
 			// Doing the modulus (%) by 100 makes the timeFactor loop between 0 and 99
 			// ( so the loop period of timeFactor is 100 times 100 ms = 10s ; the actual animation loop depends on how timeFactor is used in the shader )
 			this.testShaders[6].setUniformsValues({ timeFactor: t / 100 % 100 });
+		if (this.selectedExampleShader == 11)
+			this.testShaders[11].setUniformsValues({ timeFactor: t / 100 % 100 });
 	}
 
 	// main display function
@@ -237,7 +240,7 @@ export class ShaderScene extends CGFscene {
 		this.pushMatrix();
 
 		// bind additional texture to texture unit 1
-		this.texture3.bind(0);
+		this.texture2.bind(1);
 		this.texture4.bind(1);
 
 		if (this.selectedObject==0) {
