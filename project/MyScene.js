@@ -39,7 +39,7 @@ export class MyScene extends CGFscene {
     this.displayAxis = true;
     this.displayNormals = false;
     this.scaleFactor = 1;
-    this.selectedObject = 0;
+    this.selectedObject = 1;
     this.objectComplexity = 0.5;
 
 
@@ -64,7 +64,7 @@ export class MyScene extends CGFscene {
       1.0,
       0.1,
       1000,
-      vec3.fromValues(50, 10, 15),
+      vec3.fromValues(50, 10, 150),
       vec3.fromValues(0, 0, 0)
     );
   }

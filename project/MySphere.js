@@ -22,30 +22,34 @@ export class MySphere extends CGFobject {
 
     var ang = 0;
     var alphaAng = (2 * Math.PI) / this.slices;
-    var r = 1;
-    var betaR = r / this.stacks;
+    var radius = 0;
+    var alphaRadius = Math.PI / this.stacks;
 
-    for (var i = 0; i < this.stacks; i++) {
+    for (var i = 0; i < this.stacks * 2; i++) {
+        var sr = Math.sin(radius);
+        var cr = Math.cos(radius);
+
+        ang = 0;
+
         for (var j = 0; j < this.slices; j++) {
             // All vertices have to be declared for a given face
             // even if they are shared with others, as the normals 
-            // in each face will be different
-            
+            // in each face will be different            
             var sa = Math.sin(ang);
-            var saa = Math.sin(ang + alphaAng);
             var ca = Math.cos(ang);
-            var caa = Math.cos(ang + alphaAng);
+            var x = ca * sr;
+            var y = cr;
+            var z = -sa * sr;
 
-            this.vertices.push(ca, i / this.stacks, -sa);
-            this.vertices.push(ca, (i + 1) / this.stacks, -sa);
+            this.vertices.push(x, y, z);
 
             // triangle normal computed by cross product of two edges
             var normal = [
-                ca,
-                0,
-                -sa,
+                x,
+                y,
+                z
             ];
-
+            
             // normalization
             var nsize = Math.sqrt(
                 normal[0] * normal[0] +
@@ -58,16 +62,17 @@ export class MySphere extends CGFobject {
 
             // push normal once for each vertex of this triangle
             this.normals.push(...normal);
-            this.normals.push(...normal);
 
             var k = 2 * i * this.slices;
+            var current = i * this.slices + j;
+            var next = current + this.slices;
 
-            this.indices.push(2 * j + k, (2 * j + 3)%(2*this.slices) + k, 2 * j + 1 + k);
-            this.indices.push(2 * j + k, (2 * j + 2)%(2*this.slices) + k, (2 * j + 3)%(2*this.slices) + k);
-
+            this.indices.push(current + 1, current, next);
+            this.indices.push(current + 1, next, next + 1);
 
             ang += alphaAng;
         }
+        radius += alphaRadius;
     }
 
 
