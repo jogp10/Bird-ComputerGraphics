@@ -29,7 +29,8 @@ export class MySphere extends CGFobject {
         var sr = Math.sin(radius);
         var cr = Math.cos(radius);
 
-        ang = 0;
+        var k = i * this.slices;
+
 
         for (var j = 0; j < this.slices; j++) {
             // All vertices have to be declared for a given face
@@ -63,12 +64,15 @@ export class MySphere extends CGFobject {
             // push normal once for each vertex of this triangle
             this.normals.push(...normal);
 
-            var k = 2 * i * this.slices;
-            var current = i * this.slices + j;
-            var next = current + this.slices;
+            if(i != this.stacks*2 - 1) {
+                var current = i * this.slices + j;
+                var next = current + this.slices;
+                var current_next = (current + 1) % (this.slices) + k;
+                var next_next = (next + 1) % (this.slices) + k + this.slices;
 
-            this.indices.push(current + 1, current, next);
-            this.indices.push(current + 1, next, next + 1);
+                this.indices.push(current_next, current, next);
+                this.indices.push(current_next, next, next_next);
+            }
 
             ang += alphaAng;
         }
