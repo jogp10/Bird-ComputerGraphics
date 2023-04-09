@@ -45,10 +45,15 @@ export class MyScene extends CGFscene {
 
     this.enableTextures(true);
 
-    this.texture = new CGFtexture(this, "images/terrain.jpg");
+    this.textureTerrain = new CGFtexture(this, "images/terrain.jpg");
     this.appearance = new CGFappearance(this);
-    this.appearance.setTexture(this.texture);
+    this.appearance.setTexture(this.textureTerrain);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.textureEarth = new CGFtexture(this, "images/earth.jpg");
+    this.earth = new CGFappearance(this);
+    this.earth.setTexture(this.textureEarth);
+    this.earth.setTextureWrap('REPEAT', 'REPEAT');
 
   }
   
@@ -118,21 +123,35 @@ export class MyScene extends CGFscene {
         this.axis.display();
 
     // ---- BEGIN Primitive drawing section
-
+    /*
     this.pushMatrix();
     this.appearance.apply();
-    //this.translate(0,-100,0);
+
+    this.translate(0,-100,0);
     this.scale(400,400,400);
     this.rotate(-Math.PI/2.0,1,0,0);
 
+    if (this.displayNormals)
+      this.objects[0].enableNormalViz();
+    else
+      this.objects[0].disableNormalViz();
+    
+    this.objects[0].display();
+    this.popMatrix();
+    */
+    
+    this.pushMatrix();
+    this.earth.apply();
+    this.translate(0, -100, 0);
+    //this.rotate(Math.PI,1,0,0);
+    this.scale(200,200,200);
 
     if (this.displayNormals)
-      this.objects[this.selectedObject].enableNormalViz();
+      this.objects[1].enableNormalViz();
     else
-      this.objects[this.selectedObject].disableNormalViz();
-    
+      this.objects[1].disableNormalViz();
 
-    this.objects[this.selectedObject].display();
+    this.objects[1].display();
     this.popMatrix();
 
     // ---- END Primitive drawing section

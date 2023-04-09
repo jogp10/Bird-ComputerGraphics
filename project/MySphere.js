@@ -19,6 +19,7 @@ export class MySphere extends CGFobject {
     this.vertices = [];
     this.indices = [];
     this.normals = [];
+    this.texCoords = [];
 
     var ang = 0;
     var alphaAng = (2 * Math.PI) / this.slices;
@@ -44,6 +45,12 @@ export class MySphere extends CGFobject {
 
             this.vertices.push(x, y, z);
 
+            // texture Coords, west to east, south to north, latitude and longitude
+            var texCoordX = j / (this.slices-1); // longitude
+            var texCoordY = i / (this.stacks-1); // latitude
+            this.texCoords.push(texCoordX, texCoordY);
+
+
             // triangle normal computed by cross product of two edges
             var normal = [
                 x,
@@ -64,15 +71,15 @@ export class MySphere extends CGFobject {
             // push normal once for each vertex of this triangle
             this.normals.push(...normal);
 
-            if(i != this.stacks*2 - 1) {
-                var current = i * this.slices + j;
-                var next = current + this.slices;
-                var current_next = (current + 1) % (this.slices) + k;
-                var next_next = (next + 1) % (this.slices) + k + this.slices;
+            if(i == this.stacks*2 - 1) continue;
+            
+            var current = i * this.slices + j;
+            var next = current + this.slices;
+            var current_next = (current + 1) % (this.slices) + k;
+            var next_next = (next + 1) % (this.slices) + k + this.slices;
 
-                this.indices.push(current_next, current, next);
-                this.indices.push(current_next, next, next_next);
-            }
+            this.indices.push(current, next_next, current_next);
+            this.indices.push(current, next, next_next);
 
             ang += alphaAng;
         }
@@ -86,6 +93,15 @@ export class MySphere extends CGFobject {
 
     this.initGLBuffers();
   }
+
+  setFillMode() { 
+		this.primitiveType=this.scene.gl.TRIANGLE_STRIP;
+	}
+
+	setLineMode() 
+	{ 
+		this.primitiveType=this.scene.gl.LINES;
+	};
 
   updateBuffers() {}
 }
