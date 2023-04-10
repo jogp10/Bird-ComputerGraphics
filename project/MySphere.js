@@ -21,19 +21,22 @@ export class MySphere extends CGFobject {
     this.normals = [];
     this.texCoords = [];
 
+    var wide = this.slices+1;
+    var height = this.stacks*2;
+
     var ang = 0;
     var alphaAng = (2 * Math.PI) / this.slices;
     var radius = 0;
-    var alphaRadius = Math.PI / this.stacks;
+    var alphaRadius = (2 * Math.PI) / height;
 
-    for (var i = 0; i < this.stacks * 2; i++) {
+    for (var i = 0; i < height; i++) {
         var sr = Math.sin(radius);
         var cr = Math.cos(radius);
 
-        var k = i * this.slices;
+        var k = i * wide;
+        ang = 0;
 
-
-        for (var j = 0; j < this.slices; j++) {
+        for (var j = 0; j < wide; j++) {
             // All vertices have to be declared for a given face
             // even if they are shared with others, as the normals 
             // in each face will be different            
@@ -46,8 +49,8 @@ export class MySphere extends CGFobject {
             this.vertices.push(x, y, z);
 
             // texture Coords, west to east, south to north, latitude and longitude
-            var texCoordX = j / (this.slices-1); // longitude
-            var texCoordY = i / (this.stacks-1); // latitude
+            var texCoordX = j / this.slices; // longitude
+            var texCoordY = i / this.stacks; // latitude
             this.texCoords.push(texCoordX, texCoordY);
 
 
@@ -71,12 +74,12 @@ export class MySphere extends CGFobject {
             // push normal once for each vertex of this triangle
             this.normals.push(...normal);
 
-            if(i == this.stacks*2 - 1) continue;
-            
-            var current = i * this.slices + j;
-            var next = current + this.slices;
-            var current_next = (current + 1) % (this.slices) + k;
-            var next_next = (next + 1) % (this.slices) + k + this.slices;
+            if(i == height - 1) continue;
+
+            var current = i * wide + j;
+            var next = current + wide;
+            var current_next = (current + 1) % wide + k;
+            var next_next = (next + 1) % wide + k + wide;
 
             this.indices.push(current, next_next, current_next);
             this.indices.push(current, next, next_next);
@@ -94,14 +97,11 @@ export class MySphere extends CGFobject {
     this.initGLBuffers();
   }
 
-  setFillMode() { 
-		this.primitiveType=this.scene.gl.TRIANGLE_STRIP;
-	}
+  updateBuffers(objectComplexity) {
+    this.slices = Math.round(100 * objectComplexity);
+    this.stacks = Math.round(100 * objectComplexity);
 
-	setLineMode() 
-	{ 
-		this.primitiveType=this.scene.gl.LINES;
-	};
-
-  updateBuffers() {}
+    this.initBuffers();
+    this.initNormalVizBuffers();
+  }
 }

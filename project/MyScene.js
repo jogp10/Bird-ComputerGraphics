@@ -27,7 +27,7 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
-    this.sphere = new MySphere(this, 30, 30);
+    this.sphere = new MySphere(this, 10, 10);
 
     this.objects = [this.plane, this.sphere];
 
@@ -122,36 +122,34 @@ export class MyScene extends CGFscene {
     if (this.displayAxis) 
         this.axis.display();
 
+    // Draw normals
+    if (this.displayNormals)
+        this.objects[this.selectedObject].enableNormalViz();
+    else
+        this.objects[this.selectedObject].disableNormalViz();
+
     // ---- BEGIN Primitive drawing section
-    /*
+    
     this.pushMatrix();
+
     this.appearance.apply();
 
     this.translate(0,-100,0);
     this.scale(400,400,400);
     this.rotate(-Math.PI/2.0,1,0,0);
-
-    if (this.displayNormals)
-      this.objects[0].enableNormalViz();
-    else
-      this.objects[0].disableNormalViz();
     
-    this.objects[0].display();
+    if(this.selectedObject == 0) this.objects[0].display();
+
     this.popMatrix();
-    */
+    
     
     this.pushMatrix();
+
     this.earth.apply();
-    this.translate(0, -100, 0);
-    //this.rotate(Math.PI,1,0,0);
     this.scale(200,200,200);
 
-    if (this.displayNormals)
-      this.objects[1].enableNormalViz();
-    else
-      this.objects[1].disableNormalViz();
+    if(this.selectedObject == 1) this.objects[1].display();
 
-    this.objects[1].display();
     this.popMatrix();
 
     // ---- END Primitive drawing section
