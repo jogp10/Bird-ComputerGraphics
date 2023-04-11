@@ -21,36 +21,36 @@ export class MySphere extends CGFobject {
     this.normals = [];
     this.texCoords = [];
 
-    var wide = this.slices+1;
+    var wide = this.slices;
     var height = this.stacks*2;
 
     var ang = 0;
-    var alphaAng = (2 * Math.PI) / this.slices;
+    var alphaAng = (2 * Math.PI) / wide;
     var radius = 0;
-    var alphaRadius = (2 * Math.PI) / height;
+    var tetaRadius = Math.PI / height;
 
-    for (var i = 0; i < height; i++) {
+    for (var i = 0; i < height + 1; i++) {
         var sr = Math.sin(radius);
         var cr = Math.cos(radius);
 
-        var k = i * wide;
+        var k = i * (wide + 1);
         ang = 0;
 
-        for (var j = 0; j < wide; j++) {
+        for (var j = 0; j < wide + 1; j++) {
             // All vertices have to be declared for a given face
             // even if they are shared with others, as the normals 
             // in each face will be different            
             var sa = Math.sin(ang);
             var ca = Math.cos(ang);
-            var x = ca * sr;
-            var y = cr;
-            var z = -sa * sr;
+            var x = sr * ca;
+            var y = -cr;
+            var z = sr * sa;
 
             this.vertices.push(x, y, z);
 
             // texture Coords, west to east, south to north, latitude and longitude
-            var texCoordX = j / this.slices; // longitude
-            var texCoordY = i / this.stacks; // latitude
+            var texCoordX = 1 - j / wide; // longitude
+            var texCoordY = 1 - i / height; // latitude
             this.texCoords.push(texCoordX, texCoordY);
 
 
@@ -74,19 +74,19 @@ export class MySphere extends CGFobject {
             // push normal once for each vertex of this triangle
             this.normals.push(...normal);
 
-            if(i == height - 1) continue;
+            ang += alphaAng;
 
-            var current = i * wide + j;
-            var next = current + wide;
-            var current_next = (current + 1) % wide + k;
-            var next_next = (next + 1) % wide + k + wide;
+            if(i == height || j == wide) continue;
+
+            var current = i * (wide + 1) + j;
+            var next = current + (wide + 1);
+            var current_next = (current + 1) % (wide + 1) + k;
+            var next_next = (next + 1) % (wide + 1) + k + (wide + 1);
 
             this.indices.push(current, next_next, current_next);
             this.indices.push(current, next, next_next);
-
-            ang += alphaAng;
         }
-        radius += alphaRadius;
+        radius += tetaRadius;
     }
 
 
