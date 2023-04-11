@@ -1,6 +1,7 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
+import { MyBird } from "./MyBird.js";
 
 /**
  * MyScene
@@ -27,12 +28,13 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
-    this.sphere = new MySphere(this, 10, 10);
+    this.sphere = new MySphere(this, 3, 3);
+    this.bird = new MyBird(this);
 
-    this.objects = [this.plane, this.sphere];
+    this.objects = [this.plane, this.sphere, this.bird];
 
     // Labels and ID's for object selection on MyInterface
-    this.objectIDs = { 'Plane': 0, 'Sphere': 1 };
+    this.objectIDs = { 'Plane': 0, 'Sphere': 1 , 'Bird': 2};
 
 
     //Objects connected to MyInterface
