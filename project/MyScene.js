@@ -2,6 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyBird } from "./MyBird.js";
+import { MyPanorama } from "./MyPanorama.js";
 
 /**
  * MyScene
@@ -30,18 +31,19 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 50, 50);
     this.bird = new MyBird(this);
+    this.panorama = new MyPanorama(this, 'images/panorama4.jpg', 50, 50);
 
-    this.objects = [this.plane, this.sphere, this.bird];
+    this.objects = [this.plane, this.sphere, this.bird, this.panorama];
 
     // Labels and ID's for object selection on MyInterface
-    this.objectIDs = { 'Plane': 0, 'Sphere': 1 , 'Bird': 2};
+    this.objectIDs = { 'Plane': 0, 'Sphere': 1 , 'Bird': 2, 'Panorama' : 3};
 
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
     this.scaleFactor = 1;
-    this.selectedObject = 1;
+    this.selectedObject = 3;
     this.objectComplexity = 0.5;
 
 
@@ -64,6 +66,7 @@ export class MyScene extends CGFscene {
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
+    // change FOV
   }
 
   initCameras() {
@@ -151,6 +154,14 @@ export class MyScene extends CGFscene {
     this.scale(200,200,200);
 
     if(this.selectedObject == 1) this.objects[1].display();
+
+    this.popMatrix();
+
+
+    this.pushMatrix();
+
+    this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
+    if(this.selectedObject == 3) this.objects[3].display();
 
     this.popMatrix();
 

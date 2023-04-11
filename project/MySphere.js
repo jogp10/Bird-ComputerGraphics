@@ -7,10 +7,14 @@ import { CGFobject } from "../lib/CGF.js";
  * @param stacks - number of stacks
  */
 export class MySphere extends CGFobject {
-  constructor(scene, slices, stacks) {
+  constructor(scene, slices, stacks, inverted) {
     super(scene);
     this.slices = slices;
     this.stacks = stacks;
+    
+    if (inverted) this.inverted = -1;
+    else this.inverted = 1;
+
     this.initBuffers();
   }
 
@@ -56,9 +60,9 @@ export class MySphere extends CGFobject {
 
             // triangle normal computed by cross product of two edges
             var normal = [
-                x,
-                y,
-                z
+                this.inverted * x,
+                this.inverted * y,
+                this.inverted * z
             ];
             
             // normalization
@@ -83,8 +87,13 @@ export class MySphere extends CGFobject {
             var current_next = (current + 1) % (wide + 1) + k;
             var next_next = (next + 1) % (wide + 1) + k + (wide + 1);
 
-            this.indices.push(current, next_next, current_next);
-            this.indices.push(current, next, next_next);
+            if (this.inverted == 1) {
+                this.indices.push(current, next_next, current_next);
+                this.indices.push(current, next, next_next);
+            } else if(this.inverted == -1) {
+                this.indices.push(current, current_next, next_next);
+                this.indices.push(current, next_next, next);
+            }
         }
         radius += tetaRadius;
     }
