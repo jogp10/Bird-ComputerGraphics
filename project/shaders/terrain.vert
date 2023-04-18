@@ -7,21 +7,19 @@ uniform mat4 uPMatrix;
 uniform mat4 uNMatrix;
 
 uniform float normScale;
-uniform float timeFactor;
-uniform sampler2D uSampler2;
+uniform sampler2D heightMap;
 
 varying vec2 vTextureCoord;
+varying vec2 vLightMapCoord;
 
 void main() {
-
 	vec3 offset = vec3(0.0, 0.0, 0.0);
+	float z_offset = texture2D(heightMap, aTextureCoord).g;
 
-	float z_offset = texture2D(uSampler2, aTextureCoord).b*0.08;
-	offset=vec3(0.0, 0.0, z_offset);
-	
-	
+	offset = vec3(0.0, 0.0, z_offset)*0.35;
+
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition+offset, 1.0);
 
 	vTextureCoord = aTextureCoord;
-
+	vLightMapCoord = vec2(0, 1.0-z_offset);
 }
