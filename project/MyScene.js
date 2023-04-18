@@ -2,6 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyBird } from "./MyBird.js";
+import { MyPanorama } from "./MyPanorama.js";
 import { MyWing } from "./MyWing.js";
 
 /**
@@ -29,21 +30,22 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
-    this.sphere = new MySphere(this, 3, 3);
+    this.sphere = new MySphere(this, 50, 50);
     this.bird = new MyBird(this,3,3);
     this.wing = new MyWing(this,3,3);
+    this.panorama = new MyPanorama(this, 'images/panorama4.jpg', 50, 50);
 
-    this.objects = [this.plane, this.sphere, this.bird, this.wing];
+    this.objects = [this.plane, this.sphere, this.bird, this.wing, this.panorama];
 
     // Labels and ID's for object selection on MyInterface
-    this.objectIDs = { 'Plane': 0, 'Sphere': 1 , 'Bird': 2, 'Wing': 3};
+    this.objectIDs = { 'Plane': 0, 'Sphere': 1 , 'Bird': 2, 'Wing': 3, 'Panorama' : 4};
 
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
     this.scaleFactor = 1;
-    this.selectedObject = 2;
+    this.selectedObject = 1;
     this.objectComplexity = 0.5;
 
 
@@ -66,11 +68,12 @@ export class MyScene extends CGFscene {
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
+    // change FOV
   }
 
   initCameras() {
     this.camera = new CGFcamera(
-      1.0,
+      2*Math.PI/3,
       0.1,
       1000,
       vec3.fromValues(50, 10, 150),
@@ -176,6 +179,28 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
 
+
+
+    
+
+    this.pushMatrix();
+
+    this.translate(0,0,0);
+    this.scale(100,100,100);
+
+    if(this.selectedObject == 3) this.objects[3].display();
+
+    this.popMatrix();
+
+
+
+
+    this.pushMatrix();
+
+    this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
+    if(this.selectedObject == 4) this.objects[4].display();
+
+    this.popMatrix();
 
     // ---- END Primitive drawing section
   }
