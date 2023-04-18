@@ -3,6 +3,7 @@ import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyBird } from "./MyBird.js";
 import { MyPanorama } from "./MyPanorama.js";
+import { MyWing } from "./MyWing.js";
 
 /**
  * MyScene
@@ -31,12 +32,13 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 50, 50);
     this.bird = new MyBird(this, 0, 0, [0, 3, 0]);
+    this.wing = new MyWing(this,3,3);
     this.panorama = new MyPanorama(this, 'images/panorama4.jpg', 50, 50);
 
-    this.objects = [this.plane, this.sphere, this.bird, this.panorama];
+    this.objects = [this.plane, this.sphere, this.bird, this.wing, this.panorama];
 
     // Labels and ID's for object selection on MyInterface
-    this.objectIDs = { 'Plane': 0, 'Sphere': 1 , 'Bird': 2, 'Panorama' : 3};
+    this.objectIDs = { 'Plane': 0, 'Sphere': 1 , 'Bird': 2, 'Wing': 3, 'Panorama' : 4};
 
 
     //Objects connected to MyInterface
@@ -174,8 +176,43 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
 
-    this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
+    this.translate(0,0,0);
+    this.scale(100,100,100);
+
+    if(this.selectedObject == 2) this.objects[2].display();
+
+    this.popMatrix();
+
+    this.pushMatrix();
+
+    this.translate(0,0,0);
+    this.scale(100,100,100);
+
     if(this.selectedObject == 3) this.objects[3].display();
+
+    this.popMatrix();
+
+
+
+
+    
+
+    this.pushMatrix();
+
+    this.translate(0,0,0);
+    this.scale(100,100,100);
+
+    if(this.selectedObject == 3) this.objects[3].display();
+
+    this.popMatrix();
+
+
+
+
+    this.pushMatrix();
+
+    this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
+    if(this.selectedObject == 4) this.objects[4].display();
 
     this.popMatrix();
 
