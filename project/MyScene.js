@@ -4,6 +4,7 @@ import { MySphere } from "./MySphere.js";
 import { MyBird } from "./MyBird.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyWing } from "./MyWing.js";
+import { MyFoot } from "./MyFoot.js";
 
 /**
  * MyScene
@@ -34,11 +35,12 @@ export class MyScene extends CGFscene {
     this.bird = new MyBird(this, 0, 0, [0, 3, 0]);
     this.wing = new MyWing(this,3,3);
     this.panorama = new MyPanorama(this, 'images/panorama4.jpg', 50, 50);
+    this.foot = new MyFoot(this,3,3);
 
-    this.objects = [this.plane, this.sphere, this.bird, this.wing, this.panorama];
+    this.objects = [this.plane, this.sphere, this.bird, this.wing, this.foot ,this.panorama];
 
     // Labels and ID's for object selection on MyInterface
-    this.objectIDs = { 'Plane': 0, 'Sphere': 1 , 'Bird': 2, 'Wing': 3, 'Panorama' : 4};
+    this.objectIDs = { 'Plane': 0, 'Sphere': 1 , 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5};
 
 
     //Objects connected to MyInterface
@@ -146,7 +148,7 @@ export class MyScene extends CGFscene {
     
     this.pushMatrix();
 
-    this.appearance.apply();
+    //this.appearance.apply();
 
     this.translate(0,-100,0);
     this.scale(400,400,400);
@@ -159,7 +161,7 @@ export class MyScene extends CGFscene {
     
     this.pushMatrix();
 
-    this.earth.apply();
+    //this.earth.apply();
     this.scale(200,200,200);
 
     if(this.selectedObject == 1) this.objects[1].display();
@@ -183,6 +185,7 @@ export class MyScene extends CGFscene {
 
     this.popMatrix();
 
+
     this.pushMatrix();
 
     this.translate(0,0,0);
@@ -202,7 +205,7 @@ export class MyScene extends CGFscene {
     this.translate(0,0,0);
     this.scale(100,100,100);
 
-    if(this.selectedObject == 3) this.objects[3].display();
+    if(this.selectedObject == 4) this.objects[4].display();
 
     this.popMatrix();
 
@@ -212,7 +215,7 @@ export class MyScene extends CGFscene {
     this.pushMatrix();
 
     this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
-    if(this.selectedObject == 4) this.objects[4].display();
+    if(this.selectedObject == 5) this.objects[5].display();
 
     this.popMatrix();
 

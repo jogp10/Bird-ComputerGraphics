@@ -1,5 +1,6 @@
 import {CGFobject, CGFtexture} from '../lib/CGF.js';
-import {MyPlane} from './MyPlane.js';
+import { MyQuad } from './MyQuad.js';
+import { MyTriangle } from './MyTriangle.js';
 
 export class MyWing extends CGFobject {
 
@@ -11,7 +12,8 @@ export class MyWing extends CGFobject {
 
     initBuffers() {
 
-        this.plane = new MyPlane(this.scene, 20);
+        this.quad = new MyQuad(this.scene);
+        this.triangle = new MyTriangle(this.scene);
         
     }
 
@@ -23,20 +25,32 @@ export class MyWing extends CGFobject {
     display() {
 
         this.scene.pushMatrix();
-        this.scene.translate(0, 0, 0);
-        this.scene.rotate(Math.PI/2, 0, 1, 0);
-        this.scene.scale(0.5, 0.5, 0.5);
-        this.plane.display();
+        this.scene.rotate(Math.PI/2,1,0,0);
+        this.scene.scale(0.8,0.4,0.5);
+        this.quad.display();
         this.scene.popMatrix();
-        
+
+        this.scene.pushMatrix();
+        this.scene.translate(0.6,-0.21,0);
+        this.scene.rotate(-Math.PI/2,1,0,0);
+        this.scene.rotate(Math.PI/4,0,1,0);
+        this.scene.scale(0.3,0.2,0.3);
+        this.triangle.display();
+        this.scene.popMatrix();
     }
 
     updateBuffers() {}
 
     enableNormalViz() {
         
+        this.quad.enableNormalViz();
+        this.triangle.enableNormalViz();
+        
     }
     disableNormalViz() {
+        this.quad.disableNormalViz();
+        this.triangle.disableNormalViz();
+
     }
 
 }
