@@ -2,6 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyBird } from "./MyBird.js";
+import { MyWing } from "./MyWing.js";
 
 /**
  * MyScene
@@ -29,19 +30,20 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 3, 3);
-    this.bird = new MyBird(this);
+    this.bird = new MyBird(this,3,3);
+    this.wing = new MyWing(this,3,3);
 
-    this.objects = [this.plane, this.sphere, this.bird];
+    this.objects = [this.plane, this.sphere, this.bird, this.wing];
 
     // Labels and ID's for object selection on MyInterface
-    this.objectIDs = { 'Plane': 0, 'Sphere': 1 , 'Bird': 2};
+    this.objectIDs = { 'Plane': 0, 'Sphere': 1 , 'Bird': 2, 'Wing': 3};
 
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
     this.scaleFactor = 1;
-    this.selectedObject = 1;
+    this.selectedObject = 2;
     this.objectComplexity = 0.5;
 
 
@@ -153,6 +155,27 @@ export class MyScene extends CGFscene {
     if(this.selectedObject == 1) this.objects[1].display();
 
     this.popMatrix();
+
+
+    this.pushMatrix();
+
+    this.translate(0,0,0);
+    this.scale(100,100,100);
+
+    if(this.selectedObject == 2) this.objects[2].display();
+
+    this.popMatrix();
+
+    this.pushMatrix();
+
+    this.translate(0,0,0);
+    this.scale(100,100,100);
+
+    if(this.selectedObject == 3) this.objects[3].display();
+
+    this.popMatrix();
+
+
 
     // ---- END Primitive drawing section
   }
