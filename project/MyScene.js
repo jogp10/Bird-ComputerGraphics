@@ -46,9 +46,9 @@ export class MyScene extends CGFscene {
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
-    this.scaleFactor = 1;
-    this.speedFactor = 1;
-    this.selectedObject = 3;
+    this.scaleFactor = 3;
+    this.speedFactor = 0.1;
+    this.selectedObject = 2;
     this.objectComplexity = 0.5;
 
 
@@ -168,18 +168,8 @@ export class MyScene extends CGFscene {
 
     this.popMatrix();
 
-    
-    this.pushMatrix();
-
-    if(this.selectedObject == 2) this.objects[2].display();
-
-    this.popMatrix();
-
 
     this.pushMatrix();
-
-    this.translate(0,0,0);
-    this.scale(100,100,100);
 
     if(this.selectedObject == 2) this.objects[2].display();
 
@@ -242,13 +232,13 @@ export class MyScene extends CGFscene {
     if (this.gui.isKeyPressed("KeyA")) {
       text+=" A ";
       keysPressed=true;
-      this.bird.turn(-2*Math.PI/200);
+      this.bird.turn(2*Math.PI/200);
     }
 
     if (this.gui.isKeyPressed("KeyD")) {
       text+=" D ";
       keysPressed=true;
-      this.bird.turn(2*Math.PI/200);
+      this.bird.turn(-2*Math.PI/200);
     }
 
     if (this.gui.isKeyPressed("KeyR")) {

@@ -16,6 +16,7 @@ export class MyBird extends CGFobject {
 
         this.initialPosition = position;
         this.position = position;
+		this.lastPosition = position;
         this.orientation = orientation;
         this.speed = speed;
     }
@@ -33,8 +34,10 @@ export class MyBird extends CGFobject {
 
 
 	display() {
+		this.scene.pushMatrix();
+
+		this.scene.rotate(this.orientation, 0, 1, 0);
         this.scene.translate(this.position[0], this.position[1], this.position[2]);
-		this.scene.scale(2,2,2);
 
 		// Bird Eyes
 		this.scene.pushMatrix();
@@ -88,6 +91,8 @@ export class MyBird extends CGFobject {
 		this.scene.rotate(Math.PI, 0, 1, 0);
 		this.wing2.display();
 		this.scene.popMatrix();	
+
+		this.scene.popMatrix();
 	}
 
     updateTexCoords() {
@@ -114,8 +119,8 @@ export class MyBird extends CGFobject {
 
     update(t) {
         // Calculate the new position of the bird
+        this.lastPosition = this.position;
         this.position = [this.position[0] + Math.cos(this.orientation)*(this.speed), this.position[1], this.position[2] + Math.sin(this.orientation)*(this.speed)];
-        
 
         console.log("pos: " + this.position + " ori: " + this.orientation + " speed: " + this.speed);
     }
