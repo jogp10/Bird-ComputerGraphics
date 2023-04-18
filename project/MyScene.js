@@ -30,7 +30,7 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 50, 50);
-    this.bird = new MyBird(this);
+    this.bird = new MyBird(this, 0, 0, [0, 3, 0]);
     this.panorama = new MyPanorama(this, 'images/panorama4.jpg', 50, 50);
 
     this.objects = [this.plane, this.sphere, this.bird, this.panorama];
@@ -43,6 +43,7 @@ export class MyScene extends CGFscene {
     this.displayAxis = true;
     this.displayNormals = false;
     this.scaleFactor = 1;
+    this.speedFactor = 1;
     this.selectedObject = 3;
     this.objectComplexity = 0.5;
 
@@ -58,6 +59,8 @@ export class MyScene extends CGFscene {
     this.earth = new CGFappearance(this);
     this.earth.setTexture(this.textureEarth);
     this.earth.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.setUpdatePeriod(1000/60);
 
   }
   
@@ -127,6 +130,10 @@ export class MyScene extends CGFscene {
     if (this.displayAxis) 
         this.axis.display();
 
+    this.setDefaultAppearance();
+
+    this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+
     // Draw normals
     if (this.displayNormals)
         this.objects[this.selectedObject].enableNormalViz();
@@ -157,6 +164,13 @@ export class MyScene extends CGFscene {
 
     this.popMatrix();
 
+    
+    this.pushMatrix();
+
+    if(this.selectedObject == 2) this.objects[2].display();
+
+    this.popMatrix();
+
 
     this.pushMatrix();
 
@@ -166,5 +180,49 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     // ---- END Primitive drawing section
+  }
+
+  checkKeys() {
+    var text="Keys pressed: ";
+    var keysPressed=false;
+
+    // Check for key codes e.g. in https://keycode.info/
+    if (this.gui.isKeyPressed("KeyW")) {
+      text+=" W ";
+      keysPressed=true;
+      this.bird.accelerate(0.05);
+    }
+
+    if (this.gui.isKeyPressed("KeyS")) {
+      text+=" S ";
+      keysPressed=true;
+      this.bird.accelerate(-0.05);
+    }
+
+    if (this.gui.isKeyPressed("KeyA")) {
+      text+=" A ";
+      keysPressed=true;
+      this.bird.turn(-2*Math.PI/200);
+    }
+
+    if (this.gui.isKeyPressed("KeyD")) {
+      text+=" D ";
+      keysPressed=true;
+      this.bird.turn(2*Math.PI/200);
+    }
+
+    if (this.gui.isKeyPressed("KeyR")) {
+      text+=" R ";
+      keysPressed=true;
+      this.bird.reset();
+    }
+
+    if (keysPressed)
+      console.log(text);
+  }
+
+  update(t) {
+    this.checkKeys();
+    this.bird.update(t);
   }
 }
