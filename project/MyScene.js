@@ -5,6 +5,7 @@ import { MyPanorama } from "./MyPanorama.js";
 import { MyWing } from "./MyWing.js";
 import { MyFoot } from "./MyFoot.js";
 import { MyTerrain } from "./MyTerrain.js";
+import { MyBirdEgg } from "./MyBirdEgg.js";
 
 /**
  * MyScene
@@ -37,7 +38,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 0.1;
-    this.selectedObject = 0;
+    this.selectedObject = 6;
     this.objectComplexity = 0.5;
 
     this.enableTextures(true);
@@ -57,11 +58,17 @@ export class MyScene extends CGFscene {
     this.wing = new MyWing(this,3,3);
     this.panorama = new MyPanorama(this, 'images/panorama4.jpg', 50, 50);
     this.foot = new MyFoot(this,3,3);
+    this.egg = new MyBirdEgg(this, 20, 20, [0, 0, 0]);
+    this.egg1 = new MyBirdEgg(this, 20, 20, [-3, 0.5, -3]);
+    this.egg2 = new MyBirdEgg(this, 20, 20, [3, 0.5, -3]);
+    this.egg3 = new MyBirdEgg(this, 20, 20, [-3, 0.5, 3]);
+    this.egg4 = new MyBirdEgg(this, 20, 20, [3, 0.5, 3]);
+    this.birdEggs = [this.egg1, this.egg2, this.egg3, this.egg4];
 
-    this.objects = [this.terrain, this.earth, this.bird, this.wing, this.foot ,this.panorama];
+    this.objects = [this.terrain, this.earth, this.bird, this.wing, this.foot ,this.panorama, this.egg, this.birdEggs];
 
     // Labels and ID's for object selection on MyInterface
-    this.objectIDs = { 'Terrain': 0, 'Earth': 1 , 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5};
+    this.objectIDs = { 'Terrain': 0, 'Earth': 1 , 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Bird Eggs': 7};
   }
 
   // initialize textures
@@ -163,6 +170,18 @@ export class MyScene extends CGFscene {
       this.bird.reset();
     }
 
+    if (this.gui.isKeyPressed("KeyP")) {
+      text+=" P ";
+      keysPressed=true;
+      this.bird.pickEgg();
+    }
+
+    if (this.gui.isKeyPressed("KeyO")) {
+      text+=" O ";
+      keysPressed=true;
+      this.bird.dropEgg();
+    }
+
     if (keysPressed)
       console.log(text);
   }
@@ -171,6 +190,10 @@ export class MyScene extends CGFscene {
   update(t) {
     this.checkKeys();
     this.bird.update(t);
+  }
+
+  distance(position1, position2) {
+    return Math.sqrt(Math.pow(position1[0]-position2[0],2) + Math.pow(position1[1]-position2[1],2) + Math.pow(position1[2]-position2[2],2));
   }
 
 	// main display function
@@ -196,9 +219,9 @@ export class MyScene extends CGFscene {
 
     // Draw normals
     if (this.displayNormals)
-        this.objects[this.selectedObject].enableNormalViz();
+        if(this.selectedObject!=7)this.objects[this.selectedObject].enableNormalViz();
     else
-        this.objects[this.selectedObject].disableNormalViz();
+        if(this.selectedObject!=7)this.objects[this.selectedObject].disableNormalViz();
 
 
     // ---- BEGIN Primitive drawing section
@@ -251,6 +274,20 @@ export class MyScene extends CGFscene {
         this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
         this.objects[5].display();
       }
+    this.popMatrix();
+
+    this.pushMatrix();
+    // BirdEgg
+    if(this.selectedObject == 6) {
+      this.objects[6].display();
+    }
+    this.popMatrix();
+
+    this.pushMatrix();
+    // BirdEggs
+    if(this.selectedObject == 7) {
+      for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display();
+    }
     this.popMatrix();
 
     

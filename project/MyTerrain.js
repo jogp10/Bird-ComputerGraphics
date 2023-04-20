@@ -12,7 +12,6 @@ export class MyTerrain extends CGFobject {
 
     initBuffers() {
         this.plane = new MyPlane(this.scene, 50);
-        this.plane.initBuffers();
         this.initTextures();
         this.initShaders();
     }

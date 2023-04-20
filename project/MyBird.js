@@ -1,4 +1,4 @@
-import {CGFobject, CGFappearance} from '../lib/CGF.js';
+import {CGFobject, CGFappearance, CGFshader} from '../lib/CGF.js';
 import {MyCone} from './MyCone.js';
 import {MyTriangle} from './MyTriangle.js';
 import { MyUnitCubeQuad } from './MyUnitCubeQuad.js';
@@ -19,6 +19,8 @@ export class MyBird extends CGFobject {
 		this.lastPosition = position;
         this.orientation = orientation;
         this.speed = speed;
+		this.hasEgg = false;
+		this.egg = null;
     }
 
 	initBuffers() {
@@ -30,6 +32,8 @@ export class MyBird extends CGFobject {
 		this.body = new MySphere(this.scene, 10,10);
 		this.wing1 = new MyWing(this.scene);
 		this.wing2 = new MyWing(this.scene);
+
+		this.shader = new CGFshader(this.scene.gl, "shaders/bird.vert", "shaders/bird.frag");
     }
 
 
@@ -139,4 +143,47 @@ export class MyBird extends CGFobject {
         this.orientation = 0;
         this.speed = 0;
     }
+
+	pickEgg() {
+		console.log("pickEgg");
+		// In a period of time of 2 seconds, the bird should got from y=3 to y=0 and back to y=3. If it is in the middle of the period and there is an egg in the colision point, it should pick it
+
+
+		// TODO down animation
+
+		for (let i = 0; i < this.scene.birdEggs.length; i++) {
+            const egg = this.scene.birdEggs[i];
+
+            // Check if the egg is at the bird's current position
+            const distance = vec3.distance(egg.position, this.position);
+            if (distance < 1) {
+				console.log("egg picked");
+                // Remove the egg from the scene
+                this.scene.birdEggs.splice(i, 1);
+
+                // Store a reference to the egg
+				this.egg = egg;
+				this.hasEgg = true;
+
+                // Break out of the loop
+                break;
+            }
+        }
+
+		// TODO up animation
+	}
+
+	dropEgg() {
+		console.log("dropEgg");
+		// If Bird has egg, it should drop it
+		if(!this.hasEgg) return;
+		this.hasEgg = false;
+
+		console.log("egg dropped");
+		this.egg.drop(this.position);
+
+		this.scene.birdEggs.push(this.egg);
+		this.egg = null;
+	}
+
 }
