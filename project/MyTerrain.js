@@ -22,7 +22,7 @@ export class MyTerrain extends CGFobject {
         this.terrainText.setTexture(this.textureTerrain);
         this.terrainText.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.terrainHeight = new CGFtexture(this.scene, "images/heightmap.jpg");
+        this.terrainHeight = new CGFtexture(this.scene, "images/heightmapflat.jpg");
         this.terrainAltimetry = new CGFtexture(this.scene, "images/altimetry.png");
     }
 
