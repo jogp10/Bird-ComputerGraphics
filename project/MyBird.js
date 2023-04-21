@@ -33,69 +33,17 @@ export class MyBird extends CGFobject {
 		this.wing1 = new MyBirdWing(this.scene);
 		this.wing2 = new MyBirdWing(this.scene);
 
-		this.shader = new CGFshader(this.scene.gl, "shaders/bird.vert", "shaders/bird.frag");
+		this.initTextures();
+		this.initShaders();
     }
 
+	initTextures() {
+        this.birdText = new CGFappearance(this.scene);
+    }
 
-	display() {
-		this.scene.pushMatrix();
-        this.scene.translate(this.position[0], this.position[1], this.position[2]);
-		this.scene.rotate(this.orientation, 0, 1, 0);
-
-		// Bird Eyes
-		this.scene.pushMatrix();
-		this.scene.translate(0.15, 0.18, 0.17);
-		this.scene.scale(0.05, 0.05, 0.05);
-
-		this.eye1.display();
-		this.scene.popMatrix();
-		this.scene.pushMatrix();
-		this.scene.translate(-0.15, 0.18, 0.17);
-		this.scene.scale(0.05, 0.05, 0.05);
-		this.eye2.display();
-		this.scene.popMatrix();
-
-
-		// Bird Beak
-		this.scene.pushMatrix();
-		this.scene.translate(0, 0.01, 0.24);
-		this.scene.scale(0.1, 0.1, 0.12);
-		this.scene.rotate(Math.PI/2, 1, 0, 0);
-		this.beak1.display();
-		this.scene.popMatrix();
-
-		this.scene.pushMatrix();
-		this.scene.translate(0, -0.02, 0.24);
-		this.scene.scale(0.1, 0.1, 0.12);
-		this.scene.rotate(Math.PI/2, 1, 0, 0);
-		this.scene.rotate(Math.PI, 0, 1, 0);
-		this.beak2.display();
-		this.scene.popMatrix();
-
-		// Bird Body
-		this.scene.pushMatrix();
-		this.scene.translate(0, 0, -0.6);
-		this.scene.scale(0.5, 0.5, 0.9);
-		this.scene.rotate(Math.PI/2, 1, 0, 0);
-		this.body.display();
-		this.scene.popMatrix();
-
-
-		// Bird Wings
-		this.scene.pushMatrix();
-		this.scene.translate(0.5, 0, -0.3);
-		this.scene.scale(0.5, 0.5, 0.5);
-		this.wing1.display();
-		this.scene.popMatrix();
-
-		this.scene.pushMatrix();
-		this.scene.translate(-0.5, 0, -0.3);
-		this.scene.scale(0.5, 0.5, 0.5);
-		this.scene.rotate(Math.PI, 0, 1, 0);
-		this.wing2.display();
-		this.scene.popMatrix();	
-
-		this.scene.popMatrix();
+	initShaders() {
+		this.birdShader = new CGFshader(this.scene.gl, "shaders/bird.vert", "shaders/bird.frag");
+		this.birdShader.setUniformsValues({timeFactor: 0});
 	}
 
     updateTexCoords() {
@@ -183,6 +131,69 @@ export class MyBird extends CGFobject {
 
 		this.scene.birdEggs.push(this.egg);
 		this.egg = null;
+	}
+
+	display() {
+		this.scene.pushMatrix();
+		this.birdText.apply();
+
+        this.scene.translate(this.position[0], this.position[1], this.position[2]);
+		this.scene.rotate(this.orientation, 0, 1, 0);
+
+		// Bird Eyes
+		this.scene.pushMatrix();
+		this.scene.translate(0.15, 0.18, 0.17);
+		this.scene.scale(0.05, 0.05, 0.05);
+
+		this.eye1.display();
+		this.scene.popMatrix();
+		this.scene.pushMatrix();
+		this.scene.translate(-0.15, 0.18, 0.17);
+		this.scene.scale(0.05, 0.05, 0.05);
+		this.eye2.display();
+		this.scene.popMatrix();
+
+
+		// Bird Beak
+		this.scene.pushMatrix();
+		this.scene.translate(0, 0.01, 0.24);
+		this.scene.scale(0.1, 0.1, 0.12);
+		this.scene.rotate(Math.PI/2, 1, 0, 0);
+		this.beak1.display();
+		this.scene.popMatrix();
+
+		this.scene.pushMatrix();
+		this.scene.translate(0, -0.02, 0.24);
+		this.scene.scale(0.1, 0.1, 0.12);
+		this.scene.rotate(Math.PI/2, 1, 0, 0);
+		this.scene.rotate(Math.PI, 0, 1, 0);
+		this.beak2.display();
+		this.scene.popMatrix();
+
+		// Bird Body
+		this.scene.pushMatrix();
+		this.scene.translate(0, 0, -0.6);
+		this.scene.scale(0.5, 0.5, 0.9);
+		this.scene.rotate(Math.PI/2, 1, 0, 0);
+		this.body.display();
+		this.scene.popMatrix();
+
+
+		// Bird Wings
+		this.scene.pushMatrix();
+		this.scene.translate(0.5, 0, -0.3);
+		this.scene.scale(0.5, 0.5, 0.5);
+		this.wing1.display();
+		this.scene.popMatrix();
+
+		this.scene.pushMatrix();
+		this.scene.translate(-0.5, 0, -0.3);
+		this.scene.scale(0.5, 0.5, 0.5);
+		this.scene.rotate(Math.PI, 0, 1, 0);
+		this.wing2.display();
+		this.scene.popMatrix();	
+
+		this.scene.popMatrix();
 	}
 
 }

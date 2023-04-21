@@ -1,3 +1,12 @@
+#ifdef GL_ES
+precision highp float;
+#endif
+
+varying vec2 vTextureCoord;
+varying vec2 vLightMapCoord;
+
+uniform sampler2D uSampler;
+
 void main() {
     
 }

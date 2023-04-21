@@ -29,7 +29,7 @@ export class MyBirdEgg extends CGFobject {
     updateBuffers(complexity) {
         this.egg.updateBuffers(complexity);
         this.initBuffers();
-        this.initNormalVizBuffers();
+        this.egg.initNormalVizBuffers();
     }
 
     enableNormalViz() {

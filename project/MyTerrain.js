@@ -48,6 +48,7 @@ export class MyTerrain extends CGFobject {
     display() {
         this.scene.pushMatrix();
             this.terrainText.apply();
+            
             this.terrainHeight.bind(1);
             this.terrainAltimetry.bind(2);
             this.scene.setActiveShader(this.terrainShader);
