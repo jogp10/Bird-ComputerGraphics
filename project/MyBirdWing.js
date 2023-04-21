@@ -2,7 +2,7 @@ import {CGFobject, CGFtexture} from '../lib/CGF.js';
 import { MyQuad } from './MyQuad.js';
 import { MyTriangle } from './MyTriangle.js';
 
-export class MyWing extends CGFobject {
+export class MyBirdWing extends CGFobject {
 
     constructor(scene) {
         super(scene);

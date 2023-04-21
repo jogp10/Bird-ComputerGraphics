@@ -7,7 +7,7 @@ import { MyPyramid } from './MyPyramid.js';
 import { MyParallelogram } from './MyParallelogram.js';
 import { MyPrism } from './MyPrism.js';
 import { MySphere } from './MySphere.js';
-import { MyWing } from './MyWing.js';
+import { MyBirdWing } from './MyBirdWing.js';
 
 export class MyBird extends CGFobject {
     constructor(scene, orientation, speed, position) {
@@ -30,8 +30,8 @@ export class MyBird extends CGFobject {
 		this.beak1 = new MyPyramid(this.scene, 4, 2, 2);
 		this.beak2 = new MyPyramid(this.scene, 4, 2,2);
 		this.body = new MySphere(this.scene, 10,10);
-		this.wing1 = new MyWing(this.scene);
-		this.wing2 = new MyWing(this.scene);
+		this.wing1 = new MyBirdWing(this.scene);
+		this.wing2 = new MyBirdWing(this.scene);
 
 		this.shader = new CGFshader(this.scene.gl, "shaders/bird.vert", "shaders/bird.frag");
     }
@@ -39,9 +39,8 @@ export class MyBird extends CGFobject {
 
 	display() {
 		this.scene.pushMatrix();
-
-		this.scene.rotate(this.orientation, 0, 1, 0);
         this.scene.translate(this.position[0], this.position[1], this.position[2]);
+		this.scene.rotate(this.orientation, 0, 1, 0);
 
 		// Bird Eyes
 		this.scene.pushMatrix();

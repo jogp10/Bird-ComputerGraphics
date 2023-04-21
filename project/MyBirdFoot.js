@@ -2,7 +2,7 @@ import {CGFobject, CGFtexture} from '../lib/CGF.js';
 import { MyUnitCubeQuad } from './MyUnitCubeQuad.js';
 
 
-export class MyFoot extends CGFobject {
+export class MyBirdFoot extends CGFobject {
 
     constructor(scene) {
         super(scene);

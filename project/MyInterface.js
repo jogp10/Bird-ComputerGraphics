@@ -41,7 +41,7 @@ export class MyInterface extends CGFinterface {
 
         // disable the processKeyboard function
         this.processKeyboard=function(){};
-
+        
         // create a named array to store which keys are being pressed
         this.activeKeys={};
     }
