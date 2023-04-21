@@ -38,7 +38,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 0.1;
-    this.selectedObject = 1;
+    this.selectedObject = 0;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -66,7 +66,7 @@ export class MyScene extends CGFscene {
     this.egg3 = new MyBirdEgg(this, 20, 20, [-3, 0.5, 3]);
     this.egg4 = new MyBirdEgg(this, 20, 20, [3, 0.5, 3]);
     this.birdEggs = [this.egg1, this.egg2, this.egg3, this.egg4];
-    this.scene = null;
+    this.scene = 0;
 
     this.objects = [this.scene, this.terrain, this.bird, this.wing, this.foot ,this.panorama, this.egg, this.birdEggs];
 
@@ -88,7 +88,7 @@ export class MyScene extends CGFscene {
       3*Math.PI/5,
       0.1,
       1000,
-      vec3.fromValues(175, 125, 175),
+      vec3.fromValues(325, 130, -125),
       vec3.fromValues(0, 0, 0)
     );
   }
@@ -124,7 +124,7 @@ export class MyScene extends CGFscene {
   }
 
   updateObjectComplexity(){
-    this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
+    if(this.selectedObject!=0&&this.selectedObject!=7)this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
   }
 
   updateScaleFactor(){
@@ -217,9 +217,9 @@ export class MyScene extends CGFscene {
 
     // Draw normals
     if (this.displayNormals)
-        if(this.selectedObject!=7 && this.selectedObject!=0)this.objects[this.selectedObject].enableNormalViz();
+        if(this.selectedObject!=0&&this.selectedObject!=7)this.objects[this.selectedObject].enableNormalViz();
     else
-        if(this.selectedObject!=7 && this.selectedObject!=0)this.objects[this.selectedObject].disableNormalViz();
+        if(this.selectedObject!=0&&this.selectedObject!=7)this.objects[this.selectedObject].disableNormalViz();
 
 
     // ---- BEGIN Primitive drawing section
