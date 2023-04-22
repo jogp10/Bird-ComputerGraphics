@@ -5,6 +5,7 @@ import { MyBird } from "./MyBird.js";
 import { MyBirdWing } from "./MyBirdWing.js";
 import { MyBirdFoot } from "./MyBirdFoot.js";
 import { MyBirdEgg } from "./MyBirdEgg.js";
+import { MyBirdFeather } from "./MyBirdFeather.js";
 
 /**
  * MyScene
@@ -38,7 +39,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 0.1;
-    this.selectedObject = 0;
+    this.selectedObject = 2;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -57,7 +58,7 @@ export class MyScene extends CGFscene {
   initObjects() {
     this.terrain = new MyTerrain(this,30);
     this.panorama = new MyPanorama(this, 'images/panorama4.jpg', 50, 50);
-    this.bird = new MyBird(this, 0, 0, [0, 3, 0]);
+    this.bird = new MyBird(this, 0, 0, [0, 0, 0]);
     this.wing = new MyBirdWing(this,3,3);
     this.foot = new MyBirdFoot(this,3,3);
     this.egg = new MyBirdEgg(this, 20, 20, [0, 0, 0]);
@@ -65,19 +66,21 @@ export class MyScene extends CGFscene {
     this.egg2 = new MyBirdEgg(this, 20, 20, [3, 0.5, -3]);
     this.egg3 = new MyBirdEgg(this, 20, 20, [-3, 0.5, 3]);
     this.egg4 = new MyBirdEgg(this, 20, 20, [3, 0.5, 3]);
+    this.feather = new MyBirdFeather(this, [0, 0, 0]);
     this.birdEggs = [this.egg1, this.egg2, this.egg3, this.egg4];
     this.scene = 0;
 
-    this.objects = [this.scene, this.terrain, this.bird, this.wing, this.foot ,this.panorama, this.egg, this.birdEggs];
+    this.objects = [this.scene, this.terrain, this.bird, this.wing, this.foot ,this.panorama, this.egg, this.birdEggs, this.feather];
 
     // Labels and ID's for object selection on MyInterface
-    this.objectIDs = { 'Scene': 0, 'Terrain': 1, 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Bird Eggs': 7};
+    this.objectIDs = { 'Scene': 0, 'Terrain': 1, 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Bird Eggs': 7, 'Feather': 8};
   }
 
   // initialize lights
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
-    this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+    this.lights[0].setAmbient(0.2, 0.4, 0.8, 1.0);
+    this.lights[0].setDiffuse(0.2, 0.4, 0.8, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
     // change FOV
@@ -242,6 +245,8 @@ export class MyScene extends CGFscene {
 
       this.pushMatrix();
         // Bird
+        this.translate(0,0,0);
+        this.scale(100,100,100);
         if(this.selectedObject == 2) this.objects[2].display();
       this.popMatrix();
 
@@ -287,6 +292,15 @@ export class MyScene extends CGFscene {
       }
       this.popMatrix();
 
+      this.pushMatrix();
+      //Feather
+      if(this.selectedObject == 8) {
+
+        this.translate(0,0,0);
+        this.scale(100,100,100);
+
+        this.objects[8].display();
+      }
     
     this.popMatrix();
 

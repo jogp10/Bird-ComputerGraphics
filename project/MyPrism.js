@@ -15,7 +15,7 @@ export class MyPrism extends CGFobject {
   }
 
   initBuffers() {
-    //Counter-clockwise reference of vertices
+    // Counter-clockwise reference of vertices
     this.vertices = [];
     this.indices = [];
     this.normals = [];
@@ -23,12 +23,10 @@ export class MyPrism extends CGFobject {
     var ang = 0;
     var alphaAng = (2 * Math.PI) / this.slices;
 
+    // Generate side faces
     for (var i = 0; i < this.stacks; i++) {
         for (var j = 0; j < this.slices; j++) {
-            // All vertices have to be declared for a given face
-            // even if they are shared with others, as the normals 
-            // in each face will be different
-            
+            // Generate vertices
             var sa = Math.sin(ang);
             var saa = Math.sin(ang + alphaAng);
             var ca = Math.cos(ang);
@@ -67,21 +65,48 @@ export class MyPrism extends CGFobject {
             this.indices.push(4 * j + k, 4 * j + 1 + k, 4 * j + 2 + k);
             this.indices.push(4 * j + k, 4 * j + 2 + k, 4 * j + 3 + k);
 
-            //this.indices.push(4 * j + k, 4 * j + 2 + k, 4 * j + 1 + k);
-            //this.indices.push(4 * j + k, 4 * j + 3 + k, 4 * j + 2 + k);
-
-
             ang += alphaAng;
         }
     }
 
+    // Generate top face vertices
+    for (var i = 0; i < this.slices; i++) {
+        var ang = i * alphaAng;
+        var ca = Math.cos(ang);
+        var sa = Math.sin(ang);
+        this.vertices.push(ca, 1, -sa);
+        this.normals.push(0, 1, 0);
+    }
 
-    //The defined indices (and corresponding vertices)
-    //will be read in groups of three to draw triangles
+    // Generate bottom face vertices
+    for (var i = 0; i < this.slices; i++) {
+        var ang = i * alphaAng;
+        var ca = Math.cos(ang);
+        var sa = Math.sin(ang);
+        this.vertices.push(ca, 0, -sa);
+        this.normals.push(0, -1, 0);
+    }
+
+    // Generate indices for top face
+    var topStartIndex = (this.stacks * this.slices * 4);
+    for (var i = 0; i < this.slices - 2; i++) {
+        this.indices.push(topStartIndex, topStartIndex + i + 1, topStartIndex + i + 2);
+      }
+    
+
+    // Generate indices for bottom face
+    var bottomStartIndex = (this.stacks * this.slices * 4) + this.slices;
+    for (var i = 0; i < this.slices - 2; i++) {
+        
+        this.indices.push(bottomStartIndex, bottomStartIndex + i + 2, bottomStartIndex + i + 1);
+      }
+    
+
+
     this.primitiveType = this.scene.gl.TRIANGLES;
-
     this.initGLBuffers();
   }
+
 
   updateBuffers() {}
 }
