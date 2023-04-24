@@ -121,8 +121,8 @@ export class MyScene extends CGFscene {
   setDefaultAppearance() {
     this.appearance = new CGFappearance(this);
     this.appearance.setAmbient(0.2, 0.4, 0.8, 1.0);
-    this.appearance.setDiffuse(0.2, 0.4, 0.8, 1.0);
-    this.appearance.setSpecular(0.2, 0.4, 0.8, 1.0);
+    this.appearance.setDiffuse(1,1,1,1);
+
     this.appearance.setShininess(10.0);
   }
 
@@ -189,6 +189,7 @@ export class MyScene extends CGFscene {
   update(t) {
     this.checkKeys();
     this.bird.update(t);
+    this.wing.update(t);
   }
 
   distance(position1, position2) {
@@ -233,7 +234,8 @@ export class MyScene extends CGFscene {
         if(this.selectedObject == 0) {
             this.objects[5].display(); // Panorama
             this.objects[1].display(); // Terrain
-            for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
+            //for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
+            
             this.objects[2].display(); // Bird
         }
       this.popMatrix();
@@ -294,7 +296,9 @@ export class MyScene extends CGFscene {
 
       this.pushMatrix();
       //Feather
-      if(this.selectedObject == 8) this.objects[8].display();
+      if(this.selectedObject == 8) {
+        this.scale(100,100,100);
+        this.objects[8].display();}
       this.popMatrix();
     
     this.popMatrix();
