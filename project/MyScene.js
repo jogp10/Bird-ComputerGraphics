@@ -39,7 +39,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 0.1;
-    this.selectedObject = 2;
+    this.selectedObject = 3;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -79,8 +79,8 @@ export class MyScene extends CGFscene {
   // initialize lights
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
+    this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
     this.lights[0].setAmbient(0.2, 0.4, 0.8, 1.0);
-    this.lights[0].setDiffuse(0.2, 0.4, 0.8, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
     // change FOV
@@ -233,8 +233,8 @@ export class MyScene extends CGFscene {
         if(this.selectedObject == 0) {
             this.objects[5].display(); // Panorama
             this.objects[1].display(); // Terrain
-            this.objects[2].display(); // Bird
             for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
+            this.objects[2].display(); // Bird
         }
       this.popMatrix();
     
@@ -294,13 +294,8 @@ export class MyScene extends CGFscene {
 
       this.pushMatrix();
       //Feather
-      if(this.selectedObject == 8) {
-
-        this.translate(0,0,0);
-        this.scale(100,100,100);
-
-        this.objects[8].display();
-      }
+      if(this.selectedObject == 8) this.objects[8].display();
+      this.popMatrix();
     
     this.popMatrix();
 

@@ -1,11 +1,6 @@
 import {CGFobject, CGFappearance, CGFshader} from '../lib/CGF.js';
-import {MyCone} from './MyCone.js';
-import {MyTriangle} from './MyTriangle.js';
-import { MyUnitCubeQuad } from './MyUnitCubeQuad.js';
-import { MyCylinder } from './MyCylinder.js';
+import { MyTriangle } from './MyTriangle.js';
 import { MyPyramid } from './MyPyramid.js';
-import { MyParallelogram } from './MyParallelogram.js';
-import { MyPrism } from './MyPrism.js';
 import { MySphere } from './MySphere.js';
 import { MyBirdWing } from './MyBirdWing.js';
 import { MyBirdFoot } from './MyBirdFoot.js';
@@ -149,84 +144,78 @@ export class MyBird extends CGFobject {
 
 	display() {
 		this.scene.pushMatrix();
-		this.birdText.apply();
+			this.birdText.apply();
 
-        this.scene.translate(this.position[0], this.position[1], this.position[2]);
-		this.scene.rotate(this.orientation, 0, 1, 0);
-		
-		// Bird Eyes
-		this.scene.pushMatrix();
-		this.scene.translate(0.15, 0.18, 0.17);
-		this.scene.scale(0.05, 0.05, 0.05);
-		this.eye1.display();
-		this.scene.popMatrix();
+			this.scene.translate(this.position[0], this.position[1], this.position[2]);
+			this.scene.rotate(this.orientation, 0, 1, 0);
+			
+			// Bird Eyes
+			this.scene.pushMatrix();
+			this.scene.translate(0.15, 0.18, 0.17);
+			this.scene.scale(0.05, 0.05, 0.05);
+			this.eye1.display();
+			this.scene.popMatrix();
 
-		this.scene.pushMatrix();
-		this.scene.translate(-0.15, 0.18, 0.17);
-		this.scene.scale(0.05, 0.05, 0.05);
-		this.eye2.display();
-		this.scene.popMatrix();
-
-
-		// Bird Beak
-		this.scene.pushMatrix();
-		this.scene.translate(0, 0.01, 0.24);
-		this.scene.scale(0.1, 0.1, 0.12);
-		this.scene.rotate(Math.PI/2, 1, 0, 0);
-		this.beak1.display();
-		this.scene.popMatrix();
-
-		this.scene.pushMatrix();
-		this.scene.translate(0, -0.02, 0.24);
-		this.scene.scale(0.1, 0.1, 0.12);
-		this.scene.rotate(Math.PI/2, 1, 0, 0);
-		this.scene.rotate(Math.PI, 0, 1, 0);
-		this.beak2.display();
-		this.scene.popMatrix();
-
-		// Bird Body
-		this.scene.pushMatrix();
-		this.scene.translate(0, 0, -0.6);
-		this.scene.scale(0.5, 0.5, 0.9);
-		this.scene.rotate(Math.PI/2, 1, 0, 0);
-		this.body.display();
-		this.scene.popMatrix();
+			this.scene.pushMatrix();
+			this.scene.translate(-0.15, 0.18, 0.17);
+			this.scene.scale(0.05, 0.05, 0.05);
+			this.eye2.display();
+			this.scene.popMatrix();
 
 
-		// Bird Wings
-		this.scene.pushMatrix();
-		this.scene.translate(0.5, .3, -0.4);
-		this.scene.scale(0.5, 0.5, 0.5);
-		this.scene.rotate(Math.PI, 0, 1, 0);
-		this.scene.rotate(Math.PI, 1, 0, 0);
-		this.wing1.display();
-		this.scene.popMatrix();
+			// Bird Beak
+			this.scene.pushMatrix();
+			this.scene.translate(0, 0.01, 0.24);
+			this.scene.scale(0.1, 0.1, 0.12);
+			this.scene.rotate(Math.PI/2, 1, 0, 0);
+			this.beak1.display();
+			this.scene.popMatrix();
 
-		this.scene.pushMatrix();
-		this.scene.translate(1.6,0,0);
-		this.scene.scale(1,1,1);
-		this.scene.rotate(-Math.PI, 0, 0, 1);
-		this.scene.rotate(-1*Math.PI/10, 0, 1, 0);
-		this.wing2.display();
-		this.scene.popMatrix();
+			this.scene.pushMatrix();
+			this.scene.translate(0, -0.02, 0.24);
+			this.scene.scale(0.1, 0.1, 0.12);
+			this.scene.rotate(Math.PI/2, 1, 0, 0);
+			this.scene.rotate(Math.PI, 0, 1, 0);
+			this.beak2.display();
+			this.scene.popMatrix();
 
-	
-		// Bird Feet
-		this.scene.pushMatrix();
-		this.scene.translate(0.5, -0.3, -0.4);
-		this.scene.scale(0.5, 0.5, 0.5);
-		this.scene.rotate(Math.PI, 0, 1, 0);
-	
-		this.foot1.display();
-		this.scene.popMatrix();
-		
+			// Bird Body
+			this.scene.pushMatrix();
+			this.scene.translate(0, 0, -0.6);
+			this.scene.scale(0.5, 0.5, 0.9);
+			this.scene.rotate(Math.PI/2, 1, 0, 0);
+			this.body.display();
+			this.scene.popMatrix();
+
+
+			// Bird Wings
+			this.scene.pushMatrix();
+			this.scene.translate(0.5, .3, -0.4);
+			this.scene.scale(0.5, 0.5, 0.5);
+			this.scene.rotate(Math.PI, 0, 1, 0);
+			this.scene.rotate(Math.PI, 1, 0, 0);
+			this.wing1.display();
+			this.scene.popMatrix();
+
+			this.scene.pushMatrix();
+			this.scene.translate(1.6,0,0);
+			this.scene.scale(1,1,1);
+			this.scene.rotate(-Math.PI, 0, 0, 1);
+			this.scene.rotate(-1*Math.PI/10, 0, 1, 0);
+			this.wing2.display();
+			this.scene.popMatrix();
 
 		
+			// Bird Feet
+			this.scene.pushMatrix();
+			this.scene.translate(0.5, -0.3, -0.4);
+			this.scene.scale(0.5, 0.5, 0.5);
+			this.scene.rotate(Math.PI, 0, 1, 0);
+		
+			this.foot1.display();
+			this.scene.popMatrix();
 
-
-
-	
-
+		this.scene.popMatrix();
 	}
 
 }
