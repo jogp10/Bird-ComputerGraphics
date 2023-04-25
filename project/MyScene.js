@@ -234,7 +234,7 @@ export class MyScene extends CGFscene {
         if(this.selectedObject == 0) {
             this.objects[5].display(); // Panorama
             this.objects[1].display(); // Terrain
-            //for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
+            for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
             
             this.objects[2].display(); // Bird
         }

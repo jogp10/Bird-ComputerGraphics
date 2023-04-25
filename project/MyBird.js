@@ -97,6 +97,7 @@ export class MyBird extends CGFobject {
 
 		//	Bird movement
 		this.wing1.update(t);
+		this.wing2.update(-t);
 	
     	this.y = this.amplitude * 0.1*Math.sin(t*0.008);
   
@@ -240,7 +241,6 @@ export class MyBird extends CGFobject {
 			this.scene.popMatrix();
 
 			
-
 		
 			// Bird Feet
 			this.scene.pushMatrix();

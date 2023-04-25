@@ -7,8 +7,6 @@ export class MyBirdWing extends CGFobject {
     constructor(scene) {
         super(scene);
         this.initBuffers();
-        
-        
     }
 
     initBuffers() {
@@ -26,8 +24,7 @@ export class MyBirdWing extends CGFobject {
 
     create_materials() {
         this.materials = [];
-
-         }
+        }
 
     display() {
        
@@ -284,43 +281,17 @@ export class MyBirdWing extends CGFobject {
             i++
             this.scene.popMatrix();
 
-            
-
-                
-         
-
-        this.scene.popMatrix();
-
-
-
-
-
-
-
-    
-
-       
+        this.scene.popMatrix();       
     }
 
     update(t)
     {   //Max angle = 45 degrees and min angle = 0
 
-        this.wing_angle = Math.PI/6*Math.sin(t*0.008);
-       
-        
-
+        this.wing_angle = Math.PI/-6*Math.sin(t*0.008);
     }
 
     updateBuffers() {}
 
-    enableNormalViz() {
-        
-    
-        
-    }
-    disableNormalViz() {
- 
-
-    }
-
+    enableNormalViz() {}
+    disableNormalViz() {}
 }
