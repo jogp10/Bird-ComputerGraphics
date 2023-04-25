@@ -46,7 +46,7 @@ export class MyBird extends CGFobject {
     }
 
 	initTextures() {
-        this.birdText = new CGFappearance(this.scene);
+        this.birdMaterial = new CGFappearance(this.scene);
     }
 
 	initShaders() {
@@ -91,7 +91,7 @@ export class MyBird extends CGFobject {
     update(t) {
         // Calculate the new position of the bird
         this.lastPosition = this.position;
-        this.position = [this.position[0] + Math.sin(this.orientation)*(this.speed), this.position[1], this.position[2] + Math.cos(this.orientation)*(this.speed)];
+        this.position = [this.position[0] + Math.sin(this.orientation)*(this.speed)*0.1, this.position[1], this.position[2] + Math.cos(this.orientation)*(this.speed)*0.1];
 
         console.log("pos: " + this.position + " ori: " + this.orientation + " speed: " + this.speed);
 
@@ -143,8 +143,6 @@ export class MyBird extends CGFobject {
                 break;
             }
         }
-
-		// TODO up animation
 	}
 
 	dropEgg() {
@@ -163,7 +161,7 @@ export class MyBird extends CGFobject {
 	display() {
 		this.scene.pushMatrix();
 
-			this.birdText.apply();
+			this.birdMaterial.apply();
 			this.scene.translate(0, this.y, 0);
 			this.scene.translate(this.position[0], this.position[1], this.position[2]);
 			this.scene.rotate(this.orientation, 0, 1, 0);
