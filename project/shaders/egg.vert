@@ -7,7 +7,7 @@ uniform mat4 uPMatrix;
 uniform mat4 uNMatrix;
 
 varying vec2 vTextureCoord;
-
+varying vec3 vNormal;
 
 void main() {
   float scaleFactor = (aVertexPosition.y > 0.0) ? 1.00 : 0.75;
@@ -16,4 +16,5 @@ void main() {
   gl_Position = uPMatrix * uMVMatrix * vec4(scaledPosition, 1.0);
 
   vTextureCoord = aTextureCoord;
+  vNormal = vec3(uNMatrix * vec4(aVertexNormal, 0.0));
 }

@@ -240,6 +240,8 @@ export class MyScene extends CGFscene {
             for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
             
             this.objects[2].display(); // Bird
+            this.translate(0,-2,0);
+            this.objects[9].display(); // Nest
         }
       this.popMatrix();
     

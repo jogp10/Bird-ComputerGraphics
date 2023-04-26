@@ -7,20 +7,14 @@ uniform mat4 uPMatrix;
 uniform mat4 uNMatrix;
 
 varying vec2 vTextureCoord;
-uniform sampler2D roughnessMap;
-
-
+varying vec3 vTransformedNormal;
+varying mat4 vNMatrix;
 
 void main() {
-  vec3 offset = vec3(0.0, 0.0, 0.0);
-	float axis_offset = texture2D(roughnessMap, aTextureCoord).g;
-
-	offset = vec3(axis_offset, axis_offset, axis_offset)*0.1;
-
-  float scaleFactor = (aVertexPosition.x > 0.5 && aVertexPosition.z > 0.5) ? 1.00 : 0.75;
-  vec3 scaledPosition = vec3(aVertexPosition.x, aVertexPosition.y, aVertexPosition.z);
-  
-  gl_Position = uPMatrix * uMVMatrix * vec4(scaledPosition + offset, 1.0);
-
+  gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
   vTextureCoord = aTextureCoord;
+
+  // Transform the normal vector from model space to world space.
+  vTransformedNormal = normalize(mat3(uNMatrix) * aVertexNormal);
+  vNMatrix = uMVMatrix;
 }
