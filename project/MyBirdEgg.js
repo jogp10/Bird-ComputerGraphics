@@ -5,19 +5,20 @@ export class MyBirdEgg extends CGFobject {
     constructor(scene, slices, stacks, position) {
         super(scene);
         this.position = position;
-        this.egg = new MySphere(scene, slices, stacks);
-        this.initBuffers();
-    }
-
-    initBuffers() {
-        this.eggTexture = new CGFtexture(this.scene, "images/dinosaurEgg.jpg");
-        this.eggMaterial = new CGFappearance(this.scene);
-
-        this.eggMaterial.setTexture(this.eggTexture);
-        this.eggMaterial.setTextureWrap('REPEAT', 'REPEAT');
+        this.initBuffers(slices, stacks);
+        this.initTextures();
         this.initShaders();
     }
 
+    initBuffers(slices, stacks) {
+        this.egg = new MySphere(this.scene, slices, stacks);
+    }
+    initTextures() {
+        this.eggTexture = new CGFtexture(this.scene, "images/dinosaurEgg.jpg");
+        this.eggMaterial = new CGFappearance(this.scene);
+        this.eggMaterial.setTexture(this.eggTexture);
+        this.eggMaterial.setTextureWrap('REPEAT', 'REPEAT');
+    }
     initShaders() {
         this.eggShader = new CGFshader(this.scene.gl, "shaders/egg.vert", "shaders/egg.frag");
     }

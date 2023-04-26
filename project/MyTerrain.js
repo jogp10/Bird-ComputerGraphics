@@ -5,15 +5,13 @@ import { MyPlane } from "./MyPlane.js";
 export class MyTerrain extends CGFobject {
     constructor(scene, nrDivs) {
         super(scene);
-        this.nrDivs = nrDivs;
-        this.initBuffers();
-        
-    }
-
-    initBuffers() {
-        this.plane = new MyPlane(this.scene, 50);
+        this.initBuffers(nrDivs);
         this.initTextures();
         this.initShaders();
+    }
+
+    initBuffers(nrDivs) {
+        this.plane = new MyPlane(this.scene, nrDivs);
     }
 
     initTextures() {

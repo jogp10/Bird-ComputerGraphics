@@ -5,7 +5,7 @@ export class MyBirdFeather extends CGFobject {
     constructor(scene) {
         super(scene);
         this.initBuffers();
-        
+        this.initTextures();
     }
 
     initBuffers() {
@@ -14,10 +14,9 @@ export class MyBirdFeather extends CGFobject {
     
     }
 
-    create_materials() {
+    initTextures() {
         this.materials = [];
-
-         }
+    }
         
     display() {
         this.scene.pushMatrix();
@@ -38,14 +37,19 @@ export class MyBirdFeather extends CGFobject {
         this.scene.popMatrix();
     }
 
-    updateBuffers() {}
+    updateBuffers() {
+        this.prism.updateBuffers();
+        this.prism2.updateBuffers();
+    }
 
     enableNormalViz() {
-
+        this.prism.enableNormalViz();
+        this.prism2.enableNormalViz();
     }
 
     disableNormalViz() {
-            
-        }
+        this.prism.disableNormalViz();
+        this.prism2.disableNormalViz();
+    }
 
 }

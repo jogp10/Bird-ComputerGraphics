@@ -12,29 +12,27 @@ import { MySphere } from "./MySphere.js";
 export class MyPanorama extends CGFobject {
     constructor(scene, texture, slices, stacks) {
         super(scene);
+        this.initBuffers(slices, stacks);
+        this.initTextures(texture);
+    }
 
-        this.texture = new CGFtexture(this.scene, texture);
-
+    initBuffers(slices, stacks) {
         this.sphere = new MySphere(this.scene, slices, stacks, true);
+    }
 
+    initTextures(texture) {
+        this.texture = new CGFtexture(this.scene, texture);
         this.material = new CGFappearance(this.scene);
         this.material.setTexture(this.texture);
         this.material.setEmission(0.5, 0.5, 0.5, 1);
-
-        this.initBuffers();
     }
-
-    initBuffers() {}
 
     display() {
         this.scene.pushMatrix();
-
-        this.material.apply();
-        
-        this.scene.translate(0,25,0);
-        this.scene.scale(200,200,200);
-        this.sphere.display();
-
+            this.material.apply();
+            this.scene.translate(0,25,0);
+            this.scene.scale(200,200,200);
+            this.sphere.display();
         this.scene.popMatrix();
     }
 

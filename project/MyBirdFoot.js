@@ -8,23 +8,20 @@ export class MyBirdFoot extends CGFobject {
     constructor(scene) {
         super(scene);
         this.initBuffers();
-        
+        this.initTextures();
     }
 
     initBuffers() {
-
         this.prism = new MyPrism(this.scene, 10, 4);
         this.cube1 = new MyUnitCubeQuad(this.scene);
         this.cube2 = new MyUnitCubeQuad(this.scene);
         this.cube3 = new MyUnitCubeQuad(this.scene);
         this.cube4 = new MyUnitCubeQuad(this.scene);
-
     }
 
-    create_materials() {
+    initTextures() {
         this.materials = [];
-
-         }
+    }
 
     display() {
 
@@ -87,7 +84,6 @@ export class MyBirdFoot extends CGFobject {
         this.cube2.disableNormalViz();
         this.cube3.disableNormalViz();
         this.cube4.disableNormalViz();
-       
     }
 
 }

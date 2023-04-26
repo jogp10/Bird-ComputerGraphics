@@ -7,6 +7,7 @@ export class MyBirdWing extends CGFobject {
     constructor(scene) {
         super(scene);
         this.initBuffers();
+        this.initTextures();
     }
 
     initBuffers() {
@@ -22,9 +23,9 @@ export class MyBirdWing extends CGFobject {
         this.ex = 2;
     }
 
-    create_materials() {
+    initTextures() {
         this.materials = [];
-        }
+    }
 
     display() {
        
@@ -290,8 +291,13 @@ export class MyBirdWing extends CGFobject {
         this.wing_angle = Math.PI/-6*Math.sin(t*0.008);
     }
 
-    updateBuffers() {}
-
-    enableNormalViz() {}
-    disableNormalViz() {}
+    updateBuffers() {
+        this.feathers.forEach(feather => feather.updateBuffers());
+    }
+    enableNormalViz() {
+        this.feathers.forEach(feather => feather.enableNormalViz());
+    }
+    disableNormalViz() {
+        this.feathers.forEach(feather => feather.disableNormalViz());
+    }
 }

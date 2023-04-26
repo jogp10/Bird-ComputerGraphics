@@ -22,7 +22,8 @@ export class MyBird extends CGFobject {
         this.y = 0; 
         this.amplitude = 1
 		
-    
+		this.initTextures();
+		this.initShaders();
     }
 
 	initBuffers() {
@@ -38,11 +39,6 @@ export class MyBird extends CGFobject {
 		this.foot1 = new MyBirdFoot(this.scene);
 		this.foot2 = new MyBirdFoot(this.scene);
 		this.neck = new MyCylinder(this.scene, 20, 10);
-
-
-
-		this.initTextures();
-		this.initShaders();
     }
 
 	initTextures() {

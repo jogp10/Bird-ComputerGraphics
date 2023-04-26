@@ -3,18 +3,16 @@ import { MyCylinder } from "./MyCylinder.js";
 import { MySphere } from "./MySphere.js";
 
 export class MyNest extends CGFobject {
-    constructor(scene) {
+    constructor(scene, slices, stacks) {
         super(scene);
-        this.initBuffers();
-    }
-
-    initBuffers() {
-        this.cylinder = new MyCylinder(this.scene, 20, 20);
-        this.inside = new MySphere(this.scene, 20, 20, true, true);
-        this.outside = new MySphere(this.scene, 20, 20, false, true);
-
+        this.initBuffers(slices, stacks);
         this.initTextures();
         this.initShaders();
+    }
+
+    initBuffers(slices, stacks) {
+        this.inside = new MySphere(this.scene, slices, stacks, true, true);
+        this.outside = new MySphere(this.scene, slices, stacks, false, true);
     }
 
     initTextures() {
@@ -31,10 +29,16 @@ export class MyNest extends CGFobject {
     }
 
     enableNormalViz() {
+        this.inside.enableNormalViz();
+        this.outside.enableNormalViz();
     }
     disableNormalViz() {
+        this.inside.disableNormalViz();
+        this.outside.disableNormalViz();
     }
     updateBuffers(complexity) {
+        this.inside.updateBuffers(complexity);
+        this.outside.updateBuffers(complexity);
     }
 
     display() {

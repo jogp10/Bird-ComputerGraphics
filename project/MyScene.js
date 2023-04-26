@@ -69,7 +69,7 @@ export class MyScene extends CGFscene {
     this.egg4 = new MyBirdEgg(this, 20, 20, [3, 0.5, 3]);
     this.feather = new MyBirdFeather(this, [0, 0, 0]);
     this.birdEggs = [this.egg1, this.egg2, this.egg3, this.egg4];
-    this.nest = new MyNest(this);
+    this.nest = new MyNest(this, 20, 20);
     this.scene = 0;
 
     this.objects = [this.scene, this.terrain, this.bird, this.wing, this.foot ,this.panorama, this.egg, this.birdEggs, this.feather, this.nest];
@@ -222,10 +222,11 @@ export class MyScene extends CGFscene {
     this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
 
     // Draw normals
-    if (this.displayNormals)
+    if (this.displayNormals) {
         if(this.selectedObject!=0&&this.selectedObject!=7)this.objects[this.selectedObject].enableNormalViz();
-    else
+    } else {
         if(this.selectedObject!=0&&this.selectedObject!=7)this.objects[this.selectedObject].disableNormalViz();
+    }
 
 
     // ---- BEGIN Primitive drawing section
