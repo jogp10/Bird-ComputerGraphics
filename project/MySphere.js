@@ -7,13 +7,16 @@ import { CGFobject } from "../lib/CGF.js";
  * @param stacks - number of stacks
  */
 export class MySphere extends CGFobject {
-  constructor(scene, slices, stacks, inverted) {
+  constructor(scene, slices, stacks, inverted, half) {
     super(scene);
     this.slices = slices;
     this.stacks = stacks;
     
     if (inverted) this.inverted = -1;
     else this.inverted = 1;
+    
+    if (half) this.half = 1;
+    else this.half = 0;
 
     this.initBuffers();
   }
@@ -34,6 +37,7 @@ export class MySphere extends CGFobject {
     var tetaRadius = Math.PI / height;
 
     for (var i = 0; i < height + 1; i++) {
+        if (this.half && i > height/2) break;
         var sr = Math.sin(radius);
         var cr = Math.cos(radius);
 
@@ -53,8 +57,15 @@ export class MySphere extends CGFobject {
             this.vertices.push(x, y, z);
 
             // texture Coords, west to east, south to north, latitude and longitude
-            var texCoordX = 1 - j / wide; // longitude
-            var texCoordY = 1 - i / height; // latitude
+            var texCoordX; // longitude
+            var texCoordY; // latitude
+
+            texCoordX = 1 - j / wide;
+            if(!this.half) {
+              texCoordY = 1 - i / height;
+            } else {
+              texCoordY = 1 - i / height / 2;
+            }
             this.texCoords.push(texCoordX, texCoordY);
 
 
@@ -80,7 +91,7 @@ export class MySphere extends CGFobject {
 
             ang += alphaAng;
 
-            if(i == height || j == wide) continue;
+            if(i == height || j == wide || (this.half && i == height/2)) continue;
 
             var current = i * (wide + 1) + j;
             var next = current + (wide + 1);

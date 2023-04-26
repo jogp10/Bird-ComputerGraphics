@@ -17,10 +17,10 @@ export class MyTerrain extends CGFobject {
     }
 
     initTextures() {
-        this.textureTerrain = new CGFtexture(this.scene, "images/terrain.jpg");
-        this.terrainText = new CGFappearance(this.scene);
-        this.terrainText.setTexture(this.textureTerrain);
-        this.terrainText.setTextureWrap('REPEAT', 'REPEAT');
+        this.terrainTexture = new CGFtexture(this.scene, "images/terrain.jpg");
+        this.terrainMaterial = new CGFappearance(this.scene);
+        this.terrainMaterial.setTexture(this.terrainTexture);
+        this.terrainMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
         this.terrainHeight = new CGFtexture(this.scene, "images/heightmapflat.jpg");
         this.terrainAltimetry = new CGFtexture(this.scene, "images/altimetry.png");
@@ -47,7 +47,7 @@ export class MyTerrain extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
-            this.terrainText.apply();
+            this.terrainMaterial.apply();
             
             this.terrainHeight.bind(1);
             this.terrainAltimetry.bind(2);

@@ -40,7 +40,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 1;
-    this.selectedObject = 9;
+    this.selectedObject = 0;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -58,7 +58,7 @@ export class MyScene extends CGFscene {
   // initialize objects
   initObjects() {
     this.terrain = new MyTerrain(this,30);
-    this.panorama = new MyPanorama(this, 'images/panorama4.jpg', 50, 50);
+    this.panorama = new MyPanorama(this, 'images/panorama.jpg', 50, 50);
     this.bird = new MyBird(this, 0, 0, [0, 0, 0]);
     this.wing = new MyBirdWing(this,3,3);
     this.foot = new MyBirdFoot(this,3,3);
@@ -90,7 +90,7 @@ export class MyScene extends CGFscene {
 
   initCameras() {
     this.camera = new CGFcamera(
-      3*Math.PI/5,
+      5*Math.PI/10,
       0.1,
       1000,
       vec3.fromValues(325, 130, -125),
