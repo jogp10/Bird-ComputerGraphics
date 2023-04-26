@@ -62,7 +62,7 @@ export class MyScene extends CGFscene {
     this.bird = new MyBird(this, 0, 0, [0, 0, 0]);
     this.wing = new MyBirdWing(this,3,3);
     this.foot = new MyBirdFoot(this,3,3);
-    this.egg = new MyBirdEgg(this, 20, 20, [0, 0, 0]);
+    this.birdEgg = new MyBirdEgg(this, 20, 20, [0, 0, 0]);
     this.egg1 = new MyBirdEgg(this, 20, 20, [-3, 0.5, -3]);
     this.egg2 = new MyBirdEgg(this, 20, 20, [3, 0.5, -3]);
     this.egg3 = new MyBirdEgg(this, 20, 20, [-3, 0.5, 3]);
@@ -72,7 +72,7 @@ export class MyScene extends CGFscene {
     this.nest = new MyNest(this, 20, 20);
     this.scene = 0;
 
-    this.objects = [this.scene, this.terrain, this.bird, this.wing, this.foot ,this.panorama, this.egg, this.birdEggs, this.feather, this.nest];
+    this.objects = [this.scene, this.terrain, this.bird, this.wing, this.foot ,this.panorama, this.birdEgg, this.birdEggs, this.feather, this.nest];
 
     // Labels and ID's for object selection on MyInterface
     this.objectIDs = { 'Scene': 0, 'Terrain': 1, 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Bird Eggs': 7, 'Feather': 8, 'Nest': 9};
@@ -284,29 +284,32 @@ export class MyScene extends CGFscene {
       this.popMatrix();
 
       this.pushMatrix();
-      // BirdEgg
-      if(this.selectedObject == 6) {
-        this.objects[6].display();
-      }
+        // Bird Egg
+        if(this.selectedObject == 6) {
+          this.birdEgg.display();
+        }
       this.popMatrix();
 
       this.pushMatrix();
-      // BirdEggs
-      if(this.selectedObject == 7) {
-        for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display();
-      }
+        // BirdEggs
+        if(this.selectedObject == 7) {
+          for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display();
+        }
       this.popMatrix();
 
       this.pushMatrix();
-      // Feather
-      if(this.selectedObject == 8) {
-        this.scale(100,100,100);
-        this.objects[8].display();}
+        // Feather
+        if(this.selectedObject == 8) {
+          this.scale(100,100,100);
+          this.objects[8].display();
+        }
       this.popMatrix();
 
       this.pushMatrix();
-      // Nest
-      if(this.selectedObject == 9) this.objects[9].display();
+        // Nest
+        if(this.selectedObject == 9) {
+          this.objects[9].display();
+        }
       this.popMatrix();
     
     this.popMatrix();
