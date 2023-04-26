@@ -1,4 +1,4 @@
-import {CGFobject,CGFtexture, CGFappearance} from '../lib/CGF.js';
+import {CGFobject,CGFtexture, CGFappearance, CGFshader} from '../lib/CGF.js';
 import {MySphere} from "./MySphere.js";
 
 export class MyBirdEgg extends CGFobject {
@@ -15,14 +15,21 @@ export class MyBirdEgg extends CGFobject {
 
         this.eggMaterial.setTexture(this.eggTexture);
         this.eggMaterial.setTextureWrap('REPEAT', 'REPEAT');
+        this.initShaders();
+    }
+
+    initShaders() {
+        this.eggShader = new CGFshader(this.scene.gl, "shaders/egg.vert", "shaders/egg.frag");
     }
 
     display() {
         this.scene.pushMatrix();
-        this.scene.scale(0.8, 1.2, 0.8);
-        this.scene.translate(this.position[0], this.position[1], this.position[2]);
-        this.eggMaterial.apply();
-        this.egg.display();
+            this.eggMaterial.apply();
+            this.scene.setActiveShader(this.eggShader);
+            this.scene.scale(0.8, 1.2, 0.8);
+            this.scene.translate(this.position[0], this.position[1], this.position[2]);
+            this.egg.display();
+            this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();
     }
 
