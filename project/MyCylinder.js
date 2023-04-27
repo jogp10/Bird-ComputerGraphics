@@ -19,11 +19,13 @@ export class MyCylinder extends CGFobject {
     this.vertices = [];
     this.indices = [];
     this.normals = [];
+    this.texCoords = [];
 
     var ang = 0;
     var alphaAng = (2 * Math.PI) / this.slices;
 
     for (var i = 0; i < this.stacks; i++) {
+      var tCoord = i / this.stacks;
         for (var j = 0; j < this.slices; j++) {
             // All vertices have to be declared for a given face
             // even if they are shared with others, as the normals 
@@ -63,7 +65,8 @@ export class MyCylinder extends CGFobject {
             this.indices.push(2 * j + k, (2 * j + 3)%(2*this.slices) + k, 2 * j + 1 + k);
             this.indices.push(2 * j + k, (2 * j + 2)%(2*this.slices) + k, (2 * j + 3)%(2*this.slices) + k);
 
-
+            this.texCoords.push(j / this.slices, tCoord);
+            this.texCoords.push(j / this.slices, tCoord + 1 / this.stacks);
             ang += alphaAng;
         }
     }

@@ -40,7 +40,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 1;
-    this.selectedObject = 0;
+    this.selectedObject = 3;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();

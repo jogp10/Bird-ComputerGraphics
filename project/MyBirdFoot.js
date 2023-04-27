@@ -1,4 +1,4 @@
-import {CGFobject, CGFtexture} from '../lib/CGF.js';
+import {CGFobject, CGFtexture,CGFappearance} from '../lib/CGF.js';
 import { MyPrism } from './MyPrism.js';
 import { MyUnitCubeQuad } from './MyUnitCubeQuad.js';
 
@@ -17,10 +17,17 @@ export class MyBirdFoot extends CGFobject {
         this.cube2 = new MyUnitCubeQuad(this.scene);
         this.cube3 = new MyUnitCubeQuad(this.scene);
         this.cube4 = new MyUnitCubeQuad(this.scene);
+        
     }
 
     initTextures() {
-        this.materials = [];
+        
+        this.footTexture = new CGFtexture(this.scene, "images/foot.jpg");
+		this.footMaterial = new CGFappearance(this.scene);
+		this.footMaterial.setTexture(this.footTexture);
+		this.footMaterial.setTextureWrap('REPEAT', 'REPEAT');
+
+
     }
 
     display() {
@@ -29,6 +36,7 @@ export class MyBirdFoot extends CGFobject {
      
 
             this.scene.pushMatrix();
+            this.footMaterial.apply();
             this.scene.translate(-.15, 0, 0);
             this.scene.rotate(Math.PI/2,0,0,0);
             this.scene.scale(0.1, 1, .1);
@@ -36,6 +44,7 @@ export class MyBirdFoot extends CGFobject {
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
+            this.footMaterial.apply();
             this.scene.translate(-0.1, 0, 0);
             this.scene.rotate(Math.PI/2,0,0,0);
             this.scene.scale(0.5, 0.1, 0.3);
@@ -43,6 +52,7 @@ export class MyBirdFoot extends CGFobject {
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
+            this.footMaterial.apply();
             this.scene.translate(.2, 0, -0.12);
             this.scene.rotate(Math.PI/8,0,1,0);
             this.scene.scale(0.5, 0.1, 0.1);

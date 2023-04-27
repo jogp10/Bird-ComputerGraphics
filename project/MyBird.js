@@ -1,4 +1,4 @@
-import {CGFobject, CGFappearance, CGFshader} from '../lib/CGF.js';
+import {CGFobject, CGFappearance, CGFshader, CGFtexture} from '../lib/CGF.js';
 import { MyTriangle } from './MyTriangle.js';
 import { MyPyramid } from './MyPyramid.js';
 import { MySphere } from './MySphere.js';
@@ -42,7 +42,25 @@ export class MyBird extends CGFobject {
     }
 
 	initTextures() {
-        this.birdMaterial = new CGFappearance(this.scene);
+		// Textures
+        this.bodyTexture = new CGFtexture(this.scene, "images/body.jpg");
+        this.bodyMaterial = new CGFappearance(this.scene);
+        this.bodyMaterial.setTexture(this.bodyTexture);
+		this.bodyMaterial.setTextureWrap('REPEAT', 'REPEAT');
+
+		this.beakTexture = new CGFtexture(this.scene, "images/beak.jpg");
+		this.beakMaterial = new CGFappearance(this.scene);
+		this.beakMaterial.setTexture(this.beakTexture);
+		this.beakMaterial.setTextureWrap('REPEAT', 'REPEAT');
+
+		this.eyeTexture = new CGFtexture(this.scene, "images/eye.jpg");
+		this.eyeMaterial = new CGFappearance(this.scene);
+		this.eyeMaterial.setTexture(this.eyeTexture);
+		this.eyeMaterial.setTextureWrap('REPEAT', 'REPEAT');
+
+		
+
+
     }
 
 	initShaders() {
@@ -57,28 +75,31 @@ export class MyBird extends CGFobject {
 		this.triangle.enableNormalViz();
 		this.eye1.enableNormalViz();
 		this.eye2.enableNormalViz();
-		this.body1.enableNormalViz();
 		this.beak1.enableNormalViz();
 		this.beak2.enableNormalViz();
+		this.body1.enableNormalViz();
+		this.head.enableNormalViz();
 		this.wing1.enableNormalViz();
 		this.wing2.enableNormalViz();
 		this.foot1.enableNormalViz();
+		this.foot2.enableNormalViz();
 		this.neck.enableNormalViz();
-	
 
     }
     disableNormalViz() {
 		this.triangle.disableNormalViz();
-		this.eye1.disableNormalViz();
+		this.eye1.disableNormalViz();	
 		this.eye2.disableNormalViz();
-		this.body1.disableNormalViz();
 		this.beak1.disableNormalViz();
 		this.beak2.disableNormalViz();
+		this.body1.disableNormalViz();
+		this.head.disableNormalViz();
 		this.wing1.disableNormalViz();
 		this.wing2.disableNormalViz();
 		this.foot1.disableNormalViz();
+		this.foot2.disableNormalViz();
 		this.neck.disableNormalViz();
-
+		
 		
 	}
     updateBuffers(complexity) {
@@ -95,7 +116,7 @@ export class MyBird extends CGFobject {
 		this.wing1.update(t);
 		this.wing2.update(-t);
 	
-    	this.y = this.amplitude * 0.1*Math.sin(t*0.008);
+    	this.y = this.amplitude * 0.1*Math.sin(t*0.006);
   
     }
 
@@ -157,27 +178,32 @@ export class MyBird extends CGFobject {
 	display() {
 		this.scene.pushMatrix();
 
-			this.birdMaterial.apply();
+			
 			this.scene.translate(0, this.y, 0);
 			this.scene.translate(this.position[0], this.position[1], this.position[2]);
 			this.scene.rotate(this.orientation, 0, 1, 0);
 			
 			// Bird Eyes
 			this.scene.pushMatrix();
+			this.eyeMaterial.apply();
 			this.scene.translate(0.13, 0.23, 0.15);
 			this.scene.scale(0.03, 0.03, 0.03);
+			this.scene.rotate(3*Math.PI/4, 0, 1, 0);
 			this.eye1.display();
 			this.scene.popMatrix();
 
 			this.scene.pushMatrix();
 			this.scene.translate(-0.13, 0.23, 0.15);
 			this.scene.scale(0.03, 0.03, 0.03);
+			this.scene.rotate(1*Math.PI/4, 0, 1, 0);
+		
 			this.eye2.display();
 			this.scene.popMatrix();
 
 
 			// Bird Beak
 			this.scene.pushMatrix();
+			this.beakMaterial.apply();
 			this.scene.translate(0, 0.2, 0.22);
 			this.scene.scale(0.08, 0.08, 0.1);
 			this.scene.rotate(Math.PI/2, 1, 0, 0);
@@ -194,6 +220,7 @@ export class MyBird extends CGFobject {
 
 			// Bird Body
 			this.scene.pushMatrix();
+			this.bodyMaterial.apply();
 			this.scene.translate(0, 0, -0.6);
 			this.scene.scale(0.3, 0.2, 0.6);
 			this.scene.rotate(Math.PI/2, 1, 0, 0);
@@ -219,7 +246,7 @@ export class MyBird extends CGFobject {
 
 			// Bird Wings
 			this.scene.pushMatrix();
-			this.scene.translate(0.25, .1, -0.4);
+			this.scene.translate(0.2, .1, -0.4);
 			this.scene.scale(0.3, 0.3, 0.3);
 			this.scene.rotate(Math.PI, 0, 1, 0);
 			this.scene.rotate(Math.PI, 1, 0, 0);
@@ -227,7 +254,7 @@ export class MyBird extends CGFobject {
 			this.scene.popMatrix();
 
 			this.scene.pushMatrix();
-			this.scene.translate(-0.25, .1, -0.4);
+			this.scene.translate(-0.2, .1, -0.4);
 			this.scene.scale(0.3, 0.3, 0.3);
 			this.wing2.display();
 			this.scene.popMatrix();
@@ -235,7 +262,7 @@ export class MyBird extends CGFobject {
 			
 		
 			// Bird Feet
-			this.scene.pushMatrix();
+			this.scene.pushMatrix();	
 			this.scene.translate(.1, -0.3, -.5);
 			this.scene.scale(0.2, 0.2, 0.2);
 			this.scene.rotate(-Math.PI/2, 0, 1, 0);
