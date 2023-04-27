@@ -24,7 +24,7 @@ void main() {
 
   // Compute the final color based on the perturbed normal.
   vec3 lightDirection = normalize(vec3(1.0, 1.0, 1.0));  // Example light direction.
-  float diffuse = max(dot(transformedPerturbedNormal, lightDirection), 0.0);
+  float diffuse = max(dot(transformedPerturbedNormal, lightDirection), 0.65);
   vec3 finalColor = baseColor.rgb * diffuse;
 
   gl_FragColor = vec4(finalColor, baseColor.a);
