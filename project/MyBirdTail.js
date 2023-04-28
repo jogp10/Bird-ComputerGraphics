@@ -81,7 +81,7 @@ export class MyBirdTail extends CGFobject {
 
     update(t, frequency) {
 
-        this.bird_angle = Math.PI/-6*Math.sin(t*frequency);
+        this.bird_angle = Math.PI/-10*Math.sin(t*frequency);
     }
 
 }
