@@ -4,11 +4,11 @@ import { MyBirdFeather } from './MyBirdFeather.js';
 
 export class MyBirdWing extends CGFobject {
 
-    constructor(scene) {
+    constructor(scene, frequency) {
         super(scene);
         this.initBuffers();
         this.initTextures();
-        this.frequency = 0.006
+       
     }
 
     initBuffers() {
@@ -22,7 +22,7 @@ export class MyBirdWing extends CGFobject {
         for (var i=0;i<25; i++) {
             this.feathers.push(new MyBirdFeather(this.scene));
         }
-        this.ex = 2;
+    
     }
 
     initTextures() {
@@ -334,10 +334,10 @@ export class MyBirdWing extends CGFobject {
         this.scene.popMatrix();       
     }
 
-    update(t)
+    update(t, frequency)
     {   
-        this.wing_angle = Math.PI/-6*Math.sin(t*this.frequency);
-        this.feather_angle = Math.PI/-10*Math.sin(t*this.frequency);
+        this.wing_angle = Math.PI/-6*Math.sin(t*frequency);
+        this.feather_angle = Math.PI/-10*Math.sin(t*frequency);
     }
 
     updateBuffers() {

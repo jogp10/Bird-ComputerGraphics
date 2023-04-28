@@ -4,9 +4,11 @@ import { MyTerrain } from "./MyTerrain.js";
 import { MyBird } from "./MyBird.js";
 import { MyBirdWing } from "./MyBirdWing.js";
 import { MyBirdFoot } from "./MyBirdFoot.js";
+import { MyBirdTail } from "./MyBirdTail.js";
 import { MyBirdEgg } from "./MyBirdEgg.js";
 import { MyBirdFeather } from "./MyBirdFeather.js";
 import { MyNest} from "./MyNest.js";
+
 
 /**
  * MyScene
@@ -40,7 +42,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 1;
-    this.selectedObject = 3;
+    this.selectedObject = 10;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -60,8 +62,9 @@ export class MyScene extends CGFscene {
     this.terrain = new MyTerrain(this,30);
     this.panorama = new MyPanorama(this, 'images/panorama.jpg', 50, 50);
     this.bird = new MyBird(this, 0, 0, [0, 0, 0]);
-    this.wing = new MyBirdWing(this,3,3);
-    this.foot = new MyBirdFoot(this,3,3);
+    this.wing = new MyBirdWing(this);
+    this.foot = new MyBirdFoot(this);
+    this.tail = new MyBirdTail(this);
     this.birdEgg = new MyBirdEgg(this, 20, 20, [0, 0, 0]);
     this.egg1 = new MyBirdEgg(this, 20, 20, [-3, 0.5, -3]);
     this.egg2 = new MyBirdEgg(this, 20, 20, [3, 0.5, -3]);
@@ -72,10 +75,10 @@ export class MyScene extends CGFscene {
     this.nest = new MyNest(this, 20, 20);
     this.scene = 0;
 
-    this.objects = [this.scene, this.terrain, this.bird, this.wing, this.foot ,this.panorama, this.birdEgg, this.birdEggs, this.feather, this.nest];
+    this.objects = [this.scene, this.terrain, this.bird, this.wing, this.foot ,this.panorama, this.birdEgg, this.birdEggs, this.feather, this.nest, this.tail];
 
     // Labels and ID's for object selection on MyInterface
-    this.objectIDs = { 'Scene': 0, 'Terrain': 1, 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Bird Eggs': 7, 'Feather': 8, 'Nest': 9};
+    this.objectIDs = { 'Scene': 0, 'Terrain': 1, 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Bird Eggs': 7, 'Feather': 8, 'Nest': 9, 'Tail': 10};
   }
 
   // initialize lights
@@ -197,7 +200,8 @@ export class MyScene extends CGFscene {
   update(t) {
     this.checkKeys();
     this.bird.update(t);
-    this.wing.update(t);
+    this.wing.update(t, 0.006);
+    this.tail.update(t, 0.006);
   }
 
   distance(position1, position2) {
@@ -319,6 +323,16 @@ export class MyScene extends CGFscene {
           this.objects[9].display();
         }
       this.popMatrix();
+
+      this.pushMatrix();
+      // Tail
+      if(this.selectedObject == 10) {
+        this.scale(100,100,100);
+        this.objects[10].display()
+      }
+      this.popMatrix();
+
+
     
     this.popMatrix();
 

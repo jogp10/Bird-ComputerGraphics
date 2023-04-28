@@ -5,6 +5,7 @@ import { MySphere } from './MySphere.js';
 import { MyBirdWing } from './MyBirdWing.js';
 import { MyBirdFoot } from './MyBirdFoot.js';
 import { MyCylinder } from './MyCylinder.js';
+import { MyBirdTail } from './MyBirdTail.js';
 
 
 export class MyBird extends CGFobject {
@@ -21,6 +22,7 @@ export class MyBird extends CGFobject {
 		this.egg = null;
         this.y = 0; 
         this.amplitude = 1
+		this.frequency = 0.006
 		
 		this.initTextures();
 		this.initShaders();
@@ -39,6 +41,7 @@ export class MyBird extends CGFobject {
 		this.foot1 = new MyBirdFoot(this.scene);
 		this.foot2 = new MyBirdFoot(this.scene);
 		this.neck = new MyCylinder(this.scene, 20, 10);
+		this.tail = new MyBirdTail(this.scene)
     }
 
 	initTextures() {
@@ -84,6 +87,7 @@ export class MyBird extends CGFobject {
 		this.foot1.enableNormalViz();
 		this.foot2.enableNormalViz();
 		this.neck.enableNormalViz();
+		this.tail.enableNormalViz();
 
     }
     disableNormalViz() {
@@ -99,6 +103,7 @@ export class MyBird extends CGFobject {
 		this.foot1.disableNormalViz();
 		this.foot2.disableNormalViz();
 		this.neck.disableNormalViz();
+		this.tail.disableNormalViz();
 		
 		
 	}
@@ -113,10 +118,11 @@ export class MyBird extends CGFobject {
         console.log("pos: " + this.position + " ori: " + this.orientation + " speed: " + this.speed);
 
 		//	Bird movement
-		this.wing1.update(t);
-		this.wing2.update(-t);
+		this.wing1.update(t, this.frequency);
+		this.wing2.update(-t,this.frequency);
+		this.tail.update(-t, this.frequency);
 	
-    	this.y = this.amplitude * 0.1*Math.sin(t*0.006);
+    	this.y = this.amplitude * 0.1*Math.sin(t*this.frequency);
   
     }
 
@@ -221,14 +227,15 @@ export class MyBird extends CGFobject {
 			// Bird Body
 			this.scene.pushMatrix();
 			this.bodyMaterial.apply();
-			this.scene.translate(0, 0, -0.6);
-			this.scene.scale(0.3, 0.2, 0.6);
+			this.scene.translate(0, 0, -0.5);
+			this.scene.scale(0.3, 0.2, 0.5);
 			this.scene.rotate(Math.PI/2, 1, 0, 0);
 			this.body1.display();
 			this.scene.popMatrix();
 
 			// Bird Neck
 			this.scene.pushMatrix();
+			this.bodyMaterial.apply();
 			this.scene.translate(0, 0.04, -.1);
 			this.scene.rotate(Math.PI/3, 1, 0, 0);
 			this.scene.scale(0.07, 0.3, 0.07);
@@ -237,6 +244,7 @@ export class MyBird extends CGFobject {
 
 			// Bird Head
 			this.scene.pushMatrix();
+			this.bodyMaterial.apply();
 			this.scene.translate(0, .2, .1);
 			this.scene.scale(.15,.15,.15);
 			this.scene.rotate(Math.PI/2, 1, 0, 0);
@@ -274,6 +282,15 @@ export class MyBird extends CGFobject {
 			this.scene.scale(0.2, 0.2, 0.2);
 			this.scene.rotate(-Math.PI/2, 0, 1, 0);
 			this.foot2.display();
+			this.scene.popMatrix();
+
+			// Bird Tail
+			this.scene.pushMatrix();
+			this.bodyMaterial.apply();	
+			this.scene.translate(0, 0, -1.1);
+			this.scene.scale(0.2, 0.2, 0.2);
+			this.scene.rotate(-Math.PI/2, 0, 1, 0);
+			this.tail.display();
 			this.scene.popMatrix();
 
 		this.scene.popMatrix();
