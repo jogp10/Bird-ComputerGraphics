@@ -3,8 +3,9 @@ import { MyCylinder } from "./MyCylinder.js";
 import { MySphere } from "./MySphere.js";
 
 export class MyNest extends CGFobject {
-    constructor(scene, slices, stacks) {
+    constructor(scene, slices, stacks, position) {
         super(scene);
+        this.position = position;
         this.initBuffers(slices, stacks);
         this.initTextures();
         this.initShaders();
@@ -43,6 +44,8 @@ export class MyNest extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
+            this.scene.translate(this.position[0], this.position[1], this.position[2]);
+            this.scene.scale(3.5, 3.5, 3.5);
             this.nestMaterial.apply();
             this.roughnessMap.bind(1);
             this.scene.setActiveShader(this.nestShader);

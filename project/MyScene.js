@@ -42,7 +42,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 1;
-    this.selectedObject = 10;
+    this.selectedObject = 0;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -61,18 +61,18 @@ export class MyScene extends CGFscene {
   initObjects() {
     this.terrain = new MyTerrain(this,30);
     this.panorama = new MyPanorama(this, 'images/panorama.jpg', 50, 50);
-    this.bird = new MyBird(this, 0, 0, [0, 0, 0]);
+    this.bird = new MyBird(this, 0, 0, [0, -30, 0]);
     this.wing = new MyBirdWing(this);
     this.foot = new MyBirdFoot(this);
     this.tail = new MyBirdTail(this);
     this.birdEgg = new MyBirdEgg(this, 20, 20, [0, 0, 0]);
-    this.egg1 = new MyBirdEgg(this, 20, 20, [-3, 0.5, -3]);
-    this.egg2 = new MyBirdEgg(this, 20, 20, [3, 0.5, -3]);
-    this.egg3 = new MyBirdEgg(this, 20, 20, [-3, 0.5, 3]);
-    this.egg4 = new MyBirdEgg(this, 20, 20, [3, 0.5, 3]);
+    this.egg1 = new MyBirdEgg(this, 20, 20, [-80, -45, -20]);
+    this.egg2 = new MyBirdEgg(this, 20, 20, [0, -45, -100]);
+    this.egg3 = new MyBirdEgg(this, 20, 20, [-50, -45, 50]);
+    this.egg4 = new MyBirdEgg(this, 20, 20, [100, -45, 50]);
     this.feather = new MyBirdFeather(this, [0, 0, 0]);
     this.birdEggs = [this.egg1, this.egg2, this.egg3, this.egg4];
-    this.nest = new MyNest(this, 20, 20);
+    this.nest = new MyNest(this, 20, 20, [53, -48, 0]);
     this.scene = 0;
 
     this.objects = [this.scene, this.terrain, this.bird, this.wing, this.foot ,this.panorama, this.birdEgg, this.birdEggs, this.feather, this.nest, this.tail];
@@ -102,8 +102,8 @@ export class MyScene extends CGFscene {
       5*Math.PI/10,
       0.1,
       1000,
-      vec3.fromValues(325, 130, -125),
-      vec3.fromValues(0, 0, 0)
+      vec3.fromValues(-300, -50, -120),
+      vec3.fromValues(0, -90, 0)
     );
   }
 

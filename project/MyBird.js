@@ -188,6 +188,7 @@ export class MyBird extends CGFobject {
 			this.scene.translate(0, this.y, 0);
 			this.scene.translate(this.position[0], this.position[1], this.position[2]);
 			this.scene.rotate(this.orientation, 0, 1, 0);
+			this.scene.scale(2.5, 2.5, 2.5);
 			
 			// Bird Eyes
 			this.scene.pushMatrix();
