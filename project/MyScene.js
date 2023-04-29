@@ -8,6 +8,7 @@ import { MyBirdTail } from "./MyBirdTail.js";
 import { MyBirdEgg } from "./MyBirdEgg.js";
 import { MyBirdFeather } from "./MyBirdFeather.js";
 import { MyNest} from "./MyNest.js";
+import { MyBillboard } from "./MyBillboard.js";
 
 
 /**
@@ -73,12 +74,13 @@ export class MyScene extends CGFscene {
     this.feather = new MyBirdFeather(this, [0, 0, 0]);
     this.birdEggs = [this.egg1, this.egg2, this.egg3, this.egg4];
     this.nest = new MyNest(this, 20, 20, [53, -48, 0]);
+    this.billboard = new MyBillboard(this, [0, 0, 0]);
     this.scene = 0;
 
-    this.objects = [this.scene, this.terrain, this.bird, this.wing, this.foot ,this.panorama, this.birdEgg, this.birdEggs, this.feather, this.nest, this.tail];
+    this.objects = [this.scene, this.terrain, this.bird, this.wing, this.foot ,this.panorama, this.birdEgg, this.birdEggs, this.feather, this.nest, this.tail, this.billboard];
 
     // Labels and ID's for object selection on MyInterface
-    this.objectIDs = { 'Scene': 0, 'Terrain': 1, 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Bird Eggs': 7, 'Feather': 8, 'Nest': 9, 'Tail': 10};
+    this.objectIDs = { 'Scene': 0, 'Terrain': 1, 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Bird Eggs': 7, 'Feather': 8, 'Nest': 9, 'Tail': 10, 'Billboard': 11};
   }
 
   // initialize lights
@@ -103,7 +105,7 @@ export class MyScene extends CGFscene {
       0.1,
       1000,
       vec3.fromValues(-300, -50, -120),
-      vec3.fromValues(0, -90, 0)
+      vec3.fromValues(0, 0, 0)
     );
   }
 
@@ -290,7 +292,6 @@ export class MyScene extends CGFscene {
       this.pushMatrix();
         // Panorama
         if(this.selectedObject == 5) {
-          this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
           this.objects[5].display();
         }
       this.popMatrix();
@@ -332,6 +333,12 @@ export class MyScene extends CGFscene {
       }
       this.popMatrix();
 
+      this.pushMatrix();
+      // Billboard
+      if(this.selectedObject == 11) {
+        this.objects[11].display()
+      }
+      this.popMatrix();
 
     
     this.popMatrix();

@@ -13,9 +13,13 @@ uniform bool uUseTexture;
 void main() {
 	// Branching should be reduced to a minimal. 
 	// When based on a non-changing uniform, it is usually optimized.
+
+
 	if (uUseTexture)
 	{
 		vec4 textureColor = texture(uSampler, vTextureCoord);
+		if (textureColor.a < 0.1)
+			discard;
 		fragColor = textureColor * vFinalColor;
 	}
 	else

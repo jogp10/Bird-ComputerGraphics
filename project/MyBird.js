@@ -111,11 +111,16 @@ export class MyBird extends CGFobject {
     }
 
     update(t) {
+		if(this.pickEgg) {
+			this.pickEgg = false;
+			this.startPickEggAnimation = t;
+		}
+
         // Calculate the new position of the bird
         this.lastPosition = this.position;
         this.position = [this.position[0] + Math.sin(this.orientation)*(this.speed)*0.1, this.position[1], this.position[2] + Math.cos(this.orientation)*(this.speed)*0.1];
 
-        console.log("pos: " + this.position + " ori: " + this.orientation + " speed: " + this.speed);
+		console.log("pos: " + this.position + " ori: " + this.orientation + " speed: " + this.speed);
 
 		//	Bird movement
 		this.wing1.update(t, this.frequency);
@@ -143,11 +148,10 @@ export class MyBird extends CGFobject {
 
 	pickEgg() {
 		console.log("pickEgg");
-		// In a period of time of 2 seconds, the bird should got from y=3 to y=0 and back to y=3. If it is in the middle of the period and there is an egg in the colision point, it should pick it
+		this.pickEgg = true;
+	}
 
-
-		// TODO down animation
-
+	checkEggColision() {
 		for (let i = 0; i < this.scene.birdEggs.length; i++) {
             const egg = this.scene.birdEggs[i];
 
