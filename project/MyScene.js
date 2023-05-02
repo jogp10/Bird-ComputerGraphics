@@ -62,7 +62,7 @@ export class MyScene extends CGFscene {
   initObjects() {
     this.terrain = new MyTerrain(this,30);
     this.panorama = new MyPanorama(this, 'images/panorama.jpg', 50, 50);
-    this.bird = new MyBird(this, 0, 0, [0, -30, 0]);
+    this.bird = new MyBird(this, 0, 0, [0, -46, 0]);
     this.wing = new MyBirdWing(this);
     this.foot = new MyBirdFoot(this);
     this.tail = new MyBirdTail(this);
@@ -185,7 +185,7 @@ export class MyScene extends CGFscene {
     if (this.gui.isKeyPressed("KeyP")) {
       text+=" P ";
       keysPressed=true;
-      this.bird.pickEgg();
+      this.bird.pickEgg(5/60);
     }
 
     if (this.gui.isKeyPressed("KeyO")) {

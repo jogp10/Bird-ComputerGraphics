@@ -15,10 +15,10 @@ export class MyBird extends CGFobject {
 
         this.initialPosition = position;
         this.position = position;
-		this.lastPosition = position;
         this.orientation = orientation;
         this.speed = speed;
 		this.hasEgg = false;
+		this.pickUpEgg = false;
 		this.egg = null;
         this.y = 0; 
         this.amplitude = 1
@@ -111,16 +111,16 @@ export class MyBird extends CGFobject {
     }
 
     update(t) {
-		if(this.pickEgg) {
-			this.pickEgg = false;
+		if(this.pickUpEgg) {
+			console.log("Start pick up egg animation");
+			this.pickUpEgg = false;
 			this.startPickEggAnimation = t;
 		}
 
         // Calculate the new position of the bird
-        this.lastPosition = this.position;
         this.position = [this.position[0] + Math.sin(this.orientation)*(this.speed)*0.1, this.position[1], this.position[2] + Math.cos(this.orientation)*(this.speed)*0.1];
 
-		console.log("pos: " + this.position + " ori: " + this.orientation + " speed: " + this.speed);
+		console.log("pos: " + this.position + " orientation: " + this.orientation + " speed: " + this.speed);
 
 		//	Bird movement
 		this.wing1.update(t, this.frequency);
@@ -128,7 +128,15 @@ export class MyBird extends CGFobject {
 		this.tail.update(-t, this.frequency);
 	
     	this.y = this.amplitude * 0.1*Math.sin(t*this.frequency);
-  
+
+		//	Bird picking egg animation
+		if(t - this.startPickEggAnimation < 1000) {
+			this.position[1] -= this.animationSpeed;
+		} else if (t - this.startPickEggAnimation == 1000) {
+			this.checkEggColision();
+		} else if (t - this.startPickEggAnimation < 2000) {
+			this.position[1] += this.animationSpeed;
+		}
     }
 
     turn(v) {
@@ -146,9 +154,10 @@ export class MyBird extends CGFobject {
         this.speed = 0;
     }
 
-	pickEgg() {
-		console.log("pickEgg");
-		this.pickEgg = true;
+	pickEgg(v) {
+		console.log("pickEgg animation");
+		this.pickUpEgg = true;
+		this.animationSpeed = v;
 	}
 
 	checkEggColision() {
