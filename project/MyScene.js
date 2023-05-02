@@ -62,7 +62,8 @@ export class MyScene extends CGFscene {
   initObjects() {
     this.terrain = new MyTerrain(this,30);
     this.panorama = new MyPanorama(this, 'images/panorama.jpg', 50, 50);
-    this.bird = new MyBird(this, 0, 0, [0, -30, 0]);
+    this.bird = new MyBird(this, 0, 0, [0, -30 , 0]);
+    this.testBird = new MyBird(this, 0, 0, [0, 0 , 0]);
     this.wing = new MyBirdWing(this);
     this.foot = new MyBirdFoot(this);
     this.tail = new MyBirdTail(this);
@@ -76,8 +77,9 @@ export class MyScene extends CGFscene {
     this.nest = new MyNest(this, 20, 20, [53, -48, 0]);
     this.billboard = new MyBillboard(this, [0, 0, 0]);
     this.scene = 0;
+   
 
-    this.objects = [this.scene, this.terrain, this.bird, this.wing, this.foot ,this.panorama, this.birdEgg, this.birdEggs, this.feather, this.nest, this.tail, this.billboard];
+    this.objects = [this.scene, this.terrain ,this.testBird, this.wing, this.foot ,this.panorama, this.birdEgg, this.birdEggs, this.feather, this.nest, this.tail, this.billboard];
 
     // Labels and ID's for object selection on MyInterface
     this.objectIDs = { 'Scene': 0, 'Terrain': 1, 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Bird Eggs': 7, 'Feather': 8, 'Nest': 9, 'Tail': 10, 'Billboard': 11};
@@ -202,6 +204,7 @@ export class MyScene extends CGFscene {
   update(t) {
     this.checkKeys();
     this.bird.update(t);
+    this.testBird.update(t);
     this.wing.update(t, 0.006);
     this.tail.update(t, 0.006);
   }
@@ -251,8 +254,9 @@ export class MyScene extends CGFscene {
             this.objects[1].display(); // Terrain
             for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
             
-            this.objects[2].display(); // Bird
+          this.bird.display(); // Bird
             this.translate(0,-2,0);
+            
             this.objects[9].display(); // Nest
         }
       this.popMatrix();
@@ -264,9 +268,11 @@ export class MyScene extends CGFscene {
 
       this.pushMatrix();
         // Bird
+        if(this.selectedObject == 2) {
         this.translate(0,0,0);
-        this.scale(100,100,100);
-        if(this.selectedObject == 2) this.objects[2].display();
+          this.scale(5,5,5);
+        this.objects[2].display();
+      }
       this.popMatrix();
 
       this.pushMatrix();
@@ -337,6 +343,13 @@ export class MyScene extends CGFscene {
       // Billboard
       if(this.selectedObject == 11) {
         this.objects[11].display()
+      }
+      this.popMatrix();
+
+      this.pushMatrix();
+      // 
+      if(this.selectedObject == 12) {
+        this.objects[12].display()
       }
       this.popMatrix();
 
