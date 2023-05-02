@@ -75,14 +75,15 @@ export class MyScene extends CGFscene {
     this.feather = new MyBirdFeather(this, [0, 0, 0]);
     this.birdEggs = [this.egg1, this.egg2, this.egg3, this.egg4];
     this.nest = new MyNest(this, 20, 20, [53, -48, 0]);
+    this.mynest = new MyNest(this, 20, 20, [0, 0, 0]);
     this.billboard = new MyBillboard(this, [0, 0, 0]);
     this.scene = 0;
    
 
-    this.objects = [this.scene, this.terrain ,this.testBird, this.wing, this.foot ,this.panorama, this.birdEgg, this.birdEggs, this.feather, this.nest, this.tail, this.billboard];
+    this.objects = [this.scene, this.terrain ,this.testBird, this.wing, this.foot ,this.panorama, this.birdEgg, this.feather, this.mynest, this.tail, this.billboard];
 
     // Labels and ID's for object selection on MyInterface
-    this.objectIDs = { 'Scene': 0, 'Terrain': 1, 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Bird Eggs': 7, 'Feather': 8, 'Nest': 9, 'Tail': 10, 'Billboard': 11};
+    this.objectIDs = { 'Scene': 0, 'Terrain': 1, 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Feather': 7, 'Nest': 8, 'Tail': 9, 'Billboard': 10};
   }
 
   // initialize lights
@@ -103,11 +104,21 @@ export class MyScene extends CGFscene {
 
   initCameras() {
     this.camera = new CGFcamera(
+      2*Math.PI/3,
+      0.1,
+      1000,
+      vec3.fromValues(50, 10, 150),
+      vec3.fromValues(0, 0, 0)
+    );
+  }
+
+  sceneCameras() {
+    this.camera = new CGFcamera(
       5*Math.PI/10,
       0.1,
       1000,
       vec3.fromValues(-300, -50, -120),
-      vec3.fromValues(0, 0, 0)
+      vec3.fromValues(0, -50, 0)
     );
   }
 
@@ -142,7 +153,7 @@ export class MyScene extends CGFscene {
   }
 
   updateObjectComplexity(){
-    if(this.selectedObject!=0&&this.selectedObject!=7)this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
+    if(this.selectedObject!=0)this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
   }
 
   updateScaleFactor(){
@@ -238,9 +249,9 @@ export class MyScene extends CGFscene {
 
     // Draw normals
     if (this.displayNormals) {
-        if(this.selectedObject!=0&&this.selectedObject!=7)this.objects[this.selectedObject].enableNormalViz();
+        if(this.selectedObject!=0)this.objects[this.selectedObject].enableNormalViz();
     } else {
-        if(this.selectedObject!=0&&this.selectedObject!=7)this.objects[this.selectedObject].disableNormalViz();
+        if(this.selectedObject!=0)this.objects[this.selectedObject].disableNormalViz();
     }
 
 
@@ -250,14 +261,14 @@ export class MyScene extends CGFscene {
       this.pushMatrix();
         // Scene
         if(this.selectedObject == 0) {
-            this.objects[5].display(); // Panorama
-            this.objects[1].display(); // Terrain
-            for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
+          this.panorama.display(); // Panorama
+          this.terrain.display(); // Terrain
+          for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
             
           this.bird.display(); // Bird
-            this.translate(0,-2,0);
-            
-            this.objects[9].display(); // Nest
+          this.translate(0,-2,0);
+          
+          this.nest.display(); // Nest
         }
       this.popMatrix();
     
@@ -278,9 +289,6 @@ export class MyScene extends CGFscene {
       this.pushMatrix();
         // Wing
         if(this.selectedObject == 3) {
-          this.translate(0,0,0);
-          this.scale(100,100,100);
-
           this.objects[3].display();
         }
       this.popMatrix();
@@ -288,9 +296,6 @@ export class MyScene extends CGFscene {
       this.pushMatrix();
         // Foot
         if(this.selectedObject == 4) {
-          this.translate(0,0,0);
-          this.scale(100,100,100);
-
           this.objects[4].display();
         }
       this.popMatrix();
@@ -305,51 +310,42 @@ export class MyScene extends CGFscene {
       this.pushMatrix();
         // Bird Egg
         if(this.selectedObject == 6) {
-          this.birdEgg.display();
-        }
-      this.popMatrix();
-
-      this.pushMatrix();
-        // BirdEggs
-        if(this.selectedObject == 7) {
-          for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display();
+          this.objects[6].display();
         }
       this.popMatrix();
 
       this.pushMatrix();
         // Feather
-        if(this.selectedObject == 8) {
-          this.scale(100,100,100);
-          this.objects[8].display();
+        if(this.selectedObject == 7) {
+          this.objects[7].display();
         }
       this.popMatrix();
 
       this.pushMatrix();
         // Nest
-        if(this.selectedObject == 9) {
-          this.objects[9].display();
+        if(this.selectedObject == 8) {
+          this.objects[8].display();
         }
       this.popMatrix();
 
       this.pushMatrix();
       // Tail
-      if(this.selectedObject == 10) {
-        this.scale(100,100,100);
-        this.objects[10].display()
+      if(this.selectedObject == 9) {
+        this.objects[9].display()
       }
       this.popMatrix();
 
       this.pushMatrix();
       // Billboard
-      if(this.selectedObject == 11) {
-        this.objects[11].display()
+      if(this.selectedObject == 10) {
+        this.objects[10].display()
       }
       this.popMatrix();
 
       this.pushMatrix();
       // 
-      if(this.selectedObject == 12) {
-        this.objects[12].display()
+      if(this.selectedObject == 11) {
+        this.objects[11].display()
       }
       this.popMatrix();
 

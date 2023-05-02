@@ -47,7 +47,7 @@ export class MyBirdEgg extends CGFobject {
         this.egg.disableNormalViz();
     }
 
-    drop(position) {
+    drop(position, speed) {
         // TODO
     }
 }

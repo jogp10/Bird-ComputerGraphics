@@ -335,7 +335,7 @@ export class MyBirdWing extends CGFobject {
     }
 
     update(t, frequency, speed)
-    {   
+    {  
         this.wing_angle = Math.PI/-6*Math.sin(t*frequency * (1+speed/10));
         this.feather_angle = Math.PI/-10*Math.sin(t*frequency);
     }

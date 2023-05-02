@@ -67,8 +67,6 @@ export class MyBird extends CGFobject {
     }
 
 	initShaders() {
-		this.birdShader = new CGFshader(this.scene.gl, "shaders/bird.vert", "shaders/bird.frag");
-		this.birdShader.setUniformsValues({timeFactor: 0});
 	}
 
     updateTexCoords() {
@@ -111,10 +109,10 @@ export class MyBird extends CGFobject {
     }
 
     update(t) {
-		if(this.pickUpEgg) {
+		if(this.startPickEggAnimation) {
 			console.log("Start pick up egg animation");
 			this.pickUpEgg = false;
-			this.startPickEggAnimation = t;
+			this.initstartPickEggAnimation = t;
 		}
 
         // Calculate the new position of the bird
@@ -124,17 +122,17 @@ export class MyBird extends CGFobject {
 
 		//	Bird movement
 		this.wing1.update(t, this.frequency, this.speed);
-		this.wing2.update(-t,this.frequency,this.speed);
-		this.tail.update(-t, this.frequency,);
+		this.wing2.update(-t,this.frequency, this.speed);
+		this.tail.update(-t, this.frequency);
 	
     	this.y = this.amplitude * 0.1*Math.sin(t*this.frequency);
 
 		//	Bird picking egg animation
-		if(t - this.startPickEggAnimation < 1000) {
+		if(t - this.initstartPickEggAnimation < 1000) {
 			this.position[1] -= this.animationSpeed;
-		} else if (t - this.startPickEggAnimation == 1000) {
+		} else if (t - this.initstartPickEggAnimation == 1000) {
 			this.checkEggColision();
-		} else if (t - this.startPickEggAnimation < 2000) {
+		} else if (t - this.initstartPickEggAnimation < 2000) {
 			this.position[1] += this.animationSpeed;
 		}
     }
@@ -156,7 +154,7 @@ export class MyBird extends CGFobject {
 
 	pickEgg(v) {
 		console.log("pickEgg animation");
-		this.pickUpEgg = true;
+		this.startPickEggAnimation = true;
 		this.animationSpeed = v;
 	}
 
@@ -188,7 +186,7 @@ export class MyBird extends CGFobject {
 		this.hasEgg = false;
 
 		console.log("egg dropped");
-		this.egg.drop(this.position);
+		this.egg.drop(this.position, this.speed);
 
 		this.scene.birdEggs.push(this.egg);
 		this.egg = null;
