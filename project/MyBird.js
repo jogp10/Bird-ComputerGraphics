@@ -123,9 +123,9 @@ export class MyBird extends CGFobject {
 		console.log("pos: " + this.position + " ori: " + this.orientation + " speed: " + this.speed);
 
 		//	Bird movement
-		this.wing1.update(t, this.frequency);
-		this.wing2.update(-t,this.frequency);
-		this.tail.update(-t, this.frequency);
+		this.wing1.update(t, this.frequency, this.speed);
+		this.wing2.update(-t,this.frequency,this.speed);
+		this.tail.update(-t, this.frequency,);
 	
     	this.y = this.amplitude * 0.1*Math.sin(t*this.frequency);
   
