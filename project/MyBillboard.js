@@ -10,63 +10,63 @@ import { MyQuad } from "./MyQuad.js";
  * @param stacks - number of stacks
  */
 export class MyBillboard extends CGFobject {
-    constructor(scene, position) {
-        super(scene);
-        this.position = position;
-        this.initBuffers();
-        this.initTextures();
-    }
+  constructor(scene, position) {
+    super(scene);
+    this.position = position;
+    this.initBuffers();
+    this.initTextures();
+  }
 
-    initBuffers() {
-        this.quad = new MyQuad(this.scene);
-    }
+  initBuffers() {
+    this.quad = new MyQuad(this.scene);
+  }
 
-    initTextures() {
-        this.texture = new CGFtexture(this.scene, "images/billboardtree.png");
-        this.material = new CGFappearance(this.scene);
-        this.material.setTexture(this.texture);
-    }
+  initTextures() {
+    this.texture = new CGFtexture(this.scene, "images/billboardtree.png");
+    this.material = new CGFappearance(this.scene);
+    this.material.setTexture(this.texture);
+  }
 
-    display() {
-        this.calculateOrientation();
-        this.scene.pushMatrix();
-            this.scene.rotate(Math.PI, 0, 1, 0);
-            this.scene.translate(this.position[0], this.position[1], this.position[2]);
-            this.material.apply();
-            this.scene.scale(2,5,2);
-            this.quad.display();
-        this.scene.popMatrix();
-    }
+  display() {
+    this.calculateOrientation();
+    this.scene.pushMatrix();
+    this.scene.translate(this.position[0], this.position[1], this.position[2]);
+    this.scene.rotate(this.ang, 0, 1, 0);
+    this.material.apply();
+    this.scene.scale(2, 5, 2);
+    this.quad.display();
+    this.scene.popMatrix();
+  }
 
-    calculateOrientation() {
-        // Always facing the camera
-        var camera = [this.scene.camera.position[0] - this.scene.camera.target[0], this.scene.camera.position[1] - this.scene.camera.target[1], this.scene.camera.position[2] - this.scene.camera.target[2]];
-        vec3.normalize(camera, camera);
-        
-        var normal = [this.quad.normals[0], this.quad.normals[1], this.quad.normals[2]];
-        vec3.normalize(normal, normal);
-        
-        // Calculate the angle between the vectors
-        var ang = Math.acos(vec3.dot(camera, normal));
+  calculateOrientation() {
+    // Calculate the direction from the camera to the quad
+    var cameraDir = vec3.normalize([], vec3.subtract([], this.scene.camera.position, this.position));
+  
+    // Calculate the normal vector of the quad
+    var normal = vec3.normalize([], this.quad.normals.slice(0, 3));
+  
+    // Calculate the angle between the camera direction and the quad normal
+    var angle = Math.atan2(vec3.cross([], cameraDir, normal)[1], vec3.dot(cameraDir, normal));
+  
+    // Store the angle and the rotation axis (which is the y-axis)
+    this.ang = -angle;
+    this.axis = vec3.fromValues(0, 1, 0);
 
-        // Calculate the cross product
-        var cross = [];
-        vec3.cross(cross, camera, normal);
-        vec3.normalize(cross, cross);
+    console.log(this.ang);
 
-        // Rotate the object
-        this.scene.rotate(-ang, 0, cross[1], 0);
-    }
+  }
+  
 
-    updateBuffers(objectComplexity) {
-        this.quad.updateBuffers(objectComplexity);
-    }
 
-    enableNormalViz() {
-        this.quad.enableNormalViz();
-    }
+  updateBuffers(objectComplexity) {
+    this.quad.updateBuffers(objectComplexity);
+  }
 
-    disableNormalViz() {
-        this.quad.disableNormalViz();
-    }
+  enableNormalViz() {
+    this.quad.enableNormalViz();
+  }
+
+  disableNormalViz() {
+    this.quad.disableNormalViz();
+  }
 }

@@ -118,7 +118,7 @@ export class MyBird extends CGFobject {
         // Calculate the new position of the bird
         this.position = [this.position[0] + Math.sin(this.orientation)*(this.speed)*0.1, this.position[1], this.position[2] + Math.cos(this.orientation)*(this.speed)*0.1];
 
-		console.log("pos: " + this.position + " orientation: " + this.orientation + " speed: " + this.speed);
+		//console.log("pos: " + this.position + " orientation: " + this.orientation + " speed: " + this.speed);
 
 		//	Bird movement
 		this.wing1.update(t, this.frequency, this.speed);
