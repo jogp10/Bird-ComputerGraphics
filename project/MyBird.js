@@ -22,7 +22,7 @@ export class MyBird extends CGFobject {
 		this.egg = null;
         this.y = 0; 
         this.amplitude = 1
-		this.frequency = 0.006
+		this.frequency = 1/1000*2*Math.PI
 		
 		this.initTextures();
 		this.initShaders();

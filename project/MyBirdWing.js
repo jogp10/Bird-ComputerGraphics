@@ -8,7 +8,7 @@ export class MyBirdWing extends CGFobject {
         super(scene);
         this.initBuffers();
         this.initTextures();
-       
+        
     }
 
     initBuffers() {
@@ -333,12 +333,17 @@ export class MyBirdWing extends CGFobject {
 
         this.scene.popMatrix();       
     }
-
+    
     update(t, frequency, speed)
     {  
-        this.wing_angle = Math.PI/-6*Math.sin(t*frequency * (1+speed/10));
+        if(speed > 12) speed = 12
+        const sp = 1 + speed/8
+        
+        this.wing_angle = sp*Math.PI/-8*Math.sin(t*frequency);
         this.feather_angle = Math.PI/-10*Math.sin(t*frequency);
+
     }
+      
 
     updateBuffers() {
         this.feathers.forEach(feather => feather.updateBuffers());
@@ -350,3 +355,4 @@ export class MyBirdWing extends CGFobject {
         this.feathers.forEach(feather => feather.disableNormalViz());
     }
 }
+
