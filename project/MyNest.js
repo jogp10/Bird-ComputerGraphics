@@ -45,7 +45,7 @@ export class MyNest extends CGFobject {
     display() {
         this.scene.pushMatrix();
             this.scene.translate(this.position[0], this.position[1], this.position[2]);
-            this.scene.scale(3.5, 3.5, 3.5);
+            this.scene.scale(5, 5, 5);
             this.nestMaterial.apply();
             this.roughnessMap.bind(1);
             this.scene.setActiveShader(this.nestShader);

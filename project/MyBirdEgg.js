@@ -8,6 +8,7 @@ export class MyBirdEgg extends CGFobject {
         this.initBuffers(slices, stacks);
         this.initTextures();
         this.initShaders();
+        this.drop = false;
     }
 
     initBuffers(slices, stacks) {
@@ -23,16 +24,11 @@ export class MyBirdEgg extends CGFobject {
         this.eggShader = new CGFshader(this.scene.gl, "shaders/egg.vert", "shaders/egg.frag");
     }
 
-    display() {
-        this.scene.pushMatrix();
-            this.eggMaterial.apply();
-            this.scene.setActiveShader(this.eggShader);
-            this.scene.scale(0.8, 1.2, 0.8);
-            this.scene.translate(this.position[0], this.position[1], this.position[2]);
-            this.scene.scale(2, 2, 2);
-            this.egg.display();
-            this.scene.setActiveShader(this.scene.defaultShader);
-        this.scene.popMatrix();
+    dropEgg(position, speed) {
+        console.log("start drop");
+        this.drop = true;
+        this.position = position;
+        this.dropSpeed = speed;
     }
 
     updateBuffers(complexity) {
@@ -48,20 +44,29 @@ export class MyBirdEgg extends CGFobject {
         this.egg.disableNormalViz();
     }
 
-    drop(position, speed) {
-        this.drop = true;
-        this.position = position;
-        this.dropSpeed = speed;
-    }
-
     update(t) {
-        if (drop) {
+        if (this.drop) {
+            console.log("drop started");
             this.initDropTime = t;
             this.drop = false;
         }
 
-        if (t - this.initDropTime < 1000) {
+        if (t - this.initDropTime <= 1000) {
+            console.log("drop");
             this.position[1] -= this.dropSpeed;
         }
+    }
+
+    display(scale) {
+        this.scene.pushMatrix();
+            this.eggMaterial.apply();
+            this.scene.translate(this.position[0], this.position[1], this.position[2]);
+            if (scale) this.scene.scale(scale, scale, scale);
+            else {this.scene.scale(2, 2, 2);}
+            this.scene.setActiveShader(this.eggShader);
+            this.scene.scale(0.8, 1.2, 0.8);
+            this.egg.display();
+            this.scene.setActiveShader(this.scene.defaultShader);
+        this.scene.popMatrix();
     }
 }

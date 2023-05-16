@@ -43,7 +43,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 1;
-    this.selectedObject = 2;
+    this.selectedObject = 0;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -68,13 +68,13 @@ export class MyScene extends CGFscene {
     this.wing = new MyBirdWing(this);
     this.foot = new MyBirdFoot(this);
     this.tail = new MyBirdTail(this);
-    this.egg1 = new MyBirdEgg(this, 20, 20, [-80, -45, -20]);
-    this.egg2 = new MyBirdEgg(this, 20, 20, [0, -45, -100]);
-    this.egg3 = new MyBirdEgg(this, 20, 20, [-50, -45, 50]);
-    this.egg4 = new MyBirdEgg(this, 20, 20, [100, -45, 50]);
+    this.egg1 = new MyBirdEgg(this, 20, 20, [-80, -54, -20]);
+    this.egg2 = new MyBirdEgg(this, 20, 20, [0, -54, -100]);
+    this.egg3 = new MyBirdEgg(this, 20, 20, [-50, -54, 50]);
+    this.egg4 = new MyBirdEgg(this, 20, 20, [100, -54, 50]);
     this.feather = new MyBirdFeather(this, [0, 0, 0]);
     this.birdEggs = [this.egg1, this.egg2, this.egg3, this.egg4];
-    this.nest = new MyNest(this, 20, 20, [53, -48, 0]);
+    this.nest = new MyNest(this, 20, 20, [53, -46.8, 0]);
     this.mynest = new MyNest(this, 20, 20, [0, 0, 0]);
     this.billboard = new MyBillboard(this, [0, 0, 0]);
     this.scene = 0;
@@ -157,7 +157,7 @@ export class MyScene extends CGFscene {
   }
 
   updateScaleFactor(){
-    this.objects[this.selectedObject].updateScaleFactor(this.scaleFactor);
+    this.bird.updateScaleFactor(this.scaleFactor);
   }
 
   checkKeys() {
@@ -218,6 +218,7 @@ export class MyScene extends CGFscene {
     this.testBird.update(t);
     this.wing.update(t, 0.006);
     this.tail.update(t, 0.006);
+    for (var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].update(t);
   }
 
   distance(position1, position2) {
@@ -245,7 +246,7 @@ export class MyScene extends CGFscene {
     this.appearance.apply();
 
 
-    this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+    this.scale(3,3,3);
 
     // Draw normals
     if (this.displayNormals) {

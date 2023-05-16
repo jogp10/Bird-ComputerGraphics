@@ -20,7 +20,7 @@ export class MyBird extends CGFobject {
         this.speed = speed;
 		this.hasEgg = false;
 		this.pickUpEgg = false;
-		this.egg = scene.birdEgg;
+		this.egg = null;
         this.y = 0; 
         this.amplitude = 1
 		this.frequency = 1/1000*2*Math.PI
@@ -131,7 +131,7 @@ export class MyBird extends CGFobject {
 		if(animateTime < 990) {
 			this.position[1] -= this.animationSpeed;
 		} else if (animateTime < 2000) {
-			if (animateTime < 1500) this.checkEggColision();
+			if (animateTime < 1200) this.checkEggColision();
 			this.position[1] += this.animationSpeed;
 		}
     }
@@ -178,6 +178,8 @@ export class MyBird extends CGFobject {
 				eggDistance = distance;
 			}
         }
+
+		if (this.hasEgg) {this.egg.position = [0, 0, 0]}
 	}
 
 	dropEgg() {
@@ -187,7 +189,7 @@ export class MyBird extends CGFobject {
 		this.hasEgg = false;
 
 		console.log("egg dropped");
-		this.egg.drop(this.position, this.animationSpeed);
+		this.egg.dropEgg([this.position[0], this.position[1]-1, this.position[2]], this.animationSpeed);
 
 		this.scene.birdEggs.push(this.egg);
 		this.egg = null;
@@ -308,10 +310,8 @@ export class MyBird extends CGFobject {
 
 			if(this.hasEgg) {
 				this.scene.pushMatrix();
-				this.scene.translate(0, -.5, -.48);
-				
-				this.scene.scale(0.2, 0.2, 0.2);
-				this.egg.display();
+				this.scene.translate(0, -.4, -.48);
+				this.egg.display(0.2);
 				this.scene.popMatrix();
 			}
 
