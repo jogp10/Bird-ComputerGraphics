@@ -9,6 +9,8 @@ import { MyBirdEgg } from "./MyBirdEgg.js";
 import { MyBirdFeather } from "./MyBirdFeather.js";
 import { MyNest} from "./MyNest.js";
 import { MyBillboard } from "./MyBillboard.js";
+import { MyTreeGroupPatch } from "./MyTreeGroupPatch.js";
+import { MyTreeRowPatch } from "./MyTreeRowPatch.js";
 
 
 /**
@@ -43,7 +45,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 1;
-    this.selectedObject = 0;
+    this.selectedObject = 11;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -77,13 +79,15 @@ export class MyScene extends CGFscene {
     this.nest = new MyNest(this, 20, 20, [53, -46.8, 0]);
     this.mynest = new MyNest(this, 20, 20, [0, 0, 0]);
     this.billboard = new MyBillboard(this, [0, 0, 0]);
+    this.MyTreeGroupPatch = new MyTreeGroupPatch(this, [0, 0, 0]);
+    this.MyTreeRowPatch = new MyTreeRowPatch(this, [0, 0, 0]);
     this.scene = 0;
    
 
-    this.objects = [this.scene, this.terrain ,this.testBird, this.wing, this.foot ,this.panorama, this.birdEgg, this.feather, this.mynest, this.tail, this.billboard];
+    this.objects = [this.scene, this.terrain ,this.testBird, this.wing, this.foot ,this.panorama, this.birdEgg, this.feather, this.mynest, this.tail, this.billboard, this.MyTreeGroupPatch, this.MyTreeRowPatch];
 
     // Labels and ID's for object selection on MyInterface
-    this.objectIDs = { 'Scene': 0, 'Terrain': 1, 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Feather': 7, 'Nest': 8, 'Tail': 9, 'Billboard': 10};
+    this.objectIDs = { 'Scene': 0, 'Terrain': 1, 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Feather': 7, 'Nest': 8, 'Tail': 9, 'Billboard': 10, 'TreeGroupPatch': 11, 'TreeRowPatch': 12};
   }
 
   // initialize lights
@@ -117,8 +121,8 @@ export class MyScene extends CGFscene {
       5*Math.PI/10,
       0.1,
       1000,
-      vec3.fromValues(-300, -50, -120),
-      vec3.fromValues(0, -50, 0)
+      vec3.fromValues(50,10,15),
+      vec3.fromValues(0,0,0)
     );
   }
 
@@ -340,15 +344,28 @@ export class MyScene extends CGFscene {
       // Billboard
       if(this.selectedObject == 10) {
         this.objects[10].display()
+        this.scale(5,5,5);
       }
       this.popMatrix();
 
       this.pushMatrix();
-      // 
+      // MyTreeGroupPatch
       if(this.selectedObject == 11) {
+        this.scale(5,5,5);
         this.objects[11].display()
       }
       this.popMatrix();
+
+      this.pushMatrix();
+      // MyTreeRowPatch
+      if(this.selectedObject == 12) {
+        this.scale(5,5,5);
+        this.objects[12].display()
+      }
+
+      this.popMatrix();
+
+
 
     
     this.popMatrix();

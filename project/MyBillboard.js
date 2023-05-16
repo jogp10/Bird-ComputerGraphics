@@ -1,14 +1,7 @@
 import { CGFappearance, CGFobject, CGFtexture } from "../lib/CGF.js";
 import { MyQuad } from "./MyQuad.js";
 
-/**
- * MyPanorama
- * @constructor
- * @param scene - Reference to MyScene object
- * @param texture - Path to the texture
- * @param slices - number of slices
- * @param stacks - number of stacks
- */
+
 export class MyBillboard extends CGFobject {
   constructor(scene, position) {
     super(scene);
@@ -22,7 +15,10 @@ export class MyBillboard extends CGFobject {
   }
 
   initTextures() {
-    this.texture = new CGFtexture(this.scene, "images/billboardtree.png");
+    const textures = ["images/billboardtree.png","images/tree_model1.png","images/tree_model2.png","images/tree_model3.png"]
+    
+    this.texture = new CGFtexture(this.scene, textures[Math.floor(Math.random() * 4)]);
+   
     this.material = new CGFappearance(this.scene);
     this.material.setTexture(this.texture);
   }
@@ -52,7 +48,7 @@ export class MyBillboard extends CGFobject {
     this.ang = -angle;
     this.axis = vec3.fromValues(0, 1, 0);
 
-    console.log(this.ang);
+    
 
   }
   
