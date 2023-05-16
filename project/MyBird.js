@@ -62,10 +62,6 @@ export class MyBird extends CGFobject {
 		this.eyeMaterial = new CGFappearance(this.scene);
 		this.eyeMaterial.setTexture(this.eyeTexture);
 		this.eyeMaterial.setTextureWrap('REPEAT', 'REPEAT');
-
-		
-
-
     }
 
 	initShaders() {
@@ -114,7 +110,8 @@ export class MyBird extends CGFobject {
 		if(this.startPickEggAnimation) {
 			console.log("Pick up egg");
 			this.startPickEggAnimation = false;
-			this.initstartPickEggAnimation = t;
+			if (t - this.initstartPickEggAnimation < 2000){}
+			else {this.initstartPickEggAnimation = t;}
 		}
 
         // Calculate the new position of the bird
@@ -130,11 +127,11 @@ export class MyBird extends CGFobject {
     	this.y = this.amplitude * 0.1*Math.sin(t*this.frequency);
 
 		//	Bird picking egg animation
-		if(t - this.initstartPickEggAnimation < 1000) {
+		let animateTime = t - this.initstartPickEggAnimation;
+		if(animateTime < 990) {
 			this.position[1] -= this.animationSpeed;
-		} else if (t - this.initstartPickEggAnimation == 1000) {
-			this.checkEggColision();
-		} else if (t - this.initstartPickEggAnimation < 2000) {
+		} else if (animateTime < 2000) {
+			if (animateTime < 1500) this.checkEggColision();
 			this.position[1] += this.animationSpeed;
 		}
     }
@@ -161,13 +158,15 @@ export class MyBird extends CGFobject {
 	}
 
 	checkEggColision() {
-		let eggDistance = vec3.distance(this.scene.birdEggs[0].position, this.position);
+		console.log("check egg colision");
+		let eggDistance = vec3.distance([this.scene.birdEggs[0].position[0], 0, this.scene.birdEggs[0].position[2]], [this.position[0], 0, this.position[2]]);
 		for (let i = 0; i < this.scene.birdEggs.length; i++) {
             const egg = this.scene.birdEggs[i];
 
             // Check if the egg is at the bird's current position
-            const distance = vec3.distance(egg.position, this.position);
-            if (distance < 1 && distance <= eggDistance) {
+            const distance = vec3.distance([egg.position[0], 0, egg.position[2]], [this.position[0], 0, this.position[2]]);
+			console.log("distance: " + distance);
+            if (distance < 15 && distance <= eggDistance) {
 				console.log("egg picked");
                 // Remove the egg from the scene
                 this.scene.birdEggs.splice(i, 1);
