@@ -108,7 +108,7 @@ export class MyScene extends CGFscene {
       0.1,
       1000,
       vec3.fromValues(50, 10, 150),
-      vec3.fromValues(0, 0, 0)
+      vec3.fromValues(0, -80, 0)
     );
   }
 
@@ -198,7 +198,7 @@ export class MyScene extends CGFscene {
     if (this.gui.isKeyPressed("KeyP")) {
       text+=" P ";
       keysPressed=true;
-      this.bird.pickEgg(5/60);
+      if (!this.bird.hasEgg) this.bird.pickEgg(10/60);
     }
 
     if (this.gui.isKeyPressed("KeyO")) {

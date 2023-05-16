@@ -110,15 +110,15 @@ export class MyBird extends CGFobject {
 
     update(t) {
 		if(this.startPickEggAnimation) {
-			console.log("Start pick up egg animation");
-			this.pickUpEgg = false;
+			console.log("Pick up egg");
+			this.startPickEggAnimation = false;
 			this.initstartPickEggAnimation = t;
 		}
 
         // Calculate the new position of the bird
         this.position = [this.position[0] + Math.sin(this.orientation)*(this.speed)*0.1, this.position[1], this.position[2] + Math.cos(this.orientation)*(this.speed)*0.1];
 
-		//console.log("pos: " + this.position + " orientation: " + this.orientation + " speed: " + this.speed);
+		console.log("pos: " + this.position + " orientation: " + this.orientation + " speed: " + this.speed);
 
 		//	Bird movement
 		this.wing1.update(t, this.frequency, this.speed);
@@ -159,12 +159,13 @@ export class MyBird extends CGFobject {
 	}
 
 	checkEggColision() {
+		let eggDistance = vec3.distance(this.scene.birdEggs[0].position, this.position);
 		for (let i = 0; i < this.scene.birdEggs.length; i++) {
             const egg = this.scene.birdEggs[i];
 
             // Check if the egg is at the bird's current position
             const distance = vec3.distance(egg.position, this.position);
-            if (distance < 1) {
+            if (distance < 1 && distance <= eggDistance) {
 				console.log("egg picked");
                 // Remove the egg from the scene
                 this.scene.birdEggs.splice(i, 1);
@@ -173,9 +174,8 @@ export class MyBird extends CGFobject {
 				this.egg = egg;
 				this.hasEgg = true;
 
-                // Break out of the loop
-                break;
-            }
+				eggDistance = distance;
+			}
         }
 	}
 
@@ -186,7 +186,7 @@ export class MyBird extends CGFobject {
 		this.hasEgg = false;
 
 		console.log("egg dropped");
-		this.egg.drop(this.position, this.speed);
+		this.egg.drop(this.position, this.animationSpeed);
 
 		this.scene.birdEggs.push(this.egg);
 		this.egg = null;
@@ -199,7 +199,7 @@ export class MyBird extends CGFobject {
 			this.scene.translate(0, this.y, 0);
 			this.scene.translate(this.position[0], this.position[1], this.position[2]);
 			this.scene.rotate(this.orientation, 0, 1, 0);
-			this.scene.scale(2.5, 2.5, 2.5);
+			this.scene.scale(7.5, 7.5, 7.5);
 			
 			// Bird Eyes
 			this.scene.pushMatrix();

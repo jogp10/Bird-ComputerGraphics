@@ -29,6 +29,7 @@ export class MyBirdEgg extends CGFobject {
             this.scene.setActiveShader(this.eggShader);
             this.scene.scale(0.8, 1.2, 0.8);
             this.scene.translate(this.position[0], this.position[1], this.position[2]);
+            this.scene.scale(2, 2, 2);
             this.egg.display();
             this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();
@@ -48,6 +49,19 @@ export class MyBirdEgg extends CGFobject {
     }
 
     drop(position, speed) {
-        // TODO
+        this.drop = true;
+        this.position = position;
+        this.dropSpeed = speed;
+    }
+
+    update(t) {
+        if (drop) {
+            this.initDropTime = t;
+            this.drop = false;
+        }
+
+        if (t - this.initDropTime < 1000) {
+            this.position[1] -= this.dropSpeed;
+        }
     }
 }
