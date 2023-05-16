@@ -198,7 +198,7 @@ export class MyScene extends CGFscene {
     if (this.gui.isKeyPressed("KeyP")) {
       text+=" P ";
       keysPressed=true;
-      if (!this.bird.hasEgg) this.bird.pickEgg(10/60);
+      if (!this.bird.hasEgg) this.bird.pickEgg(35/60);
     }
 
     if (this.gui.isKeyPressed("KeyO")) {

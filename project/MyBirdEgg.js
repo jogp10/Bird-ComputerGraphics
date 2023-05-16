@@ -24,11 +24,13 @@ export class MyBirdEgg extends CGFobject {
         this.eggShader = new CGFshader(this.scene.gl, "shaders/egg.vert", "shaders/egg.frag");
     }
 
-    dropEgg(position, speed) {
+    dropEgg(position, speed, birdSpeed, birdOrientation) {
         console.log("start drop");
         this.drop = true;
         this.position = position;
         this.dropSpeed = speed;
+        this.birdSpeed = birdSpeed;
+        this.birdOrientation = birdOrientation;
     }
 
     updateBuffers(complexity) {
@@ -49,11 +51,24 @@ export class MyBirdEgg extends CGFobject {
             console.log("drop started");
             this.initDropTime = t;
             this.drop = false;
+            this.initialX = this.position[0]; // Store the initial x-position
+            this.initialY = this.position[1]; // Store the initial y-position
+            this.initialZ = this.position[2]; // Store the initial z-position
         }
 
         if (t - this.initDropTime <= 1000) {
             console.log("drop");
-            this.position[1] -= this.dropSpeed;
+            const elapsedTime = t - this.initDropTime;
+            const gravity = -9.8; // Acceleration due to gravity
+            const timeInSeconds = elapsedTime / 1000; // Convert milliseconds to seconds
+
+            // Calculate the vertical displacement using the formula: y = y0 - v0t + (1/2)gt^2
+            this.position[1] = this.initialY - (this.dropSpeed * timeInSeconds) + (0.5 * gravity * Math.pow(timeInSeconds, 2));
+            
+            // Calculate the horizontal displacement using the formula: x = x0 + vt
+            this.position[0] = this.initialX + Math.sin(this.birdOrientation) * this.birdSpeed * 3 * timeInSeconds;
+            this.position[2] = this.initialZ + Math.cos(this.birdOrientation) * this.birdSpeed * 3 * timeInSeconds;
+            console.log("egg dropping position: " + this.position);
         }
     }
 

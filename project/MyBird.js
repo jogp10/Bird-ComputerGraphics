@@ -158,7 +158,10 @@ export class MyBird extends CGFobject {
 	}
 
 	checkEggColision() {
+		if (this.hasEgg) return;
+
 		console.log("check egg colision");
+		let eggIndex = -1;
 		let eggDistance = vec3.distance([this.scene.birdEggs[0].position[0], 0, this.scene.birdEggs[0].position[2]], [this.position[0], 0, this.position[2]]);
 		for (let i = 0; i < this.scene.birdEggs.length; i++) {
             const egg = this.scene.birdEggs[i];
@@ -167,11 +170,8 @@ export class MyBird extends CGFobject {
             const distance = vec3.distance([egg.position[0], 0, egg.position[2]], [this.position[0], 0, this.position[2]]);
 			console.log("distance: " + distance);
             if (distance < 15 && distance <= eggDistance) {
-				console.log("egg picked");
-                // Remove the egg from the scene
-                this.scene.birdEggs.splice(i, 1);
-
                 // Store a reference to the egg
+				eggIndex = i;
 				this.egg = egg;
 				this.hasEgg = true;
 
@@ -179,7 +179,13 @@ export class MyBird extends CGFobject {
 			}
         }
 
-		if (this.hasEgg) {this.egg.position = [0, 0, 0]}
+		if (this.hasEgg) {
+			console.log("egg picked");
+
+            // Remove the egg from the scene
+			this.scene.birdEggs.splice(eggIndex, 1);
+			this.egg.position = [0, 0, 0];
+		}
 	}
 
 	dropEgg() {
@@ -189,7 +195,7 @@ export class MyBird extends CGFobject {
 		this.hasEgg = false;
 
 		console.log("egg dropped");
-		this.egg.dropEgg([this.position[0], this.position[1]-1, this.position[2]], this.animationSpeed);
+		this.egg.dropEgg([this.position[0], this.position[1]-1, this.position[2]], 18.6, this.speed, this.orientation);
 
 		this.scene.birdEggs.push(this.egg);
 		this.egg = null;
