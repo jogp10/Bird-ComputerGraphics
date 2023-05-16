@@ -25,7 +25,6 @@ export class MyBirdEgg extends CGFobject {
     }
 
     dropEgg(position, speed, birdSpeed, birdOrientation) {
-        console.log("start drop");
         this.drop = true;
         this.position = position;
         this.dropSpeed = speed;
@@ -48,7 +47,6 @@ export class MyBirdEgg extends CGFobject {
 
     update(t) {
         if (this.drop) {
-            console.log("drop started");
             this.initDropTime = t;
             this.drop = false;
             this.initialX = this.position[0]; // Store the initial x-position
@@ -57,7 +55,6 @@ export class MyBirdEgg extends CGFobject {
         }
 
         if (t - this.initDropTime <= 1000) {
-            console.log("drop");
             const elapsedTime = t - this.initDropTime;
             const gravity = -9.8; // Acceleration due to gravity
             const timeInSeconds = elapsedTime / 1000; // Convert milliseconds to seconds
@@ -68,7 +65,6 @@ export class MyBirdEgg extends CGFobject {
             // Calculate the horizontal displacement using the formula: x = x0 + vt
             this.position[0] = this.initialX + Math.sin(this.birdOrientation) * this.birdSpeed * 3 * timeInSeconds;
             this.position[2] = this.initialZ + Math.cos(this.birdOrientation) * this.birdSpeed * 3 * timeInSeconds;
-            console.log("egg dropping position: " + this.position);
         }
     }
 

@@ -71,12 +71,16 @@ export class MyBirdTail extends CGFobject {
     updateBuffers() {}
 
     enableNormalViz() {
-        this.prism.enableNormalViz()
-        
+        this.prism.enableNormalViz();
+        this.prism2.enableNormalViz();
+        this.prism3.enableNormalViz();
+        this.prism4.enableNormalViz();
     }
     disableNormalViz() {
-        this.prism.disableNormalViz()
-        
+        this.prism.disableNormalViz();
+        this.prism2.disableNormalViz();
+        this.prism3.disableNormalViz();
+        this.prism4.disableNormalViz();
     }
 
     update(t, frequency) {

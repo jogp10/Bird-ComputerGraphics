@@ -1,11 +1,16 @@
 import {CGFobject,CGFappearance,CGFtexture,CGFshader} from "../lib/CGF.js";
 import { MyCylinder } from "./MyCylinder.js";
 import { MySphere } from "./MySphere.js";
+import { MyBirdEgg } from "./MyBirdEgg.js";
 
 export class MyNest extends CGFobject {
     constructor(scene, slices, stacks, position) {
         super(scene);
         this.position = position;
+        this.eggs = [];
+        for (let i = 0; i < 4; i++) {
+            this.eggs.push(new MyBirdEgg(this.scene, 0, 0, 0));
+        }
         this.initBuffers(slices, stacks);
         this.initTextures();
         this.initShaders();
@@ -44,15 +49,33 @@ export class MyNest extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
-            this.scene.translate(this.position[0], this.position[1], this.position[2]);
-            this.scene.scale(5, 5, 5);
-            this.nestMaterial.apply();
-            this.roughnessMap.bind(1);
-            this.scene.setActiveShader(this.nestShader);
-            this.scene.scale(1.25, 0.75, 1.25);
-            this.inside.display();
-            this.outside.display();
-            this.scene.setActiveShader(this.scene.defaultShader);
+            this.scene.pushMatrix();
+                this.scene.translate(this.position[0], this.position[1], this.position[2]);
+                this.scene.scale(5, 5, 5);
+                this.nestMaterial.apply();
+                this.roughnessMap.bind(1);
+                this.scene.setActiveShader(this.nestShader);
+                this.scene.scale(1.25, 0.75, 1.25);
+                this.inside.display();
+                this.outside.display();
+                this.scene.setActiveShader(this.scene.defaultShader);
+            this.scene.popMatrix();
+
+            if (this.eggs[0]) {
+                this.eggs[0].display();
+            }
+
+            if (this.eggs[1]) {
+                this.eggs[1].display();
+            }
+
+            if (this.eggs[2]) {
+                this.eggs[2].display();
+            }
+
+            if (this.eggs[3]) {
+                this.eggs[3].display();
+            }
         this.scene.popMatrix();
     }
 }

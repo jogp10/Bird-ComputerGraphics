@@ -17,8 +17,6 @@ export class MyTreeGroupPatch extends CGFobject{
         this.pos7 = getRandomFloat(-offset,offset);
         this.pos8 = getRandomFloat(-offset,offset);
         this.pos9 = getRandomFloat(-offset,offset);
-        console.log(this.pos1 + " " + this.pos2 + " " + this.pos3 + " " + this.pos4 + " " + this.pos5 + " " + this.pos6 + " " + this.pos7 + " " + this.pos8 + " " + this.pos9)
-
       }
 
     initBuffers(){

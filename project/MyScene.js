@@ -23,7 +23,7 @@ export class MyScene extends CGFscene {
   }
   init(application) {
     super.init(application);
-    
+
     this.initCameras();
     this.initLights();
 
@@ -54,8 +54,7 @@ export class MyScene extends CGFscene {
 		// force initial setup
     this.updateObjectComplexity();
 
-
-		// set the scene update period 
+		// set the scene update period
 		// (to invoke the update() method every y ms or as close as possible to that )
     this.setUpdatePeriod(1000/60);
   }
@@ -82,7 +81,6 @@ export class MyScene extends CGFscene {
     this.MyTreeGroupPatch = new MyTreeGroupPatch(this, [0, 0, 0]);
     this.MyTreeRowPatch = new MyTreeRowPatch(this, [0, 0, 0]);
     this.scene = 0;
-   
 
     this.objects = [this.scene, this.terrain ,this.testBird, this.wing, this.foot ,this.panorama, this.birdEgg, this.feather, this.mynest, this.tail, this.billboard, this.MyTreeGroupPatch, this.MyTreeRowPatch];
 
@@ -103,7 +101,6 @@ export class MyScene extends CGFscene {
     this.lights[1].setAmbient(0.2, 0.4, 0.8, 1.0);
     this.lights[1].enable();
     this.lights[1].update();
-    // change FOV
   }
 
   initCameras() {
@@ -112,22 +109,12 @@ export class MyScene extends CGFscene {
       0.1,
       1000,
       vec3.fromValues(50, 10, 150),
-      vec3.fromValues(0, -80, 0)
+      //vec3.fromValues(0, -80, 0)
+      vec3.fromValues(0, 0, 0)
     );
   }
 
-  sceneCameras() {
-    this.camera = new CGFcamera(
-      5*Math.PI/10,
-      0.1,
-      1000,
-      vec3.fromValues(50,10,15),
-      vec3.fromValues(0,0,0)
-    );
-  }
-
-  hexToRgbA(hex)
-  {
+  hexToRgbA(hex) {
       var ret;
       //either we receive a html/css color or a RGB vector
       if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
@@ -222,6 +209,7 @@ export class MyScene extends CGFscene {
     this.testBird.update(t);
     this.wing.update(t, 0.006);
     this.tail.update(t, 0.006);
+    this.birdEgg.update(t);
     for (var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].update(t);
   }
 
@@ -262,112 +250,101 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
     this.pushMatrix();
-
-      this.pushMatrix();
-        // Scene
-        if(this.selectedObject == 0) {
-          this.panorama.display(); // Panorama
-          this.terrain.display(); // Terrain
-          for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
-            
-          this.bird.display(); // Bird
-          this.translate(0,-2,0);
-          
-          this.nest.display(); // Nest
-        }
-      this.popMatrix();
-    
-      this.pushMatrix();
-        // Terrain
-        if(this.selectedObject == 1) this.objects[1].display();
-      this.popMatrix();
-
-      this.pushMatrix();
-        // Bird
-        if(this.selectedObject == 2) {
-        this.translate(0,0,0);
-          this.scale(5,5,5);
-        this.objects[2].display();
+      if(this.selectedObject == 0) {
+          this.pushMatrix();
+            // Scene
+            this.panorama.display(); // Panorama
+            this.terrain.display(); // Terrain
+            for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
+            this.bird.display(); // Bird
+            this.nest.display(); // Nest
+          this.popMatrix();
       }
-      this.popMatrix();
+    
+      if(this.selectedObject == 1) {
+        this.pushMatrix();
+          // Terrain
+          this.objects[1].display();
+        this.popMatrix();
+      }
 
-      this.pushMatrix();
-        // Wing
-        if(this.selectedObject == 3) {
+      if(this.selectedObject == 2) {
+        this.pushMatrix();
+          // Bird
+          this.objects[2].display();
+        this.popMatrix();
+      }
+
+      if(this.selectedObject == 3) {
+        this.pushMatrix();
+          // Wing
           this.objects[3].display();
-        }
-      this.popMatrix();
+        this.popMatrix();
+      }
 
-      this.pushMatrix();
-        // Foot
-        if(this.selectedObject == 4) {
+      if(this.selectedObject == 4) {
+        this.pushMatrix();
+          // Foot
           this.objects[4].display();
-        }
-      this.popMatrix();
+        this.popMatrix();
+      }
 
-      this.pushMatrix();
-        // Panorama
-        if(this.selectedObject == 5) {
+      if(this.selectedObject == 5) {
+        this.pushMatrix();
+          // Panorama
           this.objects[5].display();
-        }
-      this.popMatrix();
+        this.popMatrix();
+      }
 
-      this.pushMatrix();
-        // Bird Egg
-        if(this.selectedObject == 6) {
+      if(this.selectedObject == 6) {
+        this.pushMatrix();
+          // Bird Egg
           this.objects[6].display();
-        }
       this.popMatrix();
+      }
 
-      this.pushMatrix();
-        // Feather
-        if(this.selectedObject == 7) {
+      if(this.selectedObject == 7) {
+        this.pushMatrix();
+          // Feather
           this.objects[7].display();
-        }
-      this.popMatrix();
+        this.popMatrix();
+      }
 
-      this.pushMatrix();
-        // Nest
-        if(this.selectedObject == 8) {
+      if(this.selectedObject == 8) {
+        this.pushMatrix();
+          // Nest
           this.objects[8].display();
-        }
-      this.popMatrix();
+        this.popMatrix();
+      }
 
-      this.pushMatrix();
-      // Tail
       if(this.selectedObject == 9) {
-        this.objects[9].display()
+        this.pushMatrix();
+          // Tail
+          this.objects[9].display()
+        this.popMatrix();
       }
-      this.popMatrix();
 
-      this.pushMatrix();
-      // Billboard
       if(this.selectedObject == 10) {
-        this.objects[10].display()
-        this.scale(5,5,5);
+        this.pushMatrix();
+          // Billboard
+          this.objects[10].display()
+        this.popMatrix();
       }
-      this.popMatrix();
 
-      this.pushMatrix();
-      // MyTreeGroupPatch
       if(this.selectedObject == 11) {
-        this.scale(5,5,5);
-        this.objects[11].display()
+        this.pushMatrix();
+          // MyTreeGroupPatch
+          this.objects[11].display()
+        this.popMatrix();
       }
-      this.popMatrix();
 
-      this.pushMatrix();
-      // MyTreeRowPatch
       if(this.selectedObject == 12) {
-        this.scale(5,5,5);
-        this.objects[12].display()
+        this.pushMatrix();
+          // MyTreeRowPatch
+          this.objects[12].display()
+        this.popMatrix();
       }
 
-      this.popMatrix();
-
-
-
-    
     this.popMatrix();
 
     // ---- END Primitive drawing section
