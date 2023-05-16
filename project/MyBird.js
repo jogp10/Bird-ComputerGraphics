@@ -6,6 +6,7 @@ import { MyBirdWing } from './MyBirdWing.js';
 import { MyBirdFoot } from './MyBirdFoot.js';
 import { MyCylinder } from './MyCylinder.js';
 import { MyBirdTail } from './MyBirdTail.js';
+import { MyBirdEgg } from './MyBirdEgg.js';
 
 
 export class MyBird extends CGFobject {
@@ -19,7 +20,7 @@ export class MyBird extends CGFobject {
         this.speed = speed;
 		this.hasEgg = false;
 		this.pickUpEgg = false;
-		this.egg = null;
+		this.egg = scene.birdEgg;
         this.y = 0; 
         this.amplitude = 1
 		this.frequency = 1/1000*2*Math.PI
@@ -41,7 +42,8 @@ export class MyBird extends CGFobject {
 		this.foot1 = new MyBirdFoot(this.scene);
 		this.foot2 = new MyBirdFoot(this.scene);
 		this.neck = new MyCylinder(this.scene, 20, 10);
-		this.tail = new MyBirdTail(this.scene)
+		this.tail = new MyBirdTail(this.scene);
+		this.egg = new MyBirdEgg(this.scene, 0, 0, 0);
     }
 
 	initTextures() {
@@ -304,6 +306,15 @@ export class MyBird extends CGFobject {
 			this.scene.rotate(-Math.PI/2, 0, 1, 0);
 			this.tail.display();
 			this.scene.popMatrix();
+
+			if(this.hasEgg) {
+				this.scene.pushMatrix();
+				this.scene.translate(0, -.5, -.48);
+				
+				this.scene.scale(0.2, 0.2, 0.2);
+				this.egg.display();
+				this.scene.popMatrix();
+			}
 
 		this.scene.popMatrix();
 	}
