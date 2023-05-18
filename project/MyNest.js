@@ -50,6 +50,7 @@ export class MyNest extends CGFobject {
     }
 
     addEgg() {
+        
         if (this.numEggs < 4) {
             this.numEggs++;
         }

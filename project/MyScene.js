@@ -45,7 +45,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 1;
-    this.selectedObject = 8;
+    this.selectedObject = 6;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -75,14 +75,15 @@ export class MyScene extends CGFscene {
     this.egg4 = new MyBirdEgg(this, 20, 20, [Math.random() * (30) + (-15), -54, Math.random() * (20) + (-100)]);
     this.feather = new MyBirdFeather(this, [0, 0, 0]);
     this.birdEggs = [this.egg1, this.egg2, this.egg3, this.egg4];
-    this.nest = new MyNest(this, 20, 20, [53, -48, 0]);
+
+    this.nest = new MyNest(this, 20, 20, [53, -51, 20]);
     this.mynest = new MyNest(this, 20, 20, [0, 0, 0]);
     this.billboard = new MyBillboard(this, [0, 0, 0]);
     this.MyTreeGroupPatch = new MyTreeGroupPatch(this, [0, 0, 0]);
     this.MyTreeRowPatch = new MyTreeRowPatch(this, [0, 0, 0]);
     this.scene = 0;
 
-    this.objects = [this.scene, this.terrain ,this.testBird, this.wing, this.foot ,this.panorama, this.birdEgg, this.feather, this.mynest, this.tail, this.billboard, this.MyTreeGroupPatch, this.MyTreeRowPatch];
+    this.objects = [this.scene, this.terrain ,this.testBird,this.wing , this.foot ,this.panorama, , this.feather, this.mynest, this.tail, this.billboard, this.MyTreeGroupPatch, this.MyTreeRowPatch];
 
     // Labels and ID's for object selection on MyInterface
     this.objectIDs = { 'Scene': 0, 'Terrain': 1, 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Feather': 7, 'Nest': 8, 'Tail': 9, 'Billboard': 10, 'TreeGroupPatch': 11, 'TreeRowPatch': 12};
@@ -144,7 +145,7 @@ export class MyScene extends CGFscene {
   }
 
   updateObjectComplexity(){
-    if(this.selectedObject!=0)this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
+    if(this.selectedObject!=0 && this.selectedObject!=6 && this.selectedObject!=3)this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
   }
 
   updateScaleFactor(){
@@ -196,7 +197,7 @@ export class MyScene extends CGFscene {
       text+=" O ";
       keysPressed=true;
       this.bird.dropEgg();
-      this.nest.addEgg();
+      
     }
 
     if (keysPressed)
@@ -207,10 +208,6 @@ export class MyScene extends CGFscene {
   update(t) {
     this.checkKeys();
     this.bird.update(t);
-    this.testBird.update(t);
-    this.wing.update(t, 0.006);
-    this.tail.update(t, 0.006);
-    this.birdEgg.update(t);
     for (var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].update(t);
   }
 
@@ -243,9 +240,9 @@ export class MyScene extends CGFscene {
 
     // Draw normals
     if (this.displayNormals) {
-        if(this.selectedObject!=0)this.objects[this.selectedObject].enableNormalViz();
+        if(this.selectedObject!=0 && this.selectedObject!=6 && this.selectedObject!=3)this.objects[this.selectedObject].enableNormalViz();
     } else {
-        if(this.selectedObject!=0)this.objects[this.selectedObject].disableNormalViz();
+        if(this.selectedObject!=0 && this.selectedObject!=6 && this.selectedObject!=3)this.objects[this.selectedObject].disableNormalViz();
     }
 
 
@@ -280,6 +277,7 @@ export class MyScene extends CGFscene {
       if(this.selectedObject == 3) {
         this.pushMatrix();
           // Wing
+          this.scale(5,5,5)
           this.objects[3].display();
         this.popMatrix();
       }
@@ -287,6 +285,7 @@ export class MyScene extends CGFscene {
       if(this.selectedObject == 4) {
         this.pushMatrix();
           // Foot
+          this.scale(5,5,5)
           this.objects[4].display();
         this.popMatrix();
       }
@@ -301,13 +300,15 @@ export class MyScene extends CGFscene {
       if(this.selectedObject == 6) {
         this.pushMatrix();
           // Bird Egg
-          this.objects[6].display();
+          this.scale(5,5,5)
+          this.birdEgg.display();
       this.popMatrix();
       }
 
       if(this.selectedObject == 7) {
         this.pushMatrix();
           // Feather
+          this.scale(5,5,5)
           this.objects[7].display();
         this.popMatrix();
       }
@@ -322,6 +323,7 @@ export class MyScene extends CGFscene {
       if(this.selectedObject == 9) {
         this.pushMatrix();
           // Tail
+          this.scale(5,5,5)
           this.objects[9].display()
         this.popMatrix();
       }
@@ -329,6 +331,7 @@ export class MyScene extends CGFscene {
       if(this.selectedObject == 10) {
         this.pushMatrix();
           // Billboard
+          this.scale(5,5,5)
           this.objects[10].display()
         this.popMatrix();
       }
@@ -336,6 +339,7 @@ export class MyScene extends CGFscene {
       if(this.selectedObject == 11) {
         this.pushMatrix();
           // MyTreeGroupPatch
+          this.scale(5,5,5)
           this.objects[11].display()
         this.popMatrix();
       }
@@ -343,6 +347,7 @@ export class MyScene extends CGFscene {
       if(this.selectedObject == 12) {
         this.pushMatrix();
           // MyTreeRowPatch
+          this.scale(5,5,5)
           this.objects[12].display()
         this.popMatrix();
       }

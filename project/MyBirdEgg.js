@@ -52,6 +52,8 @@ export class MyBirdEgg extends CGFobject {
             this.initialX = this.position[0]; // Store the initial x-position
             this.initialY = this.position[1]; // Store the initial y-position
             this.initialZ = this.position[2]; // Store the initial z-position
+            this.canAddEgg = true;
+           
         }
 
         if (t - this.initDropTime <= 1000) {
@@ -66,6 +68,11 @@ export class MyBirdEgg extends CGFobject {
             this.position[0] = this.initialX + Math.sin(this.birdOrientation) * this.birdSpeed * 3 * timeInSeconds;
             this.position[2] = this.initialZ + Math.cos(this.birdOrientation) * this.birdSpeed * 3 * timeInSeconds;
         }
+        else if(this.canAddEgg){
+            this.scene.nest.addEgg();
+            this.canAddEgg = false;
+        }
+        
     }
 
     display(scale) {
