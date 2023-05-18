@@ -198,6 +198,7 @@ export class MyBird extends CGFobject {
 
 		this.scene.birdEggs.push(this.egg);
 		this.egg = null;
+		
 	}
 
 	display() {

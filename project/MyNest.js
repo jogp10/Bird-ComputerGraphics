@@ -9,8 +9,10 @@ export class MyNest extends CGFobject {
         this.position = position;
         this.eggs = [];
         for (let i = 0; i < 4; i++) {
-            this.eggs.push(new MyBirdEgg(this.scene, 0, 0, 0));
+            this.eggs.push(new MyBirdEgg(this.scene, 20, 20, [0, 0, 0]));
         }
+        this.numEggs = 0;
+       
         this.initBuffers(slices, stacks);
         this.initTextures();
         this.initShaders();
@@ -47,6 +49,12 @@ export class MyNest extends CGFobject {
         this.outside.updateBuffers(complexity);
     }
 
+    addEgg() {
+        if (this.numEggs < 4) {
+            this.numEggs++;
+        }
+    }
+
     display() {
         this.scene.pushMatrix();
             this.scene.pushMatrix();
@@ -61,21 +69,46 @@ export class MyNest extends CGFobject {
                 this.scene.setActiveShader(this.scene.defaultShader);
             this.scene.popMatrix();
 
-            if (this.eggs[0]) {
-                this.eggs[0].display();
-            }
+            this.scene.pushMatrix()
+            if (this.eggs[0]&& this.numEggs > 0) {
 
-            if (this.eggs[1]) {
-                this.eggs[1].display();
-            }
+                this.scene.translate(this.position[0], this.position[1], this.position[2]);
+                this.scene.scale(1.2,1.2,1.2)
+                this.scene.translate(-2,0,-2)
+                this.eggs[0].display()
+            }           
+            this.scene.popMatrix()
 
-            if (this.eggs[2]) {
+
+            this.scene.pushMatrix()
+            if (this.eggs[1] && this.numEggs > 1) {
+                this.scene.translate(this.position[0], this.position[1], this.position[2]);
+                this.scene.scale(1.2,1.2,1.2)
+                this.scene.translate(2,0,-2)
+                this.eggs[1].display(); 
+            }
+            this.scene.popMatrix()
+    
+
+            this.scene.pushMatrix()
+            if (this.eggs[2] && this.numEggs > 2) {
+                this.scene.translate(this.position[0], this.position[1], this.position[2]);
+                this.scene.scale(1.2,1.2,1.2)
+                this.scene.translate(2,0,2)
                 this.eggs[2].display();
             }
+            this.scene.popMatrix()
 
-            if (this.eggs[3]) {
+
+            this.scene.pushMatrix()
+            if (this.eggs[3] && this.numEggs > 3) {~
+                this.scene.translate(this.position[0], this.position[1], this.position[2]);
+                this.scene.scale(1.2,1.2,1.2)
+                this.scene.translate(-2,0,2)
                 this.eggs[3].display();
             }
+            this.scene.popMatrix()
+
         this.scene.popMatrix();
     }
 }

@@ -45,7 +45,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 1;
-    this.selectedObject = 11;
+    this.selectedObject = 8;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -75,7 +75,7 @@ export class MyScene extends CGFscene {
     this.egg4 = new MyBirdEgg(this, 20, 20, [Math.random() * (30) + (-15), -54, Math.random() * (20) + (-100)]);
     this.feather = new MyBirdFeather(this, [0, 0, 0]);
     this.birdEggs = [this.egg1, this.egg2, this.egg3, this.egg4];
-    this.nest = new MyNest(this, 20, 20, [53, -46.8, 0]);
+    this.nest = new MyNest(this, 20, 20, [53, -48, 0]);
     this.mynest = new MyNest(this, 20, 20, [0, 0, 0]);
     this.billboard = new MyBillboard(this, [0, 0, 0]);
     this.MyTreeGroupPatch = new MyTreeGroupPatch(this, [0, 0, 0]);
@@ -196,6 +196,7 @@ export class MyScene extends CGFscene {
       text+=" O ";
       keysPressed=true;
       this.bird.dropEgg();
+      this.nest.addEgg();
     }
 
     if (keysPressed)
@@ -257,6 +258,7 @@ export class MyScene extends CGFscene {
             this.terrain.display(); // Terrain
             for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
             this.bird.display(); // Bird
+            
             this.nest.display(); // Nest
           this.popMatrix();
       }
