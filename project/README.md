@@ -5,21 +5,25 @@
 ## Project Notes
 
 
-# MyPanorama
+### MyPanorama
 ![Screenshot 1](screenshots/cg-t02g04-proj-1-a.png)
 ![Screenshot 2](screenshots/cg-t02g04-proj-1-b.png)
 
-# MyBird
+### MyBird
 ![Screenshot 2](screenshots/cg-t02g04-proj-2.png)
 
-# Terrain & Bird & Panorama
-![Screenshot 4](screenshots/cg-t02g04-tp5-3-b.png)
+### Terrain & Bird & Panorama
+![Screenshot 4](screenshots/cg-t02g04-proj-3-b.png)
 
-# Eggs & Nest
-![Screenshot 5](screenshots/cg-t02g04-tp5-4.png)
+### Eggs & Nest
+![Screenshot 5](screenshots/cg-t02g04-proj-4.png)
 
-# MyBillboard
-![Screenshot 6](screenshots/cg-t02g04-tp5-5.png)
+### MyBillboard
+![Screenshot 6](screenshots/cg-t02g04-proj-5.png)
 
-# Final Scene
-![Screenshot 7](screenshots/cg-t02g04-tp5-6.png)
+### Final Scene
+![Screenshot 7](screenshots/cg-t02g04-proj-6.png)
+
+## Notes
+
+## Aditional Features
