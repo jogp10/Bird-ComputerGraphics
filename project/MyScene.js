@@ -129,7 +129,7 @@ export class MyScene extends CGFscene {
       2*Math.PI/3,
       0.1,
       1000,
-      vec3.fromValues(70,5,-70),
+      vec3.fromValues(65,10,-70),
       vec3.fromValues(0, 0, 0)
       //vec3.fromValues(0, -30, 0)
     );
