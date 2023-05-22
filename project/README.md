@@ -2,7 +2,7 @@
 
 ## Group T02G04
 
-## Project Notes
+## Project
 
 
 ### MyPanorama
@@ -25,5 +25,8 @@
 ![Screenshot 7](screenshots/cg-t02g04-proj-6.png)
 
 ## Notes
+- Regarding the wing flapping animation, we wanted the animation to be realistic and take into account the oscillation (up and down) of the bird, so instead of increasing the flaping speed, we increased the angle of rotation of the wing depending on the velocity of the bird. This way, 
+the flaping speed still increases because the wing rotates more in the same period of time, but we also get to maintain the relation of the oscilation of the bird going up and down and the wing flapping (both 1 second).
 
 ## Aditional Features
+- We implemented the first althernative of the aditional features: the egg has a parabolic trajectory when the bird drops it to the nest.
