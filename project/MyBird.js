@@ -135,8 +135,14 @@ export class MyBird extends CGFobject {
 		} else if (animateTime < 2000) {
 			if (animateTime < 1200) this.checkEggColision();
 			this.position[1] += this.animationSpeed;
-			this.angle -= Math.PI/30;
-			if (this.angle<-2*Math.PI/10) this.angle = -2*Math.PI/10;
+			if (animateTime < 1500) {
+				this.angle -= Math.PI/30;
+				if (this.angle<-2*Math.PI/10) this.angle = -2*Math.PI/10;
+			}
+			else if (this.angle<=0 && animateTime >= 1800) {
+				this.angle += Math.PI/30;
+				if (this.angle>0) this.angle = 0;
+			}
 		} else {
 			this.angle = 0;
 		}
@@ -208,8 +214,8 @@ export class MyBird extends CGFobject {
 
 			this.scene.translate(0, this.y, 0);
 			this.scene.translate(this.position[0], this.position[1], this.position[2]);
-			this.scene.rotate(this.angle, 1, 0, 0);
 			this.scene.rotate(this.orientation, 0, 1, 0);
+			this.scene.rotate(this.angle, 1, 0, 0);
 			this.scene.scale(7.5, 7.5, 7.5);
 
 			// Bird Eyes
