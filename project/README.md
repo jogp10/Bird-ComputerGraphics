@@ -5,12 +5,21 @@
 ## Project Notes
 
 
-- 
+# MyPanorama
 ![Screenshot 1](screenshots/cg-t02g04-proj-1-a.png)
+![Screenshot 2](screenshots/cg-t02g04-proj-1-b.png)
 
-- In exercise 2 we created a new fragment shader to grayscal the color.
+# MyBird
+![Screenshot 2](screenshots/cg-t02g04-proj-2.png)
 
-![Screenshot 2](screenshots/cg-t02g04-tp5-2.png)
+# Terrain & Bird & Panorama
+![Screenshot 4](screenshots/cg-t02g04-tp5-3-b.png)
 
-- In exercise 3 we created a water effect using an image as a heightmap of the water texture.
-![Screenshot 3](screenshots/cg-t02g04-tp5-3.png)
+# Eggs & Nest
+![Screenshot 5](screenshots/cg-t02g04-tp5-4.png)
+
+# MyBillboard
+![Screenshot 6](screenshots/cg-t02g04-tp5-5.png)
+
+# Final Scene
+![Screenshot 7](screenshots/cg-t02g04-tp5-6.png)
