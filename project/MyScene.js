@@ -47,7 +47,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 1;
-    this.selectedObject = 2;
+    this.selectedObject = 1;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -310,7 +310,9 @@ export class MyScene extends CGFscene {
       if(this.selectedObject == 1) {
         this.pushMatrix();
           // Terrain
+          this.panorama.display();
           this.objects[1].display();
+          this.objects[2].display();
         this.popMatrix();
       }
 
