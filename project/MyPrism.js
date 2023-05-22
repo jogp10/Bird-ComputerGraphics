@@ -38,7 +38,7 @@ export class MyPrism extends CGFobject {
             this.vertices.push(caa, (i + 1) / this.stacks, -saa);
             this.vertices.push(ca, (i + 1) / this.stacks, -sa);
 
-            
+
 
             // triangle normal computed by cross product of two edges
             var normal = [
@@ -79,7 +79,7 @@ export class MyPrism extends CGFobject {
         var sa = Math.sin(ang);
         this.vertices.push(ca, 1, -sa);
         this.normals.push(0, 1, 0);
-  
+
     }
 
     // Generate bottom face vertices
@@ -89,7 +89,7 @@ export class MyPrism extends CGFobject {
         var sa = Math.sin(ang);
         this.vertices.push(ca, 0, -sa);
         this.normals.push(0, -1, 0);
-        
+
 
     }
 
@@ -98,12 +98,12 @@ export class MyPrism extends CGFobject {
     for (var i = 0; i < this.slices - 2; i++) {
         this.indices.push(topStartIndex, topStartIndex + i + 1, topStartIndex + i + 2);
       }
-    
+
 
     // Generate indices for bottom face
     var bottomStartIndex = (this.stacks * this.slices * 4) + this.slices;
     for (var i = 0; i < this.slices - 2; i++) {
-        
+
         this.indices.push(bottomStartIndex, bottomStartIndex + i + 2, bottomStartIndex + i + 1);
       }
 
@@ -132,7 +132,7 @@ export class MyPrism extends CGFobject {
       var sa = Math.sin(ang);
       this.texCoords.push(0.5 + 0.5 * ca, 0.5 - 0.5 * sa);
     }
-    
+
 
 
     this.primitiveType = this.scene.gl.TRIANGLES;

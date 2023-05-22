@@ -18,8 +18,8 @@ export class MyBirdTail extends CGFobject {
         this.prism2 = new MyPrism(this.scene, 3, 4);
         this.prism3 = new MyPrism(this.scene, 3, 4);
         this.prism4 = new MyPrism(this.scene, 3, 4);
-    
-        
+
+
     }
 
     initTextures() {

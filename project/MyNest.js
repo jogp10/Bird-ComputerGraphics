@@ -12,7 +12,7 @@ export class MyNest extends CGFobject {
             this.eggs.push(new MyBirdEgg(this.scene, 20, 20, [0, 0, 0]));
         }
         this.numEggs = 0;
-       
+
         this.initBuffers(slices, stacks);
         this.initTextures();
         this.initShaders();
@@ -50,7 +50,7 @@ export class MyNest extends CGFobject {
     }
 
     addEgg() {
-        
+
         if (this.numEggs < 4) {
             this.numEggs++;
         }
@@ -77,7 +77,7 @@ export class MyNest extends CGFobject {
                 this.scene.scale(1.2,1.2,1.2)
                 this.scene.translate(-2,0,-2)
                 this.eggs[0].display()
-            }           
+            }
             this.scene.popMatrix()
 
 
@@ -89,7 +89,7 @@ export class MyNest extends CGFobject {
                 this.eggs[1].display(); 
             }
             this.scene.popMatrix()
-    
+
 
             this.scene.pushMatrix()
             if (this.eggs[2] && this.numEggs > 2) {

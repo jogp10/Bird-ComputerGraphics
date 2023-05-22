@@ -17,11 +17,11 @@ export class MyBirdFoot extends CGFobject {
         this.cube2 = new MyUnitCubeQuad(this.scene);
         this.cube3 = new MyUnitCubeQuad(this.scene);
         this.cube4 = new MyUnitCubeQuad(this.scene);
-        
+
     }
 
     initTextures() {
-        
+
         this.footTexture = new CGFtexture(this.scene, "images/foot.jpg");
 		this.footMaterial = new CGFappearance(this.scene);
 		this.footMaterial.setTexture(this.footTexture);
@@ -33,7 +33,7 @@ export class MyBirdFoot extends CGFobject {
     display() {
 
         this.scene.pushMatrix();
-     
+
 
             this.scene.pushMatrix();
             this.footMaterial.apply();
@@ -75,7 +75,7 @@ export class MyBirdFoot extends CGFobject {
 
         this.scene.popMatrix();
 
-        
+
     }
 
     updateBuffers() {}
@@ -86,7 +86,7 @@ export class MyBirdFoot extends CGFobject {
         this.cube2.enableNormalViz();
         this.cube3.enableNormalViz();
         this.cube4.enableNormalViz();
-        
+
     }
     disableNormalViz() {
         this.prism.disableNormalViz();

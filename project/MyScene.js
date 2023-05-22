@@ -197,7 +197,7 @@ export class MyScene extends CGFscene {
       text+=" O ";
       keysPressed=true;
       this.bird.dropEgg();
-      
+
     }
 
     if (keysPressed)
@@ -255,11 +255,11 @@ export class MyScene extends CGFscene {
             this.terrain.display(); // Terrain
             for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
             this.bird.display(); // Bird
-            
+
             this.nest.display(); // Nest
           this.popMatrix();
       }
-    
+
       if(this.selectedObject == 1) {
         this.pushMatrix();
           // Terrain

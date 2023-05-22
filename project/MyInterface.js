@@ -13,7 +13,7 @@ export class MyInterface extends CGFinterface {
         // call CGFinterface init
         super.init(application);
         this.initKeys();
-        
+
         // init GUI. For more information on the methods, check:
         // https://github.com/dataarts/dat.gui/blob/master/API.md
         this.gui = new dat.GUI();
@@ -41,7 +41,7 @@ export class MyInterface extends CGFinterface {
 
         // disable the processKeyboard function
         this.processKeyboard=function(){};
-        
+
         // create a named array to store which keys are being pressed
         this.activeKeys={};
     }

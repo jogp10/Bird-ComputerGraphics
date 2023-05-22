@@ -8,7 +8,7 @@ export class MyBirdWing extends CGFobject {
         super(scene);
         this.initBuffers();
         this.initTextures();
-        
+
     }
 
     initBuffers() {
@@ -22,11 +22,10 @@ export class MyBirdWing extends CGFobject {
         for (var i=0;i<25; i++) {
             this.feathers.push(new MyBirdFeather(this.scene));
         }
-    
+
     }
 
     initTextures() {
-        
 		this.wingTexture = new CGFtexture(this.scene, "images/wing.jpg");
 		this.wingMaterial = new CGFappearance(this.scene);
 		this.wingMaterial.setTexture(this.wingTexture);
@@ -40,13 +39,13 @@ export class MyBirdWing extends CGFobject {
     }
 
     display() {
-       
+
         this.scene.pushMatrix();
-       
-            
+
+
             this.scene.rotate(this.wing_angle,0,0,1);
             this.scene.translate(-.15-0.7,0 , 0);
-            
+
             this.scene.pushMatrix();
             this.wingMaterial.apply();
             this.scene.translate(-.15, -.05, 0);
@@ -71,18 +70,17 @@ export class MyBirdWing extends CGFobject {
             this.prism2.display();
             this.scene.popMatrix();
 
-           
 
-        
+
             this.scene.pushMatrix();
 
                 this.scene.translate(-.55 , 0 , 0);
                 this.scene.rotate(this.feather_angle,0,0,1);
                 this.scene.translate(.55, 0 , 0);
-                
-                
+
+
                 var i = 0
-              
+
                 this.scene.pushMatrix();
                 this.featherMaterial.apply();
                 this.scene.translate(-1.1, 0.00, .85);
@@ -107,8 +105,8 @@ export class MyBirdWing extends CGFobject {
                 this.feathers[i].display()
                 i++
                 this.scene.popMatrix();
-           
-          
+
+
                 this.scene.pushMatrix();
                 this.featherMaterial.apply();
                 this.scene.translate(-1.35,0,.60);
@@ -123,7 +121,7 @@ export class MyBirdWing extends CGFobject {
                 this.scene.translate(-1 , 0 , 0);
                 this.scene.rotate(this.feather_angle,0,0,1);
                 this.scene.translate(1, 0 , 0);
-                
+
                 this.scene.pushMatrix();
                 this.featherMaterial.apply();
                 this.scene.translate(-1.45,0,.45);
@@ -215,7 +213,7 @@ export class MyBirdWing extends CGFobject {
             this.feathers[i].display()
             i++
             this.scene.popMatrix();
-                
+
 
             this.scene.pushMatrix();
             this.featherMaterial.apply();
@@ -244,7 +242,6 @@ export class MyBirdWing extends CGFobject {
             i++
             this.scene.popMatrix();
 
-           
 
             this.scene.pushMatrix();
             this.featherMaterial.apply();
@@ -264,7 +261,6 @@ export class MyBirdWing extends CGFobject {
             i
             this.scene.popMatrix();
 
-            
 
             this.scene.pushMatrix();
             this.featherMaterial.apply();
@@ -320,7 +316,7 @@ export class MyBirdWing extends CGFobject {
             i++
             this.scene.popMatrix();
 
-            
+
             this.scene.pushMatrix();
             this.featherMaterial.apply();
             this.scene.translate(.6,0,-.56);
@@ -329,21 +325,21 @@ export class MyBirdWing extends CGFobject {
             this.feathers[i].display()
             i++
             this.scene.popMatrix();
-            
 
-        this.scene.popMatrix();       
+
+        this.scene.popMatrix();
     }
-    
+
     update(t, frequency, speed)
-    {  
+    {
         if(speed > 12) speed = 12
         const sp = 1 + speed/8
-        
+
         this.wing_angle = sp*Math.PI/-8*Math.sin(t*frequency);
         this.feather_angle = Math.PI/-10*Math.sin(t*frequency);
 
     }
-      
+
 
     updateBuffers() {
         this.feathers.forEach(feather => feather.updateBuffers());

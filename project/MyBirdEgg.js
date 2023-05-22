@@ -53,7 +53,7 @@ export class MyBirdEgg extends CGFobject {
             this.initialY = this.position[1]; // Store the initial y-position
             this.initialZ = this.position[2]; // Store the initial z-position
             this.canAddEgg = true;
-           
+
         }
 
         if (t - this.initDropTime <= 1000) {
@@ -63,7 +63,7 @@ export class MyBirdEgg extends CGFobject {
 
             // Calculate the vertical displacement using the formula: y = y0 - v0t + (1/2)gt^2
             this.position[1] = this.initialY - (this.dropSpeed * timeInSeconds) + (0.5 * gravity * Math.pow(timeInSeconds, 2));
-            
+
             // Calculate the horizontal displacement using the formula: x = x0 + vt
             this.position[0] = this.initialX + Math.sin(this.birdOrientation) * this.birdSpeed * 3 * timeInSeconds;
             this.position[2] = this.initialZ + Math.cos(this.birdOrientation) * this.birdSpeed * 3 * timeInSeconds;
@@ -72,7 +72,7 @@ export class MyBirdEgg extends CGFobject {
             this.scene.nest.addEgg();
             this.canAddEgg = false;
         }
-        
+
     }
 
     display(scale) {

@@ -9,7 +9,7 @@ export class MyParallelogram extends CGFobject {
 		super(scene);
 		this.initBuffers();
 	}
-	
+
 	initBuffers() {
 		this.vertices = [
 			0, 0, 0,	//0

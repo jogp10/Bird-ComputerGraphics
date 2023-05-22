@@ -11,10 +11,10 @@ export class MySphere extends CGFobject {
     super(scene);
     this.slices = slices;
     this.stacks = stacks;
-    
+
     if (inverted) this.inverted = -1;
     else this.inverted = 1;
-    
+
     if (half) this.half = 1;
     else this.half = 0;
 
@@ -46,8 +46,8 @@ export class MySphere extends CGFobject {
 
         for (var j = 0; j < wide + 1; j++) {
             // All vertices have to be declared for a given face
-            // even if they are shared with others, as the normals 
-            // in each face will be different            
+            // even if they are shared with others, as the normals
+            // in each face will be different
             var sa = Math.sin(ang);
             var ca = Math.cos(ang);
             var x = sr * ca;
@@ -75,7 +75,7 @@ export class MySphere extends CGFobject {
                 this.inverted * y,
                 this.inverted * z
             ];
-            
+
             // normalization
             var nsize = Math.sqrt(
                 normal[0] * normal[0] +

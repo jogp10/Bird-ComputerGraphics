@@ -11,13 +11,13 @@ export class MyBirdFeather extends CGFobject {
     initBuffers() {
         this.prism = new MyPrism(this.scene, 4, 4);
         this.prism2 = new MyPrism(this.scene, 3, 4);
-    
+
     }
 
     initTextures() {
         this.materials = [];
     }
-        
+
     display() {
         this.scene.pushMatrix();
             this.scene.pushMatrix();

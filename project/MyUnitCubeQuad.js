@@ -8,15 +8,15 @@ import {MyQuad} from './MyQuad.js';
  */
 export class MyUnitCubeQuad extends CGFobject {
 
-    constructor(scene) {	
+    constructor(scene) {
         super(scene);
         this.initBuffers();
-  
+
         this.initTextures();
     }
 
     initTextures() {
-     
+
     }
 
 
@@ -40,7 +40,7 @@ export class MyUnitCubeQuad extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(0,0,0.5);
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
-       
+
         this.front.display();
         this.scene.popMatrix();
 
@@ -51,7 +51,7 @@ export class MyUnitCubeQuad extends CGFobject {
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         this.back.display();
         this.scene.popMatrix();
-    
+
         // Left square
         this.scene.pushMatrix();
         this.scene.translate(-0.5,0,0);
@@ -87,13 +87,13 @@ export class MyUnitCubeQuad extends CGFobject {
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         this.bottom.display();
         this.scene.popMatrix();
-        
+
         this.scene.popMatrix();
     }
 
     updateBuffers() {
 
-      
+
     }
 
 	/**

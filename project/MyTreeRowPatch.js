@@ -49,7 +49,7 @@ export class MyTreeRowPatch extends CGFobject{
         this.scene.scale(1, 1, 1)
         this.tree2.display()
         this.scene.popMatrix()
-  
+
         this.scene.pushMatrix()
         this.scene.translate(i*2 + this.pos3, 0, this.pos3)
         this.scene.scale(1, 1, 1)
@@ -92,8 +92,8 @@ export class MyTreeRowPatch extends CGFobject{
         this.tree9.display()
         this.scene.popMatrix()
 
-  
-  
+
+
       this.scene.popMatrix();
     }
 
@@ -109,7 +109,7 @@ export class MyTreeRowPatch extends CGFobject{
         this.tree7.enableNormalViz()
         this.tree8.enableNormalViz()
         this.tree9.enableNormalViz()
-        
+
     }
     disableNormalViz() {
         this.tree1.disableNormalViz()
@@ -121,14 +121,13 @@ export class MyTreeRowPatch extends CGFobject{
         this.tree7.disableNormalViz()
         this.tree8.disableNormalViz()
         this.tree9.disableNormalViz()
-        
-        
+
     }
 
 }
 
 function getRandomFloat(min, max) {
     const str = (Math.random() * (max - min) + min);
-  
+
     return parseFloat(str);
   }

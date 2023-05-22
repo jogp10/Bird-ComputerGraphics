@@ -30,9 +30,9 @@ export class MyTreeGroupPatch extends CGFobject{
       this.tree8 = new MyBillboard(this.scene, [0, 0, 0]);
       this.tree9 = new MyBillboard(this.scene, [0, 0, 0]);
 
-  
+
     }
-    
+
     initTextures(){
     }
     display() {
@@ -50,7 +50,7 @@ export class MyTreeGroupPatch extends CGFobject{
         this.scene.scale(1, 1, 1)
         this.tree2.display()
         this.scene.popMatrix()
-  
+
         this.scene.pushMatrix()
         this.scene.translate(i*2 + this.pos3, 0, 0 + this.pos3/2)
         this.scene.scale(1, 1, 1)
@@ -93,8 +93,8 @@ export class MyTreeGroupPatch extends CGFobject{
         this.tree9.display()
         this.scene.popMatrix()
 
-  
-  
+
+
       this.scene.popMatrix();
     }
     updateBuffers() {}
@@ -109,7 +109,7 @@ export class MyTreeGroupPatch extends CGFobject{
         this.tree7.enableNormalViz()
         this.tree8.enableNormalViz()
         this.tree9.enableNormalViz()
-        
+
     }
     disableNormalViz() {
         this.tree1.disableNormalViz()
@@ -121,8 +121,7 @@ export class MyTreeGroupPatch extends CGFobject{
         this.tree7.disableNormalViz()
         this.tree8.disableNormalViz()
         this.tree9.disableNormalViz()
-        
-        
+
     }
 }
 

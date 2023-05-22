@@ -30,7 +30,7 @@ export class MyCylinder extends CGFobject {
             // All vertices have to be declared for a given face
             // even if they are shared with others, as the normals 
             // in each face will be different
-            
+
             var sa = Math.sin(ang);
             var saa = Math.sin(ang + alphaAng);
             var ca = Math.cos(ang);

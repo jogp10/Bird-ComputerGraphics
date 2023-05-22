@@ -25,7 +25,7 @@ export class MyBird extends CGFobject {
 		this.angle = 0;
         this.amplitude = 1;
 		this.frequency = 1/1000*2*Math.PI;
-		
+
 		this.initTextures();
 		this.initShaders();
     }
@@ -89,7 +89,7 @@ export class MyBird extends CGFobject {
     }
     disableNormalViz() {
 		this.triangle.disableNormalViz();
-		this.eye1.disableNormalViz();	
+		this.eye1.disableNormalViz();
 		this.eye2.disableNormalViz();
 		this.beak1.disableNormalViz();
 		this.beak2.disableNormalViz();
@@ -101,8 +101,8 @@ export class MyBird extends CGFobject {
 		this.foot2.disableNormalViz();
 		this.neck.disableNormalViz();
 		this.tail.disableNormalViz();
-		
-		
+
+
 	}
     updateBuffers(complexity) {
     }
@@ -123,7 +123,7 @@ export class MyBird extends CGFobject {
 		this.wing1.update(t, this.frequency, this.speed);
 		this.wing2.update(-t,this.frequency, this.speed);
 		this.tail.update(-t, this.frequency);
-	
+
     	this.y = this.amplitude * 0.1*Math.sin(t*this.frequency);
 
 		//	Bird picking egg animation
@@ -198,20 +198,20 @@ export class MyBird extends CGFobject {
 
 		this.scene.birdEggs.push(this.egg);
 		this.egg = null;
-		
-		
+
+
 	}
 
 	display() {
 		this.scene.pushMatrix();
 
-			
+
 			this.scene.translate(0, this.y, 0);
 			this.scene.translate(this.position[0], this.position[1], this.position[2]);
 			this.scene.rotate(this.angle, 1, 0, 0);
 			this.scene.rotate(this.orientation, 0, 1, 0);
 			this.scene.scale(7.5, 7.5, 7.5);
-			
+
 			// Bird Eyes
 			this.scene.pushMatrix();
 			this.eyeMaterial.apply();
@@ -225,7 +225,7 @@ export class MyBird extends CGFobject {
 			this.scene.translate(-0.13, 0.23, 0.15);
 			this.scene.scale(0.03, 0.03, 0.03);
 			this.scene.rotate(1*Math.PI/4, 0, 1, 0);
-		
+
 			this.eye2.display();
 			this.scene.popMatrix();
 
@@ -290,10 +290,10 @@ export class MyBird extends CGFobject {
 			this.wing2.display();
 			this.scene.popMatrix();
 
-			
-		
+
+
 			// Bird Feet
-			this.scene.pushMatrix();	
+			this.scene.pushMatrix();
 			this.scene.translate(.1, -0.3, -.5);
 			this.scene.scale(0.2, 0.2, 0.2);
 			this.scene.rotate(-Math.PI/2, 0, 1, 0);
@@ -309,7 +309,7 @@ export class MyBird extends CGFobject {
 
 			// Bird Tail
 			this.scene.pushMatrix();
-			this.bodyMaterial.apply();	
+			this.bodyMaterial.apply();
 			this.scene.translate(0, 0, -1.1);
 			this.scene.scale(0.2, 0.2, 0.2);
 			this.scene.rotate(-Math.PI/2, 0, 1, 0);
