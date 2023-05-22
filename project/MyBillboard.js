@@ -3,11 +3,12 @@ import { MyQuad } from "./MyQuad.js";
 
 
 export class MyBillboard extends CGFobject {
-  constructor(scene, position) {
+  constructor(scene, position, angle_scene) {
     super(scene);
     this.position = position;
     this.initBuffers();
     this.initTextures();
+    this.angle_scene = angle_scene;
   }
 
   initBuffers() {
@@ -15,9 +16,9 @@ export class MyBillboard extends CGFobject {
   }
 
   initTextures() {
-    const textures = ["images/billboardtree.png","images/tree_model1.png","images/tree_model2.png","images/tree_model3.png"]
-
-    this.texture = new CGFtexture(this.scene, textures[Math.floor(Math.random() * 4)]);
+    const textures = ["images/billboardtree.png","images/tree_model1.png","images/tree_model2.png", "images/tree_model3.png"]
+    const random = Math.floor(Math.random() * textures.length)
+    this.texture = new CGFtexture(this.scene, textures[random]);
 
     this.material = new CGFappearance(this.scene);
     this.material.setTexture(this.texture);
@@ -26,9 +27,10 @@ export class MyBillboard extends CGFobject {
   display() {
     this.calculateOrientation();
     this.scene.pushMatrix();
+    this.scene.translate(this.position[0], this.position[1], this.position[2]);
     this.scene.scale(2, 5, 2);
-    this.scene.translate(this.position[0], this.position[1]+.5, this.position[2]);
-    this.scene.rotate(this.ang, 0, 1, 0);
+    this.scene.translate(0, 0.5,0);
+    this.scene.rotate(this.ang-this.angle_scene, 0, 1, 0);
     this.material.apply();
     
     this.quad.display();

@@ -27,7 +27,7 @@ export class MyTreeGroupPatch extends CGFobject{
     initBuffers(){
       this.tree = []
         for(let i = 0; i < 9; i++){
-            this.tree[i] = new MyBillboard(this.scene, [0,0,0])
+            this.tree[i] = new MyBillboard(this.scene, [0,0,0],0)
         }
 
 
@@ -36,21 +36,23 @@ export class MyTreeGroupPatch extends CGFobject{
     initTextures(){
     }
     display() {
-    
+      
       this.scene.pushMatrix();
-       
+
+        this.scene.translate(this.position[0],this.position[1],this.position[2])
+        this.scene.scale(3,3,3)
+
         for(let i = 0; i < 9; i++){
           this.scene.pushMatrix()
-          console.log(this.pos[i])
 
-          this.scene.translate(this.position[0] + 4.5*(i%3) + this.pos[i], this.position[1] + 0, this.position[2] + 4.5*(i/3) + this.pos[i]/2)
           this.scene.scale(this.scale[i],this.scale[i], this.scale[i])
+          this.scene.translate(4.5*(i%3) + this.pos[i], 0,4.5*(i/3) + this.pos[i]/2)
           this.tree[i].display()
 
           this.scene.popMatrix()
         }
 
-        this.scene.scale(5,5,5)
+        
       
 
       this.scene.popMatrix();

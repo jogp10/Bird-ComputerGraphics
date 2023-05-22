@@ -72,7 +72,7 @@ export class MyScene extends CGFscene {
     this.foot = new MyBirdFoot(this);
     this.tail = new MyBirdTail(this);
     this.egg1 = new MyBirdEgg(this, 20, 20, [Math.random() * (50) + 50, -54, Math.random() * (100) + (-40)]);
-    this.egg2 = new MyBirdEgg(this, 20, 20, [Math.random() * (50) + 50, -54, Math.random() * (100) + (-40)]);
+    this.egg2 = new MyBirdEgg(this, 20, 20, [Math.random() * (50) + 40,-52, Math.random() * (100) + (-40)]);
     this.egg3 = new MyBirdEgg(this, 20, 20, [Math.random() * (40) + (-100), -54, Math.random() * (40) + (-20)]);
     this.egg4 = new MyBirdEgg(this, 20, 20, [Math.random() * (30) + (-15), -54, Math.random() * (20) + (-100)]);
     this.feather = new MyBirdFeather(this, [0, 0, 0]);
@@ -80,14 +80,19 @@ export class MyScene extends CGFscene {
 
     this.nest = new MyNest(this, 20, 20, [53, -51, 20]);
     this.mynest = new MyNest(this, 20, 20, [0, 0, 0]);
-    this.billboard = new MyBillboard(this, [0, 0, 0]);
+    this.billboard = new MyBillboard(this, [0, 0, 0], 0);
     this.MyTreeGroupPatch = new MyTreeGroupPatch(this, [0, 0, 0]);
-    this.MyTreeRowPatch = new MyTreeRowPatch(this, [0, 0, 0]);
+    this.MyTreeRowPatch = new MyTreeRowPatch(this, [0, 0, 0],0);
     this.groupTrees = [];
     this.rowTrees = [];
-    for(let i = 0; i < 3; i++){
-      this.groupTrees[i] = new MyTreeGroupPatch(this, [53, -51, 20]);
-      this.rowTrees[i] = new MyTreeRowPatch(this, [0, 0, 0]);
+    this.groupTreePositions = [[80,-55,-30], [60,-55,30]]
+    this.rowTreePositions = [[-50,-55,-70], [-90,-55,25]]
+    this.rowTreeAngles = [Math.PI/6,Math.PI/4]
+
+    
+    for(let i = 0; i < 2; i++){
+      this.groupTrees[i] = new MyTreeGroupPatch(this, this.groupTreePositions[i]);
+      this.rowTrees[i] = new MyTreeRowPatch(this, this.rowTreePositions[i], this.rowTreeAngles[i]);
     }
     this.scene = 0;
 
@@ -117,8 +122,8 @@ export class MyScene extends CGFscene {
       2*Math.PI/3,
       0.1,
       1000,
-      vec3.fromValues(-55, -5, -65),
-      vec3.fromValues(0, -20, 0)
+      vec3.fromValues(50,10,15),
+      vec3.fromValues(0, 0, 0)
       //vec3.fromValues(0, 0, 0)
     );
   }
@@ -262,16 +267,27 @@ export class MyScene extends CGFscene {
             this.panorama.display(); // Panorama
             this.water.display(); // Water
             this.terrain.display(); // Terrain
-            for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
+            for(var i = 0; i < this.birdEggs.length; i++){
+              this.pushMatrix();
+      
+              this.birdEggs[i].display(); // Eggs
+              this.popMatrix();
+            }
             this.bird.display(); // Bird
-            for(var i = 0; i < this.groupTrees.length; i++) {
+            
+            for(var i = 0; i < this.groupTreePositions.length; i++) {
+              this.pushMatrix();
 
               this.groupTrees[i].display();
-
+         
+              this.popMatrix();
             } // Trees
-            for(var i = 0; i < this.rowTrees.length; i++) {
-    
+            for(var i = 0; i < this.rowTreePositions.length; i++) {
+              this.pushMatrix();
+              this.rotate(this.rowTreeAngles[i], 0, 1, 0);
               this.rowTrees[i].display();
+    
+              this.popMatrix();
             } // Trees
 
             this.nest.display(); // Nest

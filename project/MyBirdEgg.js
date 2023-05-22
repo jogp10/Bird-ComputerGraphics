@@ -50,8 +50,8 @@ export class MyBirdEgg extends CGFobject {
         final_position[2] = position[2] + Math.cos(birdOrientation) * birdSpeed * 3 *  dropTime;
 
         const distance = this.scene.distance(nestPosition, final_position);
-        console.log("nestPosition: " + nestPosition + " initial_position: " + position + " final_position: " + final_position);
-        console.log("distance: " + distance);
+        //console.log("nestPosition: " + nestPosition + " initial_position: " + position + " final_position: " + final_position);
+        //console.log("distance: " + distance);
         if (distance <= nestRadius) {
             return true;
         }

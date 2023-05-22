@@ -2,9 +2,10 @@ import { CGFappearance, CGFobject, CGFtexture } from "../lib/CGF.js";
 import { MyBillboard } from "./MyBillboard.js";
 
 export class MyTreeRowPatch extends CGFobject{
-    constructor(scene, position) {
+    constructor(scene, position, angle_scene) {
         super(scene);
         this.position = position;
+        this.angle_scene = angle_scene;
         this.initBuffers();
         this.initTextures();
         this.initVariables();
@@ -13,7 +14,7 @@ export class MyTreeRowPatch extends CGFobject{
     initBuffers(){
         this.tree = []
         for(let i = 0; i < 6; i++){
-            this.tree[i] = new MyBillboard(this.scene, [0,0,0])
+            this.tree[i] = new MyBillboard(this.scene, [0,0,0], this.angle_scene)
         }
 
     }
@@ -50,19 +51,20 @@ export class MyTreeRowPatch extends CGFobject{
       
         
     this.scene.pushMatrix();
-    this.scene.scale(5,5,5)
+        this.scene.translate(this.position[0],this.position[1],this.position[2])
+        this.scene.scale(3,3,3)
         for(let i = 0; i < 6; i++){
             this.scene.pushMatrix()
 
            
-            this.scene.scale(this.scale[i], this.scale[i], this.scale[i])
-            this.scene.translate(4*i + this.pos[i], 0, this.z_pos[i])
+            this.scene.scale(this.scale[i],this.scale[i], this.scale[i])
+            this.scene.translate(4*i + this.pos[i],0,this.z_pos[i])
             this.tree[i].display()
 
 
             this.scene.popMatrix()
         }
-
+        
       this.scene.popMatrix();
     }
 
