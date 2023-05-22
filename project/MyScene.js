@@ -1,4 +1,4 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFappearance} from "../lib/CGF.js";
+import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture} from "../lib/CGF.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyTerrain } from "./MyTerrain.js";
 import { MyBird } from "./MyBird.js";
@@ -12,6 +12,7 @@ import { MyBillboard } from "./MyBillboard.js";
 import { MyTreeGroupPatch } from "./MyTreeGroupPatch.js";
 import { MyTreeRowPatch } from "./MyTreeRowPatch.js";
 import { MyWater } from "./MyWater.js";
+import { MySphere } from "./MySphere.js";
 
 
 /**
@@ -46,7 +47,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 1;
-    this.selectedObject = 0;
+    this.selectedObject = 14;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -63,6 +64,7 @@ export class MyScene extends CGFscene {
   // initialize objects
   initObjects() {
     this.terrain = new MyTerrain(this,30);
+    this.earth = new MySphere(this, 30, 30);
     this.water = new MyWater(this, 30);
     this.panorama = new MyPanorama(this, 'images/panorama.jpg', 50, 50);
     this.birdEgg = new MyBirdEgg(this, 20, 20, [0, 0, 0]);
@@ -89,6 +91,11 @@ export class MyScene extends CGFscene {
     this.rowTreePositions = [[-50,-55,-70], [-90,-55,25]]
     this.rowTreeAngles = [Math.PI/6,Math.PI/4]
 
+    this.textureEarth = new CGFtexture(this, "images/earth.jpg");
+    this.materialEarth = new CGFappearance(this);
+    this.materialEarth.setTexture(this.textureEarth);
+    this.materialEarth.setTextureWrap('REPEAT', 'REPEAT');
+
 
     for(let i = 0; i < 2; i++){
       this.groupTrees[i] = new MyTreeGroupPatch(this, this.groupTreePositions[i]);
@@ -96,10 +103,10 @@ export class MyScene extends CGFscene {
     }
     this.scene = 0;
 
-    this.objects = [this.scene, this.terrain ,this.testBird,this.wing , this.foot ,this.panorama, , this.feather, this.mynest, this.tail, this.billboard, this.MyTreeGroupPatch, this.MyTreeRowPatch];
+    this.objects = [this.scene, this.terrain ,this.testBird,this.wing , this.foot ,this.panorama, , this.feather, this.mynest, this.tail, this.billboard, this.MyTreeGroupPatch, this.MyTreeRowPatch, this.water, this.earth];
 
     // Labels and ID's for object selection on MyInterface
-    this.objectIDs = { 'Scene': 0, 'Terrain': 1, 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Feather': 7, 'Nest': 8, 'Tail': 9, 'Billboard': 10, 'TreeGroupPatch': 11, 'TreeRowPatch': 12};
+    this.objectIDs = { 'Scene': 0, 'Terrain': 1, 'Bird': 2, 'Wing': 3, 'Foot': 4, 'Panorama' : 5, 'Egg': 6, 'Feather': 7, 'Nest': 8, 'Tail': 9, 'Billboard': 10, 'TreeGroupPatch': 11, 'TreeRowPatch': 12, 'Water': 13, 'Earth': 14};
   }
 
   // initialize lights
@@ -122,9 +129,9 @@ export class MyScene extends CGFscene {
       2*Math.PI/3,
       0.1,
       1000,
-      vec3.fromValues(70,-5,-70),
-      //vec3.fromValues(0, 0, 0)
-      vec3.fromValues(0, -30, 0)
+      vec3.fromValues(70,5,-70),
+      vec3.fromValues(0, 0, 0)
+      //vec3.fromValues(0, -30, 0)
     );
   }
 
@@ -269,24 +276,24 @@ export class MyScene extends CGFscene {
             this.terrain.display(); // Terrain
             for(var i = 0; i < this.birdEggs.length; i++){
               this.pushMatrix();
-      
+
               this.birdEggs[i].display(); // Eggs
               this.popMatrix();
             }
             this.bird.display(); // Bird
-            
+
             for(var i = 0; i < this.groupTreePositions.length; i++) {
               this.pushMatrix();
 
               this.groupTrees[i].display();
-         
+
               this.popMatrix();
             } // Trees
             for(var i = 0; i < this.rowTreePositions.length; i++) {
               this.pushMatrix();
               this.rotate(this.rowTreeAngles[i], 0, 1, 0);
               this.rowTrees[i].display();
-    
+
               this.popMatrix();
             } // Trees
 
@@ -383,6 +390,23 @@ export class MyScene extends CGFscene {
           // MyTreeRowPatch
           this.scale(5,5,5)
           this.objects[12].display()
+        this.popMatrix();
+      }
+
+      if(this.selectedObject == 13) {
+        this.pushMatrix();
+          // Water
+          this.objects[13].display()
+        this.popMatrix();
+      }
+
+      if(this.selectedObject == 14) {
+        this.pushMatrix();
+          // Earth
+          this.materialEarth.apply();
+          this.rotate(Math.PI, 0, 1, 0);
+          this.scale(50, 50, 50)
+          this.objects[14].display()
         this.popMatrix();
       }
 
