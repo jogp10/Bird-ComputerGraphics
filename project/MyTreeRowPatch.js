@@ -49,7 +49,8 @@ export class MyTreeRowPatch extends CGFobject{
 
       
         
-        this.scene.pushMatrix();
+    this.scene.pushMatrix();
+    this.scene.scale(5,5,5)
         for(let i = 0; i < 6; i++){
             this.scene.pushMatrix()
 
@@ -61,50 +62,6 @@ export class MyTreeRowPatch extends CGFobject{
 
             this.scene.popMatrix()
         }
-/*
-        this.scene.pushMatrix()
-        this.scene.translate(0 + this.pos1, 0, this.z_pos1)
-        let scale = getRandomFloat(min_scale,max_scale)
-        this.scene.scale(scale, scale, scale)
-        this.tree1.display()
-        this.scene.popMatrix()
-
-        this.scene.pushMatrix()
-        this.scene.translate(i*1 + this.pos2, 0, this.z_pos2)
-        scale = getRandomFloat(min_scale,max_scale)
-        this.scene.scale(scale, scale, scale)
-        this.tree2.display()
-        this.scene.popMatrix()
-
-        this.scene.pushMatrix()
-        this.scene.translate(i*2 + this.pos3, 0, this.z_pos3)
-        scale = getRandomFloat(min_scale,max_scale)
-        this.scene.scale(scale, scale, scale)
-        this.tree3.display()
-        this.scene.popMatrix()
-
-        this.scene.pushMatrix()
-        this.scene.translate(i*3 + this.pos4, 0, this.z_pos4)
-        scale = getRandomFloat(min_scale,max_scale)
-        this.scene.scale(scale, scale, scale)
-        this.tree4.display()
-        this.scene.popMatrix()
-
-        this.scene.pushMatrix()
-        this.scene.translate(i*4 + this.pos5, 0, this.z_pos5)
-        scale = getRandomFloat(min_scale,max_scale)
-        this.scene.scale(scale, scale, scale)
-        this.tree5.display()
-        this.scene.popMatrix()
-
-        this.scene.pushMatrix()
-        this.scene.translate(i*5 + this.pos6, 0, this.z_pos6)
-        scale = getRandomFloat(min_scale,max_scale)
-        this.scene.scale(scale, scale, scale)
-        this.tree6.display()
-        this.scene.popMatrix()*/
-
-
 
       this.scene.popMatrix();
     }

@@ -81,6 +81,12 @@ export class MyScene extends CGFscene {
     this.billboard = new MyBillboard(this, [0, 0, 0]);
     this.MyTreeGroupPatch = new MyTreeGroupPatch(this, [0, 0, 0]);
     this.MyTreeRowPatch = new MyTreeRowPatch(this, [0, 0, 0]);
+    this.groupTrees = [];
+    this.rowTrees = [];
+    for(let i = 0; i < 3; i++){
+      this.groupTrees[i] = new MyTreeGroupPatch(this, [53, -51, 20]);
+      this.rowTrees[i] = new MyTreeRowPatch(this, [0, 0, 0]);
+    }
     this.scene = 0;
 
     this.objects = [this.scene, this.terrain ,this.testBird,this.wing , this.foot ,this.panorama, , this.feather, this.mynest, this.tail, this.billboard, this.MyTreeGroupPatch, this.MyTreeRowPatch];
@@ -254,6 +260,15 @@ export class MyScene extends CGFscene {
             this.terrain.display(); // Terrain
             for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
             this.bird.display(); // Bird
+            for(var i = 0; i < this.groupTrees.length; i++) {
+
+              this.groupTrees[i].display();
+
+            } // Trees
+            for(var i = 0; i < this.rowTrees.length; i++) {
+    
+              this.rowTrees[i].display();
+            } // Trees
 
             this.nest.display(); // Nest
           this.popMatrix();
