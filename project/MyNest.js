@@ -50,7 +50,6 @@ export class MyNest extends CGFobject {
     }
 
     addEgg() {
-
         if (this.numEggs < 4) {
             this.numEggs++;
         }
@@ -86,7 +85,7 @@ export class MyNest extends CGFobject {
                 this.scene.translate(this.position[0], this.position[1], this.position[2]);
                 this.scene.scale(1.2,1.2,1.2)
                 this.scene.translate(2,0,-2)
-                this.eggs[1].display(); 
+                this.eggs[1].display();
             }
             this.scene.popMatrix()
 
