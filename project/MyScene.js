@@ -11,6 +11,7 @@ import { MyNest} from "./MyNest.js";
 import { MyBillboard } from "./MyBillboard.js";
 import { MyTreeGroupPatch } from "./MyTreeGroupPatch.js";
 import { MyTreeRowPatch } from "./MyTreeRowPatch.js";
+import { MyWater } from "./MyWater.js";
 
 
 /**
@@ -62,6 +63,7 @@ export class MyScene extends CGFscene {
   // initialize objects
   initObjects() {
     this.terrain = new MyTerrain(this,30);
+    this.water = new MyWater(this, 30);
     this.panorama = new MyPanorama(this, 'images/panorama.jpg', 50, 50);
     this.birdEgg = new MyBirdEgg(this, 20, 20, [0, 0, 0]);
     this.bird = new MyBird(this, 0, 0, [0, -30, 0]);
@@ -215,6 +217,7 @@ export class MyScene extends CGFscene {
     this.checkKeys();
     this.bird.update(t);
     for (var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].update(t);
+    this.water.waterShader.setUniformsValues({ timeFactor: t / 100 % 1000 });
   }
 
   distance(position1, position2) {
@@ -257,6 +260,7 @@ export class MyScene extends CGFscene {
           this.pushMatrix();
             // Scene
             this.panorama.display(); // Panorama
+            this.water.display(); // Water
             this.terrain.display(); // Terrain
             for(var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].display(); // Eggs
             this.bird.display(); // Bird

@@ -146,7 +146,7 @@ export class ShaderScene extends CGFscene {
 	initCameras() {
 		this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(20, 20, 100), vec3.fromValues(0, 0, 0));
 	};
-	
+
 	// initialize lights
 	initLights() {
 
@@ -247,20 +247,20 @@ export class ShaderScene extends CGFscene {
 			// teapot (scaled and rotated to conform to our axis)
 
 			this.pushMatrix();
-	
+
 			this.translate(0, -6, 0);
 			this.scale(0.5, 0.5, 0.5);
 			this.rotate(-Math.PI / 2, 1, 0, 0);
 			this.objects[0].display();
-	
+
 			this.popMatrix();
 		}
 		else {
 			this.pushMatrix();
-			
+
 			this.scale(25, 25, 25);
 			this.objects[1].display();
-			
+
 			this.popMatrix();
 		}
 
