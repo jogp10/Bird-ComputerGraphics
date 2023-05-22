@@ -346,9 +346,17 @@ export class MyBirdWing extends CGFobject {
     }
     enableNormalViz() {
         this.feathers.forEach(feather => feather.enableNormalViz());
+        this.prism.enableNormalViz();
+        this.prism2.enableNormalViz();
+        this.prism3.enableNormalViz();
+
+
     }
     disableNormalViz() {
         this.feathers.forEach(feather => feather.disableNormalViz());
+        this.prism.disableNormalViz();
+        this.prism2.disableNormalViz();
+        this.prism3.disableNormalViz();
     }
 }
 

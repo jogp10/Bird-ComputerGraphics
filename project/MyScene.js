@@ -158,7 +158,7 @@ export class MyScene extends CGFscene {
   }
 
   updateObjectComplexity(){
-    if(this.selectedObject!=0 && this.selectedObject!=6 && this.selectedObject!=3)this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
+    if(this.selectedObject!=0 && this.selectedObject!=6)this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
   }
 
   updateScaleFactor(){
@@ -253,9 +253,9 @@ export class MyScene extends CGFscene {
 
     // Draw normals
     if (this.displayNormals) {
-        if(this.selectedObject!=0 && this.selectedObject!=6 && this.selectedObject!=3)this.objects[this.selectedObject].enableNormalViz();
+        if(this.selectedObject!=0 && this.selectedObject!=6)this.objects[this.selectedObject].enableNormalViz();
     } else {
-        if(this.selectedObject!=0 && this.selectedObject!=6 && this.selectedObject!=3)this.objects[this.selectedObject].disableNormalViz();
+        if(this.selectedObject!=0 && this.selectedObject!=6)this.objects[this.selectedObject].disableNormalViz();
     }
 
 
