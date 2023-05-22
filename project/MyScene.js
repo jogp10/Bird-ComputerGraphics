@@ -47,7 +47,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 1;
-    this.selectedObject = 0;
+    this.selectedObject = 1;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -278,7 +278,7 @@ export class MyScene extends CGFscene {
           this.pushMatrix();
             // Scene
             this.panorama.display(); // Panorama
-            //this.water.display(); // Water
+            this.water.display(); // Water
             this.terrain.display(); // Terrain
             for(var i = 0; i < this.birdEggs.length; i++){
               this.pushMatrix();
@@ -287,7 +287,7 @@ export class MyScene extends CGFscene {
               this.popMatrix();
             }
             this.bird.display(); // Bird
-            /*
+
             for(var i = 0; i < this.groupTreePositions.length; i++) {
               this.pushMatrix();
 
@@ -301,7 +301,7 @@ export class MyScene extends CGFscene {
               this.rowTrees[i].display();
 
               this.popMatrix();
-            } // Trees*/
+            } // Trees
 
             this.nest.display(); // Nest
           this.popMatrix();
@@ -310,6 +310,21 @@ export class MyScene extends CGFscene {
       if(this.selectedObject == 1) {
         this.pushMatrix();
           // Terrain
+
+            for(var i = 0; i < this.groupTreePositions.length; i++) {
+              this.pushMatrix();
+
+              this.groupTrees[i].display();
+
+              this.popMatrix();
+            } // Trees
+            for(var i = 0; i < this.rowTreePositions.length; i++) {
+              this.pushMatrix();
+              this.rotate(this.rowTreeAngles[i], 0, 1, 0);
+              this.rowTrees[i].display();
+
+              this.popMatrix();
+            } // Trees
           this.objects[1].display();
         this.popMatrix();
       }
