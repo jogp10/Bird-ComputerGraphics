@@ -7,28 +7,28 @@ export class MyTreeGroupPatch extends CGFobject{
         this.position = position;
         this.initBuffers();
         this.initTextures();
+        this.pos = []
+        this.z_pos = []
+        this.scale = []
+        const min_scale = 1;
+        const max_scale = 1.5;
+
         const offset = 2;
-        this.pos1 = getRandomFloat(-offset,offset);
-        this.pos2 = getRandomFloat(-offset,offset);
-        this.pos3 = getRandomFloat(-offset,offset);
-        this.pos4 = getRandomFloat(-offset,offset);
-        this.pos5 = getRandomFloat(-offset,offset);
-        this.pos6 = getRandomFloat(-offset,offset);
-        this.pos7 = getRandomFloat(-offset,offset);
-        this.pos8 = getRandomFloat(-offset,offset);
-        this.pos9 = getRandomFloat(-offset,offset);
+        for(let i = 0; i < 9; i++){
+            this.pos[i] = getRandomFloat(-offset,offset);
+        }
+       
+        for(let i = 0; i < 9; i++){
+            this.scale[i] = getRandomFloat(min_scale,max_scale);
+        }
+    
       }
 
     initBuffers(){
-      this.tree1 = new MyBillboard(this.scene, [0, 0, 0]);
-      this.tree2 = new MyBillboard(this.scene, [0, 0, 0]);
-      this.tree3 = new MyBillboard(this.scene, [0, 0, 0]);
-      this.tree4 = new MyBillboard(this.scene, [0, 0, 0]);
-      this.tree5 = new MyBillboard(this.scene, [0, 0, 0]);
-      this.tree6 = new MyBillboard(this.scene, [0, 0, 0]);
-      this.tree7 = new MyBillboard(this.scene, [0, 0, 0]);
-      this.tree8 = new MyBillboard(this.scene, [0, 0, 0]);
-      this.tree9 = new MyBillboard(this.scene, [0, 0, 0]);
+      this.tree = []
+        for(let i = 0; i < 9; i++){
+            this.tree[i] = new MyBillboard(this.scene, [0,0,0])
+        }
 
 
     }
@@ -36,10 +36,20 @@ export class MyTreeGroupPatch extends CGFobject{
     initTextures(){
     }
     display() {
-      let i = 4.5;
+    
       this.scene.pushMatrix();
 
-        this.scene.pushMatrix()
+        for(let i = 0; i < 9; i++){
+          this.scene.pushMatrix()
+          console.log(this.pos[i])
+
+          this.scene.translate(4.5*(i%3) + this.pos[i], 0, 4.5*(i/3) + this.pos[i]/2)
+          this.scene.scale(this.scale[i], this.scale[i], this.scale[i])
+          this.tree[i].display()
+
+          this.scene.popMatrix()
+        }
+        /*this.scene.pushMatrix()
         this.scene.translate(0 + this.pos1, 0, 0 + this.pos1/2)
         this.scene.scale(1, 1, 1)
         this.tree1.display()
@@ -91,7 +101,7 @@ export class MyTreeGroupPatch extends CGFobject{
         this.scene.translate(i*2 + this.pos9, 0, i*2 + this.pos9/2)
         this.scene.scale(1, 1, 1)
         this.tree9.display()
-        this.scene.popMatrix()
+        this.scene.popMatrix()*/
 
 
 
@@ -100,27 +110,15 @@ export class MyTreeGroupPatch extends CGFobject{
     updateBuffers() {}
 
     enableNormalViz() {
-        this.tree1.enableNormalViz()
-        this.tree2.enableNormalViz()
-        this.tree3.enableNormalViz()
-        this.tree4.enableNormalViz()
-        this.tree5.enableNormalViz()
-        this.tree6.enableNormalViz()
-        this.tree7.enableNormalViz()
-        this.tree8.enableNormalViz()
-        this.tree9.enableNormalViz()
+        for(let i = 0; i < 9; i++){
+            this.tree[i].enableNormalViz()
+        }
 
     }
     disableNormalViz() {
-        this.tree1.disableNormalViz()
-        this.tree2.disableNormalViz()
-        this.tree3.disableNormalViz()
-        this.tree4.disableNormalViz()
-        this.tree5.disableNormalViz()
-        this.tree6.disableNormalViz()
-        this.tree7.disableNormalViz()
-        this.tree8.disableNormalViz()
-        this.tree9.disableNormalViz()
+        for(let i = 0; i < 9; i++){
+            this.tree[i].disableNormalViz()
+        }
 
     }
 }
