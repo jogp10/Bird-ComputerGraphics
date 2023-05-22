@@ -23,7 +23,7 @@ export class MyBirdTail extends CGFobject {
     }
 
     initTextures() {
-        this.tailTexture = new CGFtexture(this.scene, "images/til.jpg");
+        this.tailTexture = new CGFtexture(this.scene, "images/tail.jpg");
 		this.tailMaterial = new CGFappearance(this.scene);
 		this.tailMaterial.setTexture(this.tailTexture);
 		this.tailMaterial.setTextureWrap('REPEAT', 'REPEAT');
