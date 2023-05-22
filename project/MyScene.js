@@ -47,7 +47,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 1;
-    this.selectedObject = 5;
+    this.selectedObject = 2;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -181,30 +181,35 @@ export class MyScene extends CGFscene {
       text+=" W ";
       keysPressed=true;
       this.bird.accelerate(0.05);
+      this.testBird.accelerate(0.05);
     }
 
     if (this.gui.isKeyPressed("KeyS")) {
       text+=" S ";
       keysPressed=true;
       this.bird.accelerate(-0.05);
+      this.testBird.accelerate(-0.05);
     }
 
     if (this.gui.isKeyPressed("KeyA")) {
       text+=" A ";
       keysPressed=true;
       this.bird.turn(2*Math.PI/200);
+      this.testBird.turn(2*Math.PI/200);
     }
 
     if (this.gui.isKeyPressed("KeyD")) {
       text+=" D ";
       keysPressed=true;
       this.bird.turn(-2*Math.PI/200);
+      this.testBird.turn(-2*Math.PI/200);
     }
 
     if (this.gui.isKeyPressed("KeyR")) {
       text+=" R ";
       keysPressed=true;
       this.bird.reset();
+      this.testBird.reset();
     }
 
     if (this.gui.isKeyPressed("KeyP")) {
@@ -228,6 +233,7 @@ export class MyScene extends CGFscene {
   update(t) {
     this.checkKeys();
     this.bird.update(t);
+    this.testBird.update(t);
     for (var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].update(t);
     this.water.waterShader.setUniformsValues({ timeFactor: t / 100000 % 1000 });
   }
