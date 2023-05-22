@@ -47,7 +47,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 1;
-    this.selectedObject = 1;
+    this.selectedObject = 0;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -215,7 +215,7 @@ export class MyScene extends CGFscene {
     if (this.gui.isKeyPressed("KeyP")) {
       text+=" P ";
       keysPressed=true;
-      if (!this.bird.hasEgg) this.bird.pickEgg(35/60);
+      if (!this.bird.hasEgg) this.bird.pickEgg(45/60);
     }
 
     if (this.gui.isKeyPressed("KeyO")) {
@@ -310,21 +310,6 @@ export class MyScene extends CGFscene {
       if(this.selectedObject == 1) {
         this.pushMatrix();
           // Terrain
-
-            for(var i = 0; i < this.groupTreePositions.length; i++) {
-              this.pushMatrix();
-
-              this.groupTrees[i].display();
-
-              this.popMatrix();
-            } // Trees
-            for(var i = 0; i < this.rowTreePositions.length; i++) {
-              this.pushMatrix();
-              this.rotate(this.rowTreeAngles[i], 0, 1, 0);
-              this.rowTrees[i].display();
-
-              this.popMatrix();
-            } // Trees
           this.objects[1].display();
         this.popMatrix();
       }

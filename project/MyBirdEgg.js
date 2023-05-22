@@ -38,7 +38,7 @@ export class MyBirdEgg extends CGFobject {
 
     is_going_to_nest(position, speed, birdSpeed, birdOrientation) {
         const nestPosition = this.scene.nest.position;
-        const nestRadius = 10;
+        const nestRadius = 5;
         let final_position = [0, 0, 0]
 
         const dropTime = 1;
