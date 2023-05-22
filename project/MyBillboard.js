@@ -32,7 +32,7 @@ export class MyBillboard extends CGFobject {
     this.scene.translate(0, 0.5,0);
     this.scene.rotate(this.ang-this.angle_scene, 0, 1, 0);
     this.material.apply();
-    
+
     this.quad.display();
     this.scene.popMatrix();
   }
@@ -50,8 +50,6 @@ export class MyBillboard extends CGFobject {
     // Store the angle and the rotation axis (which is the y-axis)
     this.ang = -angle;
     this.axis = vec3.fromValues(0, 1, 0);
-
-
 
   }
 

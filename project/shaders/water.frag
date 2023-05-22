@@ -11,7 +11,7 @@ uniform float timeFactor;
 void main() {
 	vec4 filter = texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord);
 
-	vec2 move = vec2(timeFactor*0.001, timeFactor*0.001);
+	vec2 move = vec2(timeFactor, timeFactor);
 
 	vec4 color = texture2D(uSampler,  move + vTextureCoord);
 

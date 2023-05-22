@@ -71,8 +71,8 @@ export class MyScene extends CGFscene {
     this.wing = new MyBirdWing(this);
     this.foot = new MyBirdFoot(this);
     this.tail = new MyBirdTail(this);
-    this.egg1 = new MyBirdEgg(this, 20, 20, [Math.random() * (50) + 50, -54, Math.random() * (100) + (-40)]);
-    this.egg2 = new MyBirdEgg(this, 20, 20, [Math.random() * (50) + 40,-52, Math.random() * (100) + (-40)]);
+    this.egg1 = new MyBirdEgg(this, 20, 20, [Math.random() * (50) + 60, -53, Math.random() * (100) + (-40)]);
+    this.egg2 = new MyBirdEgg(this, 20, 20, [Math.random() * (50) + 60,-53, Math.random() * (100) + (-40)]);
     this.egg3 = new MyBirdEgg(this, 20, 20, [Math.random() * (40) + (-100), -54, Math.random() * (40) + (-20)]);
     this.egg4 = new MyBirdEgg(this, 20, 20, [Math.random() * (30) + (-15), -54, Math.random() * (20) + (-100)]);
     this.feather = new MyBirdFeather(this, [0, 0, 0]);
@@ -89,7 +89,7 @@ export class MyScene extends CGFscene {
     this.rowTreePositions = [[-50,-55,-70], [-90,-55,25]]
     this.rowTreeAngles = [Math.PI/6,Math.PI/4]
 
-    
+
     for(let i = 0; i < 2; i++){
       this.groupTrees[i] = new MyTreeGroupPatch(this, this.groupTreePositions[i]);
       this.rowTrees[i] = new MyTreeRowPatch(this, this.rowTreePositions[i], this.rowTreeAngles[i]);
@@ -122,9 +122,9 @@ export class MyScene extends CGFscene {
       2*Math.PI/3,
       0.1,
       1000,
-      vec3.fromValues(50,10,15),
-      vec3.fromValues(0, 0, 0)
+      vec3.fromValues(70,-5,-70),
       //vec3.fromValues(0, 0, 0)
+      vec3.fromValues(0, -30, 0)
     );
   }
 
@@ -222,7 +222,7 @@ export class MyScene extends CGFscene {
     this.checkKeys();
     this.bird.update(t);
     for (var i = 0; i < this.birdEggs.length; i++) this.birdEggs[i].update(t);
-    this.water.waterShader.setUniformsValues({ timeFactor: t / 100 % 1000 });
+    this.water.waterShader.setUniformsValues({ timeFactor: t / 100000 % 1000 });
   }
 
   distance(position1, position2) {

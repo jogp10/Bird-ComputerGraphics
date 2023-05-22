@@ -15,7 +15,7 @@ varying vec2 vTextureCoord;
 void main() {
 	vec3 offset = vec3(0.0, 0.0, 0.0);
 
-	float z_offset = texture2D(uSampler2, timeFactor*0.01 * aTextureCoord).b*0.02;
+	float z_offset = texture2D(uSampler2, timeFactor * aTextureCoord).b*0.02;
 	offset=vec3(0.0, 0.0, z_offset);
 
 
