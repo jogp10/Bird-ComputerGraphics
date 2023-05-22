@@ -1,10 +1,10 @@
 # CG 2022/2023
 
 ## Group T02G04
-| Name               | Number    | E-Mail             |
-| ------------------ | --------- | ------------------ |
-| João Pinheiro      | 202008133 | up202008133@up.pt  |
-| Ricardo Cavalheiro | 202005103 | up202005103@up.pt  |
+| Name               | Number    | E-Mail             | Work Distribution |
+| ------------------ | --------- | ------------------ | ----------------- |
+| João Pinheiro      | 202008133 | up202008133@up.pt  | 50%               |
+| Ricardo Cavalheiro | 202005103 | up202005103@up.pt  | 50%               |
 
 ----
 
