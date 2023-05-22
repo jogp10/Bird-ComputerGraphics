@@ -178,7 +178,7 @@ export class MyBird extends CGFobject {
 
             // Check if the egg is at the bird's current position
             const distance = vec3.distance([egg.position[0], 0, egg.position[2]], [this.position[0], 0, this.position[2]]);
-            if (distance < 15 && distance <= eggDistance) {
+            if (distance < 10 && distance <= eggDistance) {
                 // Store a reference to the egg
 				eggIndex = i;
 				this.egg = egg;
@@ -196,16 +196,16 @@ export class MyBird extends CGFobject {
 	}
 
 	dropEgg() {
-		// If Bird has egg, it should drop it
+		// If Bird has egg and it is going to fall into nest, it should drop it
 		if(!this.hasEgg) return;
-		this.hasEgg = false;
 
-		this.egg.dropEgg([this.position[0], this.position[1]-1, this.position[2]], 18.6, this.speed, this.orientation);
+		const in_nest = this.egg.dropEgg([this.position[0], this.position[1]-1, this.position[2]], 18.7, this.speed, this.orientation);
 
-		this.scene.birdEggs.push(this.egg);
-		this.egg = null;
-
-
+		if(in_nest) {
+			this.hasEgg = false;
+			this.scene.birdEggs.push(this.egg);
+			this.egg = null;
+		}
 	}
 
 	display() {

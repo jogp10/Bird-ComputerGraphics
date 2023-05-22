@@ -25,11 +25,37 @@ export class MyBirdEgg extends CGFobject {
     }
 
     dropEgg(position, speed, birdSpeed, birdOrientation) {
-        this.drop = true;
-        this.position = position;
-        this.dropSpeed = speed;
-        this.birdSpeed = birdSpeed;
-        this.birdOrientation = birdOrientation;
+        if(this.is_going_to_nest(position, speed, birdSpeed, birdOrientation)) {
+            this.drop = true;
+            this.position = position;
+            this.dropSpeed = speed;
+            this.birdSpeed = birdSpeed;
+            this.birdOrientation = birdOrientation;
+            return true;
+        }
+        return false;
+    }
+
+    is_going_to_nest(position, speed, birdSpeed, birdOrientation) {
+        const nestPosition = this.scene.nest.position;
+        const nestRadius = 10;
+        let final_position = [0, 0, 0]
+
+        const dropTime = 1;
+
+        const gravity = -9.8; // Acceleration due to gravity
+
+        final_position[0] = position[0] + Math.sin(birdOrientation) * birdSpeed * 3 *  dropTime;
+        final_position[1] = nestPosition[1];
+        final_position[2] = position[2] + Math.cos(birdOrientation) * birdSpeed * 3 *  dropTime;
+
+        const distance = this.scene.distance(nestPosition, final_position);
+        console.log("nestPosition: " + nestPosition + " initial_position: " + position + " final_position: " + final_position);
+        console.log("distance: " + distance);
+        if (distance <= nestRadius) {
+            return true;
+        }
+        return false;
     }
 
     updateBuffers(complexity) {
@@ -70,9 +96,9 @@ export class MyBirdEgg extends CGFobject {
         }
         else if(this.canAddEgg){
             this.scene.nest.addEgg();
+            this.scene.birdEggs.pop()
             this.canAddEgg = false;
         }
-
     }
 
     display(scale) {

@@ -45,7 +45,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.scaleFactor = 3;
     this.speedFactor = 1;
-    this.selectedObject = 6;
+    this.selectedObject = 0;
     this.objectComplexity = 0.5;
 
     this.setDefaultAppearance();
@@ -109,9 +109,9 @@ export class MyScene extends CGFscene {
       2*Math.PI/3,
       0.1,
       1000,
-      vec3.fromValues(50, 10, 150),
-      //vec3.fromValues(0, -80, 0)
-      vec3.fromValues(0, 0, 0)
+      vec3.fromValues(-55, -5, -65),
+      vec3.fromValues(0, -20, 0)
+      //vec3.fromValues(0, 0, 0)
     );
   }
 
@@ -236,7 +236,6 @@ export class MyScene extends CGFscene {
     this.appearance.apply();
 
 
-    this.scale(3,3,3);
 
     // Draw normals
     if (this.displayNormals) {
