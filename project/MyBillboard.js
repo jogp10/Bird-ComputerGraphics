@@ -26,10 +26,11 @@ export class MyBillboard extends CGFobject {
   display() {
     this.calculateOrientation();
     this.scene.pushMatrix();
-    this.scene.translate(this.position[0], this.position[1], this.position[2]);
+    this.scene.scale(2, 5, 2);
+    this.scene.translate(this.position[0], this.position[1]+.5, this.position[2]);
     this.scene.rotate(this.ang, 0, 1, 0);
     this.material.apply();
-    this.scene.scale(2, 5, 2);
+    
     this.quad.display();
     this.scene.popMatrix();
   }

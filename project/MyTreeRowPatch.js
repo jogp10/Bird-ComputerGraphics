@@ -7,90 +7,102 @@ export class MyTreeRowPatch extends CGFobject{
         this.position = position;
         this.initBuffers();
         this.initTextures();
+        this.initVariables();
     }
 
     initBuffers(){
-        this.tree1 = new MyBillboard(this.scene, [0, 0, 0]);
-        this.tree2 = new MyBillboard(this.scene, [0, 0, 0]);
-        this.tree3 = new MyBillboard(this.scene, [0, 0, 0]);
-        this.tree4 = new MyBillboard(this.scene, [0, 0, 0]);
-        this.tree5 = new MyBillboard(this.scene, [0, 0, 0]);
-        this.tree6 = new MyBillboard(this.scene, [0, 0, 0]);
-        this.tree7 = new MyBillboard(this.scene, [0, 0, 0]);
-        this.tree8 = new MyBillboard(this.scene, [0, 0, 0]);
-        this.tree9 = new MyBillboard(this.scene, [0, 0, 0]);
-
-        this.pos1 = getRandomFloat(-1,1);
-        this.pos2 = getRandomFloat(-1,1);
-        this.pos3 = getRandomFloat(-1,1);
-        this.pos4 = getRandomFloat(-1,1);
-        this.pos5 = getRandomFloat(-1,1);
-        this.pos6 = getRandomFloat(-1,1);
-        this.pos7 = getRandomFloat(-1,1);
-        this.pos8 = getRandomFloat(-1,1);
-        this.pos9 = getRandomFloat(-1,1);
+        this.tree = []
+        for(let i = 0; i < 6; i++){
+            this.tree[i] = new MyBillboard(this.scene, [0,0,0])
+        }
 
     }
+    initVariables(){
+        const max = .8;
+        const min = -.8;
+        const min_scale = 1;
+        const max_scale = 1.5;
+        this.pos = []
+        this.z_pos = []
+        this.scale = []
+
+
+        for(let i = 0; i < 6; i++){
+            this.pos[i] = getRandomFloat(min, max);
+        }
+        for(let i = 0; i < 6; i++){
+            this.z_pos[i] = getRandomFloat(min, max);
+        }
+        for(let i = 0; i < 6; i++){
+            this.scale[i] = getRandomFloat(min_scale,max_scale);
+        }
+
+    }
+
 
     initTextures(){
+        
     }
-    display() {
-        const i = 4;
-        this.scene.pushMatrix();
 
+    display() {
+
+
+      
+        
+        this.scene.pushMatrix();
+        for(let i = 0; i < 6; i++){
+            this.scene.pushMatrix()
+
+           
+            this.scene.scale(this.scale[i], this.scale[i], this.scale[i])
+            this.scene.translate(4*i + this.pos[i], 0, this.z_pos[i])
+            this.tree[i].display()
+
+
+            this.scene.popMatrix()
+        }
+/*
         this.scene.pushMatrix()
-        this.scene.translate(0 + this.pos1, 0, this.pos1)
-        this.scene.scale(1, 1, 1)
+        this.scene.translate(0 + this.pos1, 0, this.z_pos1)
+        let scale = getRandomFloat(min_scale,max_scale)
+        this.scene.scale(scale, scale, scale)
         this.tree1.display()
         this.scene.popMatrix()
 
         this.scene.pushMatrix()
-        this.scene.translate(i*1 + this.pos2, 0, this.pos2)
-        this.scene.scale(1, 1, 1)
+        this.scene.translate(i*1 + this.pos2, 0, this.z_pos2)
+        scale = getRandomFloat(min_scale,max_scale)
+        this.scene.scale(scale, scale, scale)
         this.tree2.display()
         this.scene.popMatrix()
 
         this.scene.pushMatrix()
-        this.scene.translate(i*2 + this.pos3, 0, this.pos3)
-        this.scene.scale(1, 1, 1)
+        this.scene.translate(i*2 + this.pos3, 0, this.z_pos3)
+        scale = getRandomFloat(min_scale,max_scale)
+        this.scene.scale(scale, scale, scale)
         this.tree3.display()
         this.scene.popMatrix()
 
         this.scene.pushMatrix()
-        this.scene.translate(i*3 + this.pos4, 0, this.pos4)
-        this.scene.scale(1, 1, 1)
+        this.scene.translate(i*3 + this.pos4, 0, this.z_pos4)
+        scale = getRandomFloat(min_scale,max_scale)
+        this.scene.scale(scale, scale, scale)
         this.tree4.display()
         this.scene.popMatrix()
 
         this.scene.pushMatrix()
-        this.scene.translate(i*4 + this.pos5, 0, this.pos5)
-        this.scene.scale(1, 1, 1)
+        this.scene.translate(i*4 + this.pos5, 0, this.z_pos5)
+        scale = getRandomFloat(min_scale,max_scale)
+        this.scene.scale(scale, scale, scale)
         this.tree5.display()
         this.scene.popMatrix()
 
         this.scene.pushMatrix()
-        this.scene.translate(i*5 + this.pos6, 0, this.pos6)
-        this.scene.scale(1, 1, 1)
+        this.scene.translate(i*5 + this.pos6, 0, this.z_pos6)
+        scale = getRandomFloat(min_scale,max_scale)
+        this.scene.scale(scale, scale, scale)
         this.tree6.display()
-        this.scene.popMatrix()
-
-        this.scene.pushMatrix()
-        this.scene.translate(i*6 + this.pos7, 0, this.pos7)
-        this.scene.scale(1, 1, 1)
-        this.tree7.display()
-        this.scene.popMatrix()
-
-        this.scene.pushMatrix()
-        this.scene.translate(i*7 + this.pos8, 0, this.pos8)
-        this.scene.scale(1, 1, 1)
-        this.tree8.display()
-        this.scene.popMatrix()
-
-        this.scene.pushMatrix()
-        this.scene.translate(i*8 + this.pos9, 0, this.pos9)
-        this.scene.scale(1, 1, 1)
-        this.tree9.display()
-        this.scene.popMatrix()
+        this.scene.popMatrix()*/
 
 
 
@@ -100,27 +112,16 @@ export class MyTreeRowPatch extends CGFobject{
     updateBuffers() {}
 
     enableNormalViz() {
-        this.tree1.enableNormalViz()
-        this.tree2.enableNormalViz()
-        this.tree3.enableNormalViz()
-        this.tree4.enableNormalViz()
-        this.tree5.enableNormalViz()
-        this.tree6.enableNormalViz()
-        this.tree7.enableNormalViz()
-        this.tree8.enableNormalViz()
-        this.tree9.enableNormalViz()
+        for(let i = 0; i < this.tree.length; i++){
+            this.tree[i].enableNormalViz()
+        }
+ 
 
     }
     disableNormalViz() {
-        this.tree1.disableNormalViz()
-        this.tree2.disableNormalViz()
-        this.tree3.disableNormalViz()
-        this.tree4.disableNormalViz()
-        this.tree5.disableNormalViz()
-        this.tree6.disableNormalViz()
-        this.tree7.disableNormalViz()
-        this.tree8.disableNormalViz()
-        this.tree9.disableNormalViz()
+        for(let i = 0; i < this.tree.length; i++){
+            this.tree[i].disableNormalViz()
+        }
 
     }
 
