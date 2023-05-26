@@ -126,12 +126,12 @@ export class MyScene extends CGFscene {
 
   initCameras() {
     this.camera = new CGFcamera(
-      2*Math.PI/3,
+      5*Math.PI/9,
       0.1,
       1000,
-      vec3.fromValues(65,10,-70),
-      vec3.fromValues(0, 0, 0)
-      //vec3.fromValues(0, -30, 0)
+      vec3.fromValues(70,15,-70),
+      //vec3.fromValues(0, 0, 0)
+      vec3.fromValues(0, -40, 0)
     );
   }
 
